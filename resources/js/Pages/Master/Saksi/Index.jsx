@@ -2,6 +2,7 @@ import { Link } from "@inertiajs/inertia-react";
 import {
     Button,
     Card,
+    Pagination,
     Paper,
     Table,
     TableBody,
@@ -16,7 +17,8 @@ import { ButtonLinkEl } from "../../../Components/InputCompt";
 import { BreadcrumbsEl } from "../../../Components/NavCompt";
 import AuthenticatedLayout from "../../../Layouts/AuthenticatedLayout";
 
-const Index = () => {
+const Index = ({ datas }) => {
+    console.log(datas);
     return (
         <AuthenticatedLayout>
             <DivSpaceBetween>
@@ -47,20 +49,37 @@ const Index = () => {
                     <Table sx={{ minWidth: 650 }} aria-label="simple table">
                         <TableHead>
                             <TableRow>
-                                <TableCell>Dessert (100g serving)</TableCell>
-                                <TableCell align="right">Calories</TableCell>
-                                <TableCell align="right">
-                                    Fat&nbsp;(g)
-                                </TableCell>
-                                <TableCell align="right">
-                                    Carbs&nbsp;(g)
-                                </TableCell>
-                                <TableCell align="right">
-                                    Protein&nbsp;(g)
-                                </TableCell>
+                                <TableCell>#</TableCell>
+                                <TableCell>TPS</TableCell>
+                                <TableCell>Nama</TableCell>
+                                <TableCell>Usernama</TableCell>
+                                <TableCell>Password</TableCell>
+                                <TableCell>Telp</TableCell>
+                                <TableCell>Action</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
+                            {datas?.map((d, i) => (
+                                <TableRow
+                                    key={i}
+                                    sx={{
+                                        "&:last-child td, &:last-child th": {
+                                            border: 0,
+                                        },
+                                    }}
+                                >
+                                    {/* <TableCell>{datas.form}</TableCell> */}
+                                    {/* <TableCell>{d.nama}</TableCell> */}
+                                    {/* <TableCell>{d.nama}</TableCell> */}
+                                    <TableCell>{1}</TableCell>
+                                    <TableCell>{d.tps.nama}</TableCell>
+                                    <TableCell>{d.nama}</TableCell>
+                                    <TableCell>{d.username} tes</TableCell>
+
+                                    <TableCell>{d.password}</TableCell>
+                                    <TableCell>{d.telp}</TableCell>
+                                </TableRow>
+                            ))}
                             {/* {rows.map((row) => (
                                 <TableRow
                                     key={row.name}
@@ -90,6 +109,7 @@ const Index = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
+                {/* <Pagination count={10} variant="outlined" shape="rounded" /> */}
             </Card>
         </AuthenticatedLayout>
     );

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('nama', 50);
             $table->string('username', 15);
             $table->string('password');
-            $table->string('telp', 15);
+            $table->string('telp', 20);
             $table->foreignIdFor(Tps::class);
             $table->timestamps();
             $table->softDeletes();

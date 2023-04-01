@@ -12,7 +12,7 @@ import Typography from "@mui/material/Typography";
 export const Navbar = ({ open, handleDrawerOpen }) => {
     return (
         <AppBar position="fixed" open={open}>
-            <Toolbar>
+            <Toolbar style={{ backgroundColor: "#24292E" }}>
                 <IconButton
                     color="inherit"
                     aria-label="open drawer"
@@ -26,7 +26,7 @@ export const Navbar = ({ open, handleDrawerOpen }) => {
                     <MenuIcon />
                 </IconButton>
                 <Typography variant="h6" noWrap component="div">
-                    Mini variant drawer
+                    Mini variant drawe
                 </Typography>
             </Toolbar>
         </AppBar>

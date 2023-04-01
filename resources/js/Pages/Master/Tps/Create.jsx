@@ -104,6 +104,7 @@ const Create = ({ api_kota }) => {
                             style={{ padding: "20px" }}
                         >
                             <DivFormControl>
+                                <label htmlFor="">nama</label>
                                 <InputEl
                                     title="nama"
                                     name="nama"

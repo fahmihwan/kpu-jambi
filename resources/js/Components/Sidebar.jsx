@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { styled, useTheme } from "@mui/material/styles";
+import { makeStyles, styled, useTheme } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -31,9 +31,20 @@ export const Sidebar = ({ theme, handleDrawerClose, open }) => {
     }, [open]);
 
     return (
-        <Drawer variant="permanent" open={open}>
+        <Drawer
+            variant="permanent"
+            PaperProps={{
+                sx: {
+                    backgroundColor: "#091627",
+                },
+            }}
+            open={open}
+        >
             <DrawerHeader>
-                <IconButton onClick={handleDrawerClose}>
+                <IconButton
+                    style={{ color: "#BDBFC4" }}
+                    onClick={handleDrawerClose}
+                >
                     {theme.direction === "rtl" ? (
                         <ChevronRightIcon />
                     ) : (
@@ -42,7 +53,14 @@ export const Sidebar = ({ theme, handleDrawerClose, open }) => {
                 </IconButton>
             </DrawerHeader>
             <Divider />
-            <List>
+            <List
+                sx={{
+                    backgroundColor: "#101F33",
+                    margin: "10px",
+                    borderRadius: "10px",
+                    color: "white",
+                }}
+            >
                 <ListMenu
                     title="Dashboard"
                     href="/admin/dashboard"
@@ -59,6 +77,7 @@ export const Sidebar = ({ theme, handleDrawerClose, open }) => {
                 <ListItem
                     disablePadding
                     sx={{
+                        color: "#BDBFC4",
                         display: "block",
                     }}
                     onClick={() => setToggleList(!toggleList)}
@@ -78,7 +97,7 @@ export const Sidebar = ({ theme, handleDrawerClose, open }) => {
                             }}
                         >
                             {/* icon title*/}
-                            <InboxIcon />
+                            <InboxIcon style={{ color: "#BDBFC4" }} />
                         </ListItemIcon>
                         <ListItemText
                             primary={"master data"}
@@ -98,27 +117,14 @@ export const Sidebar = ({ theme, handleDrawerClose, open }) => {
                                 backgroundColor: "red",
                             }}
                         >
-                            <ListItemButton sx={{ pl: 4 }}>
+                            <ListItemButton sx={{ pl: 4, color: "#BDBFC4" }}>
                                 <ListItemIcon>
-                                    <StarBorder />
+                                    <StarBorder style={{ color: "#BDBFC4" }} />
                                 </ListItemIcon>
                                 <ListItemText primary="Saksi" />
                             </ListItemButton>
                         </Link>
-                        <Link
-                            href="/admin/master/kandidat"
-                            style={{
-                                textDecoration: "none",
-                                backgroundColor: "red",
-                            }}
-                        >
-                            <ListItemButton sx={{ pl: 4 }}>
-                                <ListItemIcon>
-                                    <StarBorder />
-                                </ListItemIcon>
-                                <ListItemText primary="Kandidat" />
-                            </ListItemButton>
-                        </Link>
+
                         <Link
                             href="/admin/master/tps"
                             style={{
@@ -126,9 +132,9 @@ export const Sidebar = ({ theme, handleDrawerClose, open }) => {
                                 backgroundColor: "red",
                             }}
                         >
-                            <ListItemButton sx={{ pl: 4 }}>
+                            <ListItemButton sx={{ pl: 4, color: "#BDBFC4" }}>
                                 <ListItemIcon>
-                                    <StarBorder />
+                                    <StarBorder style={{ color: "#BDBFC4" }} />
                                 </ListItemIcon>
                                 <ListItemText primary="TPS" />
                             </ListItemButton>
@@ -137,6 +143,12 @@ export const Sidebar = ({ theme, handleDrawerClose, open }) => {
                 </Collapse>
                 <ListMenu
                     title="Laporan"
+                    href="#"
+                    open={open}
+                    linkActive={false}
+                />
+                <ListMenu
+                    title="Pengaturan Akun"
                     href="#"
                     open={open}
                     linkActive={false}
@@ -151,6 +163,7 @@ const ListMenu = ({ title, href, open, linkActive }) => {
         <Link
             href={href}
             style={{
+                color: "#BDBFC4",
                 textDecoration: "none",
                 backgroundColor: "red",
             }}
@@ -159,6 +172,7 @@ const ListMenu = ({ title, href, open, linkActive }) => {
                 disablePadding
                 sx={{
                     display: "block",
+
                     // backgroundColor: linkActive ? "red" : "white",
                 }}
             >
@@ -177,7 +191,7 @@ const ListMenu = ({ title, href, open, linkActive }) => {
                         }}
                     >
                         {/* icon title*/}
-                        <InboxIcon />
+                        <InboxIcon style={{ color: "#BDBFC4" }} />
                     </ListItemIcon>
                     <ListItemText
                         primary={title}

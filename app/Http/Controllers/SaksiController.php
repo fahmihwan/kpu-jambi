@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Saksi;
 use App\Models\Tps;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 
 class SaksiController extends Controller
@@ -14,9 +15,10 @@ class SaksiController extends Controller
      */
     public function index()
     {
-
-
-        return Inertia::render('Master/Saksi/Index');
+        $datas = Saksi::with('tps:id,nama')->latest()->get();
+        return Inertia::render('Master/Saksi/Index', [
+            'datas' => $datas
+        ]);
     }
 
     /**
@@ -35,7 +37,19 @@ class SaksiController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
+
+        $validated = $request->validate([
+            'nama' => 'required|max:50',
+            'username' => 'required|max:15',
+            'telp' => 'required|max:20',
+            'tps_id' => 'required',
+            'password' => 'required',
+        ]);
+
+        // $validated['password'] = Hash::make($request->password);
+        Saksi::create($validated);
+
+        return redirect('/admin/master/saksi');
     }
 
     /**
