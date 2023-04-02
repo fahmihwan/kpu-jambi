@@ -15,7 +15,8 @@ class SaksiController extends Controller
      */
     public function index()
     {
-        $datas = Saksi::with('tps:id,nama')->latest()->get();
+        $datas = Saksi::with('tps:id,nama')->latest()->paginate(10);
+        // return $datas;
         return Inertia::render('Master/Saksi/Index', [
             'datas' => $datas
         ]);
@@ -57,7 +58,6 @@ class SaksiController extends Controller
      */
     public function show(Saksi $saksi)
     {
-        //
     }
 
     /**
@@ -65,7 +65,11 @@ class SaksiController extends Controller
      */
     public function edit(Saksi $saksi)
     {
-        //
+        $tps =  Tps::latest()->get();
+        return Inertia::render('Master/Saksi/Edit', [
+            'tps' => $tps,
+            'saksi' => $saksi
+        ]);
     }
 
     /**
@@ -73,7 +77,16 @@ class SaksiController extends Controller
      */
     public function update(Request $request, Saksi $saksi)
     {
-        //
+        $validated = $request->validate([
+            'nama' => 'required|max:50',
+            'username' => 'required|max:15',
+            'telp' => 'required|max:20',
+            'tps_id' => 'required',
+            'password' => 'required',
+        ]);
+
+        Saksi::where('id', $saksi->id)->update($validated);
+        return redirect('/admin/master/saksi');
     }
 
     /**
@@ -81,6 +94,7 @@ class SaksiController extends Controller
      */
     public function destroy(Saksi $saksi)
     {
-        //
+        Saksi::destroy($saksi->id);
+        return redirect('/admin/master/saksi');
     }
 }

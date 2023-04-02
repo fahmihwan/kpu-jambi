@@ -74,24 +74,60 @@ class TpsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Tps $tps)
+    // public function edit(Tps $tps)
+    public function edit($id)
     {
-        //
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://emsifa.github.io/api-wilayah-indonesia/api/regencies/15.json",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                "Content-Type: application/json",
+                "Authorization: Basic gfdsds"
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+
+        $tps =   Tps::where('id', $id)->first();
+
+        return Inertia::render('Master/Tps/Edit', [
+            'api_kota' => json_decode($response),
+            'tps' => $tps
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Tps $tps)
+    public function update(Request $request, $id)
     {
-        //
+        $validated =  $request->validate([
+            'nama' => 'required',
+            'kota' => 'required',
+            'kecamatan' => 'required',
+            'kelurahan' => 'required'
+        ]);
+
+        Tps::where('id', $id)->update($validated);
+
+        return redirect('/admin/master/tps');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Tps $tps)
+    public function destroy($id)
     {
-        //
+        Tps::destroy($id);
+        return redirect('/admin/master/tps');
     }
 }

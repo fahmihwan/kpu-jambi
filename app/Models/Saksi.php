@@ -18,6 +18,6 @@ class Saksi extends Model
 
     public function tps()
     {
-        return $this->belongsTo(Tps::class);
+        return $this->belongsTo(Tps::class)->withTrashed();
     }
 }

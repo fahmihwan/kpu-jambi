@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Saksi;
 use App\Models\Sesi_pemilu;
 use App\Models\Tps;
 use Illuminate\Database\Migrations\Migration;
@@ -13,16 +14,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('saksis', function (Blueprint $table) {
+        Schema::create('transaksis', function (Blueprint $table) {
             $table->id();
-            $table->string('nama', 50);
-            $table->string('username', 15);
-            $table->string('password');
-            $table->string('telp', 20);
-            $table->foreignIdFor(Tps::class);
             $table->foreignIdFor(Sesi_pemilu::class);
+            $table->foreignIdFor(Saksi::class);
+            $table->foreignIdFor(Tps::class);
+            $table->integer('qty');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('saksis');
+        Schema::dropIfExists('transaksis');
     }
 };

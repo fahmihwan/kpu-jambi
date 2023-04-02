@@ -17,6 +17,10 @@ import { ButtonLinkEl } from "../../../Components/InputCompt";
 import { BreadcrumbsEl } from "../../../Components/NavCompt";
 import AuthenticatedLayout from "../../../Layouts/AuthenticatedLayout";
 
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import { Inertia } from "@inertiajs/inertia";
+
 const Index = ({ datas }) => {
     console.log(datas);
     return (
@@ -55,11 +59,11 @@ const Index = ({ datas }) => {
                                 <TableCell>Usernama</TableCell>
                                 <TableCell>Password</TableCell>
                                 <TableCell>Telp</TableCell>
-                                <TableCell>Action</TableCell>
+                                <TableCell></TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {datas?.map((d, i) => (
+                            {datas?.data?.map((d, i) => (
                                 <TableRow
                                     key={i}
                                     sx={{
@@ -68,48 +72,44 @@ const Index = ({ datas }) => {
                                         },
                                     }}
                                 >
-                                    {/* <TableCell>{datas.form}</TableCell> */}
-                                    {/* <TableCell>{d.nama}</TableCell> */}
-                                    {/* <TableCell>{d.nama}</TableCell> */}
-                                    <TableCell>{1}</TableCell>
+                                    <TableCell>{datas.from + i}</TableCell>
                                     <TableCell>{d.tps.nama}</TableCell>
                                     <TableCell>{d.nama}</TableCell>
                                     <TableCell>{d.username} tes</TableCell>
 
                                     <TableCell>{d.password}</TableCell>
                                     <TableCell>{d.telp}</TableCell>
+                                    <TableCell>
+                                        <Link
+                                            href={`/admin/master/saksi/${d.id}/edit`}
+                                            style={{ marginRight: "5px" }}
+                                        >
+                                            <Button
+                                                variant="outlined"
+                                                color="warning"
+                                            >
+                                                <EditIcon />
+                                            </Button>
+                                        </Link>
+
+                                        <Button
+                                            onClick={() =>
+                                                Inertia.delete(
+                                                    `/admin/master/saksi/${d.id}`
+                                                )
+                                            }
+                                            color="error"
+                                            variant="outlined"
+                                        >
+                                            <DeleteIcon />
+                                        </Button>
+                                    </TableCell>
                                 </TableRow>
                             ))}
-                            {/* {rows.map((row) => (
-                                <TableRow
-                                    key={row.name}
-                                    sx={{
-                                        "&:last-child td, &:last-child th": {
-                                            border: 0,
-                                        },
-                                    }}
-                                >
-                                    <TableCell component="th" scope="row">
-                                        {row.name}
-                                    </TableCell>
-                                    <TableCell align="right">
-                                        {row.calories}
-                                    </TableCell>
-                                    <TableCell align="right">
-                                        {row.fat}
-                                    </TableCell>
-                                    <TableCell align="right">
-                                        {row.carbs}
-                                    </TableCell>
-                                    <TableCell align="right">
-                                        {row.protein}
-                                    </TableCell>
-                                </TableRow>
-                            ))} */}
                         </TableBody>
                     </Table>
                 </TableContainer>
-                {/* <Pagination count={10} variant="outlined" shape="rounded" /> */}
+                {/* <Pagination count={1} variant="outlined" shape="rounded" /> */}
             </Card>
         </AuthenticatedLayout>
     );
