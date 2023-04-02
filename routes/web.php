@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GetApiController;
 use App\Http\Controllers\KandidatController;
 use App\Http\Controllers\SaksiController;
 use App\Http\Controllers\TpsController;
 use App\Http\Controllers\UserTPS_controller;
+use App\Models\Sesi_pemilu;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -29,10 +31,14 @@ Route::get('/admin/dashboard', function () {
 });
 
 Route::get('/admin', [AuthController::class, 'login']);
+Route::post('/admin/auth/', [AuthController::class, 'authenticated']);
+Route::post('/admin/auth/logout', [AuthController::class, 'logout']);
 
 
 Route::resource('/admin/master/saksi', SaksiController::class);
 Route::resource('/admin/master/tps', TpsController::class);
+Route::resource('/admin/akun', AdminController::class);
+Route::resource('/admin/periode-pemilu', Sesi_pemilu::class);
 // Route::resource('/admin/master/kandidat', KandidatController::class);
 
 

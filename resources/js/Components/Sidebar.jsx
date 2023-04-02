@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { makeStyles, styled, useTheme } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -9,17 +9,20 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 
-import MailIcon from "@mui/icons-material/Mail";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 
 import Collapse from "@mui/material/Collapse";
 
-import StarBorder from "@mui/icons-material/StarBorder";
 import { Link } from "@inertiajs/inertia-react";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
+import EventRoundedIcon from "@mui/icons-material/EventRounded";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import AddHomeIcon from "@mui/icons-material/AddHome";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
+import AssessmentRoundedIcon from "@mui/icons-material/AssessmentRounded";
 export const Sidebar = ({ theme, handleDrawerClose, open }) => {
     const [toggleList, setToggleList] = useState(true);
     useEffect(() => {
@@ -66,13 +69,14 @@ export const Sidebar = ({ theme, handleDrawerClose, open }) => {
                     href="/admin/dashboard"
                     open={open}
                     linkActive={true}
+                    icon={<DashboardIcon style={{ color: "#BDBFC4" }} />}
                 />
-                <ListMenu
+                {/* <ListMenu
                     title="Real Time data"
                     href="#"
                     open={open}
                     linkActive={false}
-                />
+                /> */}
 
                 <ListItem
                     disablePadding
@@ -97,7 +101,8 @@ export const Sidebar = ({ theme, handleDrawerClose, open }) => {
                             }}
                         >
                             {/* icon title*/}
-                            <InboxIcon style={{ color: "#BDBFC4" }} />
+
+                            <BusinessCenterIcon style={{ color: "#BDBFC4" }} />
                         </ListItemIcon>
                         <ListItemText
                             primary={"master data"}
@@ -119,7 +124,11 @@ export const Sidebar = ({ theme, handleDrawerClose, open }) => {
                         >
                             <ListItemButton sx={{ pl: 4, color: "#BDBFC4" }}>
                                 <ListItemIcon>
-                                    <StarBorder style={{ color: "#BDBFC4" }} />
+                                    <PersonAddIcon
+                                        style={{
+                                            color: "#BDBFC4",
+                                        }}
+                                    />
                                 </ListItemIcon>
                                 <ListItemText primary="Saksi" />
                             </ListItemButton>
@@ -134,31 +143,37 @@ export const Sidebar = ({ theme, handleDrawerClose, open }) => {
                         >
                             <ListItemButton sx={{ pl: 4, color: "#BDBFC4" }}>
                                 <ListItemIcon>
-                                    <StarBorder style={{ color: "#BDBFC4" }} />
+                                    <AddHomeIcon style={{ color: "#BDBFC4" }} />
                                 </ListItemIcon>
                                 <ListItemText primary="TPS" />
                             </ListItemButton>
                         </Link>
                     </List>
                 </Collapse>
+
                 <ListMenu
+                    title="Periode Pemilu"
+                    href="/admin/periode-pemilu"
+                    open={open}
+                    linkActive={false}
+                    icon={<EventRoundedIcon style={{ color: "#BDBFC4" }} />}
+                />
+
+                {/* <ListMenu
                     title="Laporan"
-                    href="#"
+                    href="/admin/laporan"
                     open={open}
                     linkActive={false}
-                />
-                <ListMenu
-                    title="Pengaturan Akun"
-                    href="#"
-                    open={open}
-                    linkActive={false}
-                />
+                    icon={
+                        <AssessmentRoundedIcon style={{ color: "#BDBFC4" }} />
+                    }
+                /> */}
             </List>
             <Divider />
         </Drawer>
     );
 };
-const ListMenu = ({ title, href, open, linkActive }) => {
+const ListMenu = ({ title, href, open, linkActive, icon }) => {
     return (
         <Link
             href={href}
@@ -191,7 +206,8 @@ const ListMenu = ({ title, href, open, linkActive }) => {
                         }}
                     >
                         {/* icon title*/}
-                        <InboxIcon style={{ color: "#BDBFC4" }} />
+                        {icon}
+                        {/* <InboxIcon style={{ color: "#BDBFC4" }} /> */}
                     </ListItemIcon>
                     <ListItemText
                         primary={title}

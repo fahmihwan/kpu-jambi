@@ -6,7 +6,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 
 import { Sidebar } from "../Components/Sidebar";
 import { Navbar } from "../Components/Navbar";
-export default function AuthenticatedLayout({ children }) {
+export default function AuthenticatedLayout({ children, auth }) {
     const theme = useTheme();
     const [open, setOpen] = useState(true);
 
@@ -22,7 +22,11 @@ export default function AuthenticatedLayout({ children }) {
         <Box sx={{ display: "flex" }}>
             <CssBaseline />
 
-            <Navbar open={open} handleDrawerOpen={handleDrawerOpen} />
+            <Navbar
+                auth={auth}
+                open={open}
+                handleDrawerOpen={handleDrawerOpen}
+            />
             {/* sidebar */}
             <Sidebar
                 theme={theme}

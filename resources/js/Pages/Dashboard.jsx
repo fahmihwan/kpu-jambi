@@ -1,9 +1,10 @@
 import React from "react";
 import Button from "@mui/material/Button";
 import AuthenticatedLayout from "../Layouts/AuthenticatedLayout";
-const Dashboard = () => {
+const Dashboard = ({ auth }) => {
+    // console.log(auth);
     return (
-        <AuthenticatedLayout>
+        <AuthenticatedLayout auth={auth}>
             <Button variant="contained">Hello World</Button>
             <Button variant="contained">Hello World</Button>
         </AuthenticatedLayout>
