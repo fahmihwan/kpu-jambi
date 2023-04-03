@@ -13,39 +13,37 @@ import {
 } from "@mui/material";
 import React from "react";
 import styled from "styled-components";
-import { ButtonLinkEl } from "../../../Components/InputCompt";
-import { BreadcrumbsEl } from "../../../Components/NavCompt";
-import AuthenticatedLayout from "../../../Layouts/AuthenticatedLayout";
+import { ButtonLinkEl } from "../../Components/InputCompt";
+import { BreadcrumbsEl } from "../../Components/NavCompt";
+import AuthenticatedLayout from "../../Layouts/AuthenticatedLayout";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { Inertia } from "@inertiajs/inertia";
 
-const Index = ({ datas }) => {
-    console.log(datas);
+const Index = ({ datas, auth }) => {
     return (
-        <AuthenticatedLayout>
+        <AuthenticatedLayout auth={auth}>
             <DivSpaceBetween>
-                <h2>Saksi</h2>
+                <h2>Kelola Saksi</h2>
                 <BreadcrumbsEl
                     list={[
                         { title: "Master", href: "#" },
-                        { title: "List Saksi", href: "#" },
+                        { title: "Periode Pemilu", href: "#" },
                     ]}
                 />
             </DivSpaceBetween>
             <Card>
                 <DivSpaceBetween
                     style={{
-                        paddingLeft: "10px",
-                        paddingRight: "10px",
-                        backgroundColor: "gainsboro",
+                        padding: "10px",
+                        backgroundColor: "#F8F9FA",
                     }}
                 >
-                    <p>List Saksi</p>
+                    <p>List Periode</p>
                     <ButtonLinkEl
                         title="Tambah Data"
-                        href="/admin/master/saksi/create"
+                        href="/admin/periode-pemilu/create"
                     />
                 </DivSpaceBetween>
 
@@ -54,10 +52,9 @@ const Index = ({ datas }) => {
                         <TableHead>
                             <TableRow>
                                 <TableCell>#</TableCell>
-                                <TableCell>Nama</TableCell>
-                                <TableCell>Usernama</TableCell>
-                                <TableCell>Password</TableCell>
-                                <TableCell>Telp</TableCell>
+                                <TableCell>kode</TableCell>
+                                <TableCell>Tanggal Pelaksanaan</TableCell>
+                                <TableCell>keterangan</TableCell>
                                 <TableCell></TableCell>
                             </TableRow>
                         </TableHead>
@@ -72,15 +69,12 @@ const Index = ({ datas }) => {
                                     }}
                                 >
                                     <TableCell>{datas.from + i}</TableCell>
-
-                                    <TableCell>{d.nama}</TableCell>
-                                    <TableCell>{d.username}</TableCell>
-
-                                    <TableCell>{d.password}</TableCell>
-                                    <TableCell>{d.telp}</TableCell>
+                                    <TableCell>{d.kode}</TableCell>
+                                    <TableCell>{d.tanggal}</TableCell>
+                                    <TableCell>{d.keterangan}</TableCell>
                                     <TableCell>
                                         <Link
-                                            href={`/admin/master/saksi/${d.id}/edit`}
+                                            href={`/admin/periode-pemilu/${d.id}/edit`}
                                             style={{ marginRight: "5px" }}
                                         >
                                             <Button
@@ -94,7 +88,7 @@ const Index = ({ datas }) => {
                                         <Button
                                             onClick={() =>
                                                 Inertia.delete(
-                                                    `/admin/master/saksi/${d.id}`
+                                                    `/admin/periode-pemilu/${d.id}`
                                                 )
                                             }
                                             color="error"
@@ -108,7 +102,6 @@ const Index = ({ datas }) => {
                         </TableBody>
                     </Table>
                 </TableContainer>
-                {/* <Pagination count={1} variant="outlined" shape="rounded" /> */}
             </Card>
         </AuthenticatedLayout>
     );

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Sesi_pemilu;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class SesiPemiluController extends Controller
 {
@@ -12,7 +13,9 @@ class SesiPemiluController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('SesiPemilu/Index', [
+            'datas' => Sesi_pemilu::latest()->paginate(5)
+        ]);
     }
 
     /**
@@ -20,7 +23,7 @@ class SesiPemiluController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('SesiPemilu/Create');
     }
 
     /**
@@ -28,7 +31,16 @@ class SesiPemiluController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'kode' => 'required',
+            'tanggal' => 'required',
+            'keterangan' => 'required'
+        ]);
+        $validated['isActive'] = false;
+        // return $validated;
+        Sesi_pemilu::create($validated);
+
+        return redirect('/admin/periode-pemilu');
     }
 
     /**
@@ -42,24 +54,37 @@ class SesiPemiluController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Sesi_pemilu $sesi_pemilu)
+    public function edit($id)
     {
-        //
+        $item = Sesi_pemilu::where('id', $id)->first();
+
+        return Inertia::render('SesiPemilu/Edit', [
+            'item' => $item
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Sesi_pemilu $sesi_pemilu)
+    public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'kode' => 'required',
+            'tanggal' => 'required',
+            'keterangan' => 'required'
+        ]);
+        // $validated['isActive'] = false;
+
+        Sesi_pemilu::where('id', $id)->update($validated);
+        return redirect('/admin/periode-pemilu');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Sesi_pemilu $sesi_pemilu)
+    public function destroy($id)
     {
-        //
+        Sesi_pemilu::destroy($id);
+        return redirect()->back();
     }
 }

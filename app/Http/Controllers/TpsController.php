@@ -23,25 +23,9 @@ class TpsController extends Controller
      */
     public function create()
     {
-        $curl = curl_init();
+        $getApi = new GetApiController();
+        $response = $getApi->getApi("https://emsifa.github.io/api-wilayah-indonesia/api/regencies/15.json");
 
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://emsifa.github.io/api-wilayah-indonesia/api/regencies/15.json",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET",
-            CURLOPT_HTTPHEADER => array(
-                "Content-Type: application/json",
-                "Authorization: Basic gfdsds"
-            ),
-        ));
-
-        $response = curl_exec($curl);
-        curl_close($curl);
         return Inertia::render('Master/Tps/Create', [
             'api_kota' => json_decode($response)
         ]);
@@ -77,25 +61,8 @@ class TpsController extends Controller
     // public function edit(Tps $tps)
     public function edit($id)
     {
-        $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://emsifa.github.io/api-wilayah-indonesia/api/regencies/15.json",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET",
-            CURLOPT_HTTPHEADER => array(
-                "Content-Type: application/json",
-                "Authorization: Basic gfdsds"
-            ),
-        ));
-
-        $response = curl_exec($curl);
-        curl_close($curl);
+        $getApi = new GetApiController();
+        $response = $getApi->getApi("https://emsifa.github.io/api-wilayah-indonesia/api/regencies/15.json");
 
         $tps =   Tps::where('id', $id)->first();
 

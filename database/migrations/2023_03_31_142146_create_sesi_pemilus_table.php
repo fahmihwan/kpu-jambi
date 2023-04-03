@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('sesi_pemilus', function (Blueprint $table) {
             $table->id();
             $table->string('kode');
-            $table->date('tanggal_pelaksanaan');
+            $table->date('tanggal');
             $table->string('keterangan');
+            $table->boolean('isActive');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

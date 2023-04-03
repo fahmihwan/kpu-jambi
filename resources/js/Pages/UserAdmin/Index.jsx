@@ -72,7 +72,7 @@ const Index = ({ datas }) => {
                                     <TableCell>{d.created_at}</TableCell>
                                     <TableCell>
                                         <Link
-                                            href={`/admin/master/tps/${d.id}/edit`}
+                                            href={`/admin/akun/${d.id}/edit`}
                                             style={{ marginRight: "5px" }}
                                         >
                                             <Button
@@ -86,7 +86,7 @@ const Index = ({ datas }) => {
                                         <Button
                                             onClick={() =>
                                                 Inertia.delete(
-                                                    `/admin/master/tps/${d.id}`
+                                                    `/admin/akun/${d.id}`
                                                 )
                                             }
                                             color="error"

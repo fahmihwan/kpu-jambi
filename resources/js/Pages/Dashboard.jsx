@@ -7,6 +7,7 @@ const Dashboard = ({ auth }) => {
         <AuthenticatedLayout auth={auth}>
             <Button variant="contained">Hello World</Button>
             <Button variant="contained">Hello World</Button>
+            <Button variant="contained">Hello World</Button>
         </AuthenticatedLayout>
     );
 };

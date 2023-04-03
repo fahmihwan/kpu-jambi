@@ -22,7 +22,8 @@ import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import AddHomeIcon from "@mui/icons-material/AddHome";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
-import AssessmentRoundedIcon from "@mui/icons-material/AssessmentRounded";
+import AssignmentTurnedInOutlinedIcon from "@mui/icons-material/AssignmentTurnedInOutlined";
+
 export const Sidebar = ({ theme, handleDrawerClose, open }) => {
     const [toggleList, setToggleList] = useState(true);
     useEffect(() => {
@@ -152,22 +153,23 @@ export const Sidebar = ({ theme, handleDrawerClose, open }) => {
                 </Collapse>
 
                 <ListMenu
+                    title="Kelola Wakil"
+                    href="/admin/kelola-saksi"
+                    open={open}
+                    linkActive={false}
+                    icon={
+                        <AssignmentTurnedInOutlinedIcon
+                            style={{ color: "#BDBFC4" }}
+                        />
+                    }
+                />
+                <ListMenu
                     title="Periode Pemilu"
                     href="/admin/periode-pemilu"
                     open={open}
                     linkActive={false}
                     icon={<EventRoundedIcon style={{ color: "#BDBFC4" }} />}
                 />
-
-                {/* <ListMenu
-                    title="Laporan"
-                    href="/admin/laporan"
-                    open={open}
-                    linkActive={false}
-                    icon={
-                        <AssessmentRoundedIcon style={{ color: "#BDBFC4" }} />
-                    }
-                /> */}
             </List>
             <Divider />
         </Drawer>

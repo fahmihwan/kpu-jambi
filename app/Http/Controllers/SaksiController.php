@@ -43,7 +43,6 @@ class SaksiController extends Controller
             'nama' => 'required|max:50',
             'username' => 'required|max:15',
             'telp' => 'required|max:20',
-            'tps_id' => 'required',
             'password' => 'required',
         ]);
 

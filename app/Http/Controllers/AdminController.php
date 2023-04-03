@@ -59,7 +59,10 @@ class AdminController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $item = User::where('id', $id)->first();
+        return Inertia::render('UserAdmin/Edit', [
+            'item' => $item
+        ]);
     }
 
     /**
@@ -67,7 +70,15 @@ class AdminController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'nama' => 'required',
+            'username' => 'required',
+        ]);
+        if ($request->toggleSwitch) {
+            $validated['password'] = Hash::make($request->password);
+        }
+        User::where('id', $id)->update($validated);
+        return redirect('admin/akun');
     }
 
     /**
@@ -75,6 +86,7 @@ class AdminController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        User::destroy($id);
+        return redirect('admin/akun');
     }
 }

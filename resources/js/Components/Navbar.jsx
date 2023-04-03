@@ -89,7 +89,7 @@ export const Navbar = ({ open, handleDrawerOpen, auth }) => {
                             >
                                 <Link
                                     style={{ textDecoration: "none" }}
-                                    href="/admin/akun"
+                                    href="/admin/setting"
                                 >
                                     <MenuItem onClick={handleClose}>
                                         Periode Pemilu

@@ -15,18 +15,17 @@ import AuthenticatedLayout from "../../../Layouts/AuthenticatedLayout";
 
 const Create = ({ tps }) => {
     const [phone, setPhone] = useState("+62");
-    const [listTps, setlistTps] = useState();
-    useEffect(() => {
-        let data = tps.map((d) => ({ value: d.id, label: d.nama }));
-        setlistTps(data);
-    }, []);
+    // const [listTps, setlistTps] = useState();
+    // useEffect(() => {
+    //     let data = tps.map((d) => ({ value: d.id, label: d.nama }));
+    //     setlistTps(data);
+    // }, []);
 
     const { data, setData, post, processing, errors, reset } = useForm({
         nama: "",
         username: "",
         password: "",
         telp: "+62",
-        tps_id: "",
     });
 
     const handleChange = (e) => {
@@ -91,7 +90,7 @@ const Create = ({ tps }) => {
                                             }
                                         />
                                     </DivFormControl>
-                                    <DivFormControl>
+                                    {/* <DivFormControl>
                                         <SelectSearchEl
                                             options={listTps}
                                             nameData="kecamatan"
@@ -99,7 +98,7 @@ const Create = ({ tps }) => {
                                                 setData("tps_id", e.value)
                                             }
                                         />
-                                    </DivFormControl>
+                                    </DivFormControl> */}
                                 </Grid2>
                                 <Grid2 xs={6}>
                                     <h4>Akun</h4>

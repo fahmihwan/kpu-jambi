@@ -5,18 +5,28 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
-import React from "react";
 import { createRoot } from "react-dom/client";
 import { InertiaProgress } from "@inertiajs/progress";
 import { createInertiaApp } from "@inertiajs/inertia-react";
-
+import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 createInertiaApp({
-    resolve: (name) => {
-        const pages = import.meta.glob("./Pages/**/*.jsx", { eager: true });
-        return pages[`./Pages/${name}.jsx`];
-    },
+    title: (title) => `${title} - ${appName}`,
+    resolve: (name) =>
+        resolvePageComponent(
+            `./Pages/${name}.jsx`,
+            import.meta.glob("./Pages/**/*.jsx")
+        ),
+    //     const pages = import.meta.glob("./Pages/**/*.jsx", { eager: true });
+    //     return pages[`./Pages/${name}.jsx`];
+    // },
+    // setup({ el, App, props }) {
+    //     const root = createRoot(el);
+    //     root.createRoot(el).render(<App {...props} />);
+    // },
     setup({ el, App, props }) {
-        createRoot(el).render(<App {...props} />);
+        const root = createRoot(el);
+
+        root.render(<App {...props} />);
     },
 });
 
