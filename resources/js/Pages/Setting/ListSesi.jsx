@@ -6,13 +6,13 @@ import styled from "styled-components";
 import AuthenticatedLayout from "../../Layouts/AuthenticatedLayout";
 import { Inertia } from "@inertiajs/inertia";
 
-const ListSesi = ({ auth, datas }) => {
+const ListSesi = ({ auth, datas, share, sesi_share }) => {
     const handleChange = (e) => {
         Inertia.put(`/admin/setting/${e.target.value}/update`);
     };
 
     return (
-        <AuthenticatedLayout auth={auth}>
+        <AuthenticatedLayout auth={auth} share={sesi_share}>
             <DivSpaceBetween>
                 <h2>Setting Periode</h2>
                 <BreadcrumbsEl

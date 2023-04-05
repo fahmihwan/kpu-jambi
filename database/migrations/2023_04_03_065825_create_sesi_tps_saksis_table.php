@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreignIdFor(Saksi::class);
             $table->foreignIdFor(Sesi_pemilu::class);
             $table->foreignIdFor(Tps::class);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

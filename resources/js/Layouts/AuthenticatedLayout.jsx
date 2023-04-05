@@ -6,7 +6,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 
 import { Sidebar } from "../Components/Sidebar";
 import { Navbar } from "../Components/Navbar";
-export default function AuthenticatedLayout({ children, auth }) {
+export default function AuthenticatedLayout({ children, auth, share }) {
     const theme = useTheme();
     const [open, setOpen] = useState(true);
 
@@ -29,6 +29,7 @@ export default function AuthenticatedLayout({ children, auth }) {
             />
             {/* sidebar */}
             <Sidebar
+                share={share}
                 theme={theme}
                 handleDrawerClose={handleDrawerClose}
                 drawerWidth={drawerWidth}

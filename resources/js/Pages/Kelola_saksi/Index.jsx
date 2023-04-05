@@ -25,7 +25,7 @@ const Index = ({ datas, auth }) => {
     return (
         <AuthenticatedLayout auth={auth}>
             <DivSpaceBetween>
-                <h2>Kelola Saksi</h2>
+                <h2>Kelola Wakil</h2>
                 <BreadcrumbsEl
                     list={[
                         { title: "Master", href: "#" },
@@ -43,7 +43,7 @@ const Index = ({ datas, auth }) => {
                     <p>List Periode</p>
                     <ButtonLinkEl
                         title="Tambah Data"
-                        href="/admin/periode-pemilu/create"
+                        href="/admin/kelola-saksi/create"
                     />
                 </DivSpaceBetween>
 
@@ -52,9 +52,9 @@ const Index = ({ datas, auth }) => {
                         <TableHead>
                             <TableRow>
                                 <TableCell>#</TableCell>
-                                <TableCell>kode</TableCell>
-                                <TableCell>Tanggal Pelaksanaan</TableCell>
-                                <TableCell>keterangan</TableCell>
+                                <TableCell>tps</TableCell>
+                                <TableCell>nama</TableCell>
+                                <TableCell>telp</TableCell>
                                 <TableCell></TableCell>
                             </TableRow>
                         </TableHead>
@@ -69,22 +69,10 @@ const Index = ({ datas, auth }) => {
                                     }}
                                 >
                                     <TableCell>{datas.from + i}</TableCell>
-                                    <TableCell>{d.kode}</TableCell>
-                                    <TableCell>{d.tanggal}</TableCell>
-                                    <TableCell>{d.keterangan}</TableCell>
+                                    <TableCell>{d.tps}</TableCell>
+                                    <TableCell>{d.saksi}</TableCell>
+                                    <TableCell>{d.telp}</TableCell>
                                     <TableCell>
-                                        <Link
-                                            href={`/admin/periode-pemilu/${d.id}/edit`}
-                                            style={{ marginRight: "5px" }}
-                                        >
-                                            <Button
-                                                variant="outlined"
-                                                color="warning"
-                                            >
-                                                <EditIcon />
-                                            </Button>
-                                        </Link>
-
                                         <Button
                                             onClick={() =>
                                                 Inertia.delete(

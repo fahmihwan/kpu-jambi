@@ -2,19 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\SesiHelper;
+use App\Models\Sesi_pemilu;
 use App\Models\Tps;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class TpsController extends Controller
 {
+
+    protected $sesiId;
+    public function __construct()
+    {
+        $this->sesiId = new SesiHelper();
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+        $sesiId = $this->sesiId->getSesiId();
+        if (!$sesiId) {
+            return 'harap pilih periode';
+        }
         return Inertia::render('Master/Tps/Index', [
-            'datas' => Tps::latest()->paginate(10)
+            'datas' => Tps::where('sesi_pemilu_id', $sesiId)->latest()->paginate(10)
         ]);
     }
 
@@ -36,12 +48,22 @@ class TpsController extends Controller
      */
     public function store(Request $request)
     {
+
+        // dd($this->sesiId->getSesiId());
+
         $validated =  $request->validate([
             'nama' => 'required',
             'kota' => 'required',
             'kecamatan' => 'required',
             'kelurahan' => 'required'
         ]);
+
+        $sesiId = $this->sesiId->getSesiId();
+        if (!$sesiId) {
+            return 'harap pilih periode';
+        }
+
+        $validated['sesi_pemilu_id'] = $this->sesiId->getSesiId();
 
         Tps::create($validated);
         return redirect('/admin/master/tps');

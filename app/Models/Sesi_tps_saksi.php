@@ -10,4 +10,14 @@ class Sesi_tps_saksi extends Model
 {
     use HasFactory, SoftDeletes;
     protected $guarded = ['id'];
+
+    public function saksi()
+    {
+        return $this->belongsTo(Saksi::class);
+    }
+
+    public function tps()
+    {
+        return $this->belongsTo(Tps::class);
+    }
 }

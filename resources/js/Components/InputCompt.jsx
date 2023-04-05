@@ -27,9 +27,33 @@ export const SelectSearchEl = ({
     return (
         <Select
             options={options}
-            nameData={nameData}
+            nameData={nameData} //nameData unavailable
             onChange={handleChange}
             isDisabled={isDisabled}
+            styles={{
+                control: (baseStyles, state) => ({
+                    ...baseStyles,
+                    height: "55px",
+                    borderColor: state.isFocused ? "grey" : "#cacaca",
+                }),
+            }}
+            variant="outlined"
+        />
+    );
+};
+
+export const SelectSearchClearSubmitEl = ({
+    options,
+    handleChangeSelect,
+    name,
+    value,
+}) => {
+    return (
+        <Select
+            options={options}
+            name={name}
+            onChange={handleChangeSelect}
+            value={value}
             styles={{
                 control: (baseStyles, state) => ({
                     ...baseStyles,

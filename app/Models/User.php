@@ -41,4 +41,9 @@ class User extends Authenticatable
     protected $casts = [
         'created_at' => 'datetime:l, d-m-Y'
     ];
+
+    public function sesi_pemilu()
+    {
+        return $this->belongsTo(Sesi_pemilu::class);
+    }
 }

@@ -55,7 +55,7 @@ export const Navbar = ({ open, handleDrawerOpen, auth }) => {
                     }}
                 >
                     <Typography variant="h6" noWrap component="div">
-                        Sistem Informasi Penghitungan Suara
+                        {/* Sistem Informasi Penghitungan Suara */}
                     </Typography>
                     <Box sx={{ display: "flex", alignItems: "center" }}>
                         <Typography>Welcome, {auth?.user?.nama}</Typography>

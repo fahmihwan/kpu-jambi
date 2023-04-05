@@ -23,8 +23,9 @@ import AddHomeIcon from "@mui/icons-material/AddHome";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import AssignmentTurnedInOutlinedIcon from "@mui/icons-material/AssignmentTurnedInOutlined";
+import { Typography } from "@mui/material";
 
-export const Sidebar = ({ theme, handleDrawerClose, open }) => {
+export const Sidebar = ({ theme, handleDrawerClose, open, share }) => {
     const [toggleList, setToggleList] = useState(true);
     useEffect(() => {
         if (!open) {
@@ -44,7 +45,22 @@ export const Sidebar = ({ theme, handleDrawerClose, open }) => {
             }}
             open={open}
         >
-            <DrawerHeader>
+            <DrawerHeader
+                sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    paddingLeft: "20px",
+                }}
+            >
+                <Typography
+                    sx={{
+                        color: "white",
+                        fontWeight: "bold",
+                        fontSize: "20px",
+                    }}
+                >
+                    {share?.kode}
+                </Typography>
                 <IconButton
                     style={{ color: "#BDBFC4" }}
                     onClick={handleDrawerClose}

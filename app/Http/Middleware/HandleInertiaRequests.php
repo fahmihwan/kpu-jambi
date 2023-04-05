@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Sesi_pemilu;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -44,6 +45,7 @@ class HandleInertiaRequests extends Middleware
             'flash' => [
                 'error_message' => fn () => $request->session()->get('error_message')
             ],
+            'sesi_share' => Sesi_pemilu::select(['id', 'kode'])->where('isActive', 1)->first()
         ]);
     }
 }
