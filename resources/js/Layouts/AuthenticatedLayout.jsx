@@ -35,7 +35,14 @@ export default function AuthenticatedLayout({ children, auth, share }) {
                 drawerWidth={drawerWidth}
                 open={open}
             />
-            <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+            <Box
+                component="main"
+                sx={{
+                    flexGrow: 1,
+                    p: 3,
+                    //  backgroundColor: "#F9FAFB"
+                }}
+            >
                 <DrawerHeader />
                 {children}
             </Box>

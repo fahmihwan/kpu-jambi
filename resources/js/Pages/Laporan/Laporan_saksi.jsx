@@ -1,8 +1,8 @@
-import React from "react";
 import { Link } from "@inertiajs/inertia-react";
 import {
     Button,
     Card,
+    Pagination,
     Paper,
     Table,
     TableBody,
@@ -11,38 +11,31 @@ import {
     TableHead,
     TableRow,
 } from "@mui/material";
+import React from "react";
+import styled from "styled-components";
 import { ButtonLinkEl } from "../../Components/InputCompt";
 import { BreadcrumbsEl } from "../../Components/NavCompt";
-import styled from "styled-components";
 import AuthenticatedLayout from "../../Layouts/AuthenticatedLayout";
+
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { Inertia } from "@inertiajs/inertia";
 
-const Index = ({ datas, auth, sesi_share }) => {
+const Laporan_saksi = ({ datas, auth, sesi_share }) => {
     return (
         <AuthenticatedLayout auth={auth} share={sesi_share}>
             <DivSpaceBetween>
-                <h2>Periode Pemilu</h2>
-                <BreadcrumbsEl
-                    list={[
-                        { title: "Master", href: "#" },
-                        { title: "Periode Pemilu", href: "#" },
-                    ]}
-                />
+                <h2>Laporan Saksi</h2>
+                <BreadcrumbsEl list={[{ title: "Laporan Saksi", href: "#" }]} />
             </DivSpaceBetween>
             <Card>
                 <DivSpaceBetween
                     style={{
                         padding: "10px",
-                        backgroundColor: "#F8F9FA",
+                        backgroundColor: "#e0e0e0",
                     }}
                 >
-                    <p>List Periode</p>
-                    <ButtonLinkEl
-                        title="Tambah Data"
-                        href="/admin/periode-pemilu/create"
-                    />
+                    <p>List Saksi</p>
                 </DivSpaceBetween>
 
                 <TableContainer component={Paper}>
@@ -50,9 +43,10 @@ const Index = ({ datas, auth, sesi_share }) => {
                         <TableHead>
                             <TableRow>
                                 <TableCell>#</TableCell>
-                                <TableCell>kode</TableCell>
-                                <TableCell>Tanggal Pelaksanaan</TableCell>
-                                <TableCell>keterangan</TableCell>
+                                <TableCell>Nama</TableCell>
+                                <TableCell>Usernama</TableCell>
+                                <TableCell>Password</TableCell>
+                                <TableCell>Telp</TableCell>
                                 <TableCell></TableCell>
                             </TableRow>
                         </TableHead>
@@ -67,12 +61,15 @@ const Index = ({ datas, auth, sesi_share }) => {
                                     }}
                                 >
                                     <TableCell>{datas.from + i}</TableCell>
-                                    <TableCell>{d.kode}</TableCell>
-                                    <TableCell>{d.tanggal}</TableCell>
-                                    <TableCell>{d.keterangan}</TableCell>
+
+                                    <TableCell>{d.nama}</TableCell>
+                                    <TableCell>{d.username}</TableCell>
+
+                                    <TableCell>{d.password}</TableCell>
+                                    <TableCell>{d.telp}</TableCell>
                                     <TableCell>
                                         <Link
-                                            href={`/admin/periode-pemilu/${d.id}/edit`}
+                                            href={`/admin/master/saksi/${d.id}/edit`}
                                             style={{ marginRight: "5px" }}
                                         >
                                             <Button
@@ -86,7 +83,7 @@ const Index = ({ datas, auth, sesi_share }) => {
                                         <Button
                                             onClick={() =>
                                                 Inertia.delete(
-                                                    `/admin/periode-pemilu/${d.id}`
+                                                    `/admin/master/saksi/${d.id}`
                                                 )
                                             }
                                             color="error"
@@ -100,12 +97,13 @@ const Index = ({ datas, auth, sesi_share }) => {
                         </TableBody>
                     </Table>
                 </TableContainer>
+                {/* <Pagination count={1} variant="outlined" shape="rounded" /> */}
             </Card>
         </AuthenticatedLayout>
     );
 };
 
-export default Index;
+export default Laporan_saksi;
 
 const DivSpaceBetween = styled.div`
     display: flex;

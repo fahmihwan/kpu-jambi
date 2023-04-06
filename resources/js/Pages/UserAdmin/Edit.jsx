@@ -12,8 +12,7 @@ import {
 import { BreadcrumbsEl } from "../../Components/NavCompt";
 import AuthenticatedLayout from "../../Layouts/AuthenticatedLayout";
 
-const Edit = ({ item, auth }) => {
-    // const [toggleSwitch, setToggleSwitch] = useState(false);
+const Edit = ({ item, auth, sesi_share }) => {
     const { data, setData, put, processing, errors, reset } = useForm({
         nama: item.nama,
         username: item.username,
@@ -31,7 +30,7 @@ const Edit = ({ item, auth }) => {
     };
     const label = { inputProps: { "aria-label": "Switch demo" } };
     return (
-        <AuthenticatedLayout auth={auth}>
+        <AuthenticatedLayout auth={auth} share={sesi_share}>
             <DivSpaceBetween>
                 <h2>Akun</h2>
                 <BreadcrumbsEl

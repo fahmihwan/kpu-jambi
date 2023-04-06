@@ -27,10 +27,7 @@ class SaksiController extends Controller
      */
     public function create()
     {
-        $tps =  Tps::latest()->get();
-        return Inertia::render('Master/Saksi/Create', [
-            'tps' => $tps
-        ]);
+        return Inertia::render('Master/Saksi/Create');
     }
 
     /**
@@ -64,9 +61,8 @@ class SaksiController extends Controller
      */
     public function edit(Saksi $saksi)
     {
-        $tps =  Tps::latest()->get();
+
         return Inertia::render('Master/Saksi/Edit', [
-            'tps' => $tps,
             'saksi' => $saksi
         ]);
     }
@@ -93,6 +89,7 @@ class SaksiController extends Controller
      */
     public function destroy(Saksi $saksi)
     {
+
         Saksi::destroy($saksi->id);
         return redirect('/admin/master/saksi');
     }

@@ -14,26 +14,33 @@ import List from "@mui/material/List";
 
 import Collapse from "@mui/material/Collapse";
 
-import { Link } from "@inertiajs/inertia-react";
-import EventRoundedIcon from "@mui/icons-material/EventRounded";
+import { Link, usePage } from "@inertiajs/inertia-react";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import AddHomeIcon from "@mui/icons-material/AddHome";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
-import AssignmentTurnedInOutlinedIcon from "@mui/icons-material/AssignmentTurnedInOutlined";
 import { Typography } from "@mui/material";
+import TaskIcon from "@mui/icons-material/Task";
+import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
+import HomeIcon from "@mui/icons-material/Home";
+import BadgeIcon from "@mui/icons-material/Badge";
 
 export const Sidebar = ({ theme, handleDrawerClose, open, share }) => {
-    const [toggleList, setToggleList] = useState(true);
+    const [toggleList, setToggleList] = useState(false);
+    const [toggleListReport, setToggleListReport] = useState(false);
+    // console.log(open);
     useEffect(() => {
-        if (!open) {
-            setToggleList(false);
-        } else {
-            setToggleList(true);
-        }
+        setToggleListReport(false);
+        setToggleList(false);
     }, [open]);
+
+    const iconSize = 20;
+    const iconColorActive = "#BDBFC4";
+
+    const menuActive = "#1a3251";
+    const { url, component } = usePage();
 
     return (
         <Drawer
@@ -62,7 +69,7 @@ export const Sidebar = ({ theme, handleDrawerClose, open, share }) => {
                     {share?.kode}
                 </Typography>
                 <IconButton
-                    style={{ color: "#BDBFC4" }}
+                    style={{ color: iconColorActive, fontSize: iconSize }}
                     onClick={handleDrawerClose}
                 >
                     {theme.direction === "rtl" ? (
@@ -81,56 +88,45 @@ export const Sidebar = ({ theme, handleDrawerClose, open, share }) => {
                     color: "white",
                 }}
             >
+                {/* DASHBOARD */}
                 <ListMenu
                     title="Dashboard"
                     href="/admin/dashboard"
                     open={open}
-                    linkActive={true}
-                    icon={<DashboardIcon style={{ color: "#BDBFC4" }} />}
-                />
-                {/* <ListMenu
-                    title="Real Time data"
-                    href="#"
-                    open={open}
-                    linkActive={false}
-                /> */}
-
-                <ListItem
-                    disablePadding
-                    sx={{
-                        color: "#BDBFC4",
-                        display: "block",
-                    }}
-                    onClick={() => setToggleList(!toggleList)}
-                >
-                    <ListItemButton
-                        sx={{
-                            minHeight: 48,
-                            justifyContent: open ? "initial" : "center",
-                            px: 2.5,
-                        }}
-                    >
-                        <ListItemIcon
-                            sx={{
-                                minWidth: 0,
-                                mr: open ? 3 : "auto",
-                                justifyContent: "center",
+                    linkActive={url.startsWith("/admin/dashboard")}
+                    icon={
+                        <DashboardIcon
+                            style={{
+                                color: iconColorActive,
+                                fontSize: iconSize,
                             }}
-                        >
-                            {/* icon title*/}
-
-                            <BusinessCenterIcon style={{ color: "#BDBFC4" }} />
-                        </ListItemIcon>
-                        <ListItemText
-                            primary={"master data"}
-                            sx={{ opacity: open ? 1 : 0 }}
                         />
+                    }
+                />
+                {/* MASTER DATA */}
+                <ListItemToggleDropdown
+                    toggleState={toggleList}
+                    handleToggle={() => setToggleList(!toggleList)}
+                    linkActive={url.startsWith("/admin/master")}
+                    iconEl={
+                        <BusinessCenterIcon
+                            style={{
+                                color: iconColorActive,
+                                fontSize: iconSize,
+                            }}
+                        />
+                    }
+                    title={"Master Data"}
+                    open={open}
+                />
 
-                        {open && (toggleList ? <ExpandLess /> : <ExpandMore />)}
-                    </ListItemButton>
-                </ListItem>
-
-                <Collapse in={toggleList} timeout="auto" unmountOnExit>
+                {/* Dropdown Master Data */}
+                <Collapse
+                    in={toggleList}
+                    timeout="auto"
+                    unmountOnExit
+                    sx={{ backgroundColor: "#091627" }}
+                >
                     <List component="div" disablePadding>
                         <Link
                             href="/admin/master/saksi"
@@ -143,7 +139,7 @@ export const Sidebar = ({ theme, handleDrawerClose, open, share }) => {
                                 <ListItemIcon>
                                     <PersonAddIcon
                                         style={{
-                                            color: "#BDBFC4",
+                                            color: iconColorActive,
                                         }}
                                     />
                                 </ListItemIcon>
@@ -160,7 +156,12 @@ export const Sidebar = ({ theme, handleDrawerClose, open, share }) => {
                         >
                             <ListItemButton sx={{ pl: 4, color: "#BDBFC4" }}>
                                 <ListItemIcon>
-                                    <AddHomeIcon style={{ color: "#BDBFC4" }} />
+                                    <AddHomeIcon
+                                        style={{
+                                            color: iconColorActive,
+                                            fontSize: iconSize,
+                                        }}
+                                    />
                                 </ListItemIcon>
                                 <ListItemText primary="TPS" />
                             </ListItemButton>
@@ -168,27 +169,139 @@ export const Sidebar = ({ theme, handleDrawerClose, open, share }) => {
                     </List>
                 </Collapse>
 
+                {/* KELOLA WAKIL */}
                 <ListMenu
+                    onClick={() => setToggleList(!toggleList)}
                     title="Kelola Wakil"
+                    linkActive={url.startsWith("/admin/kelola-saksi")}
                     href="/admin/kelola-saksi"
                     open={open}
-                    linkActive={false}
                     icon={
-                        <AssignmentTurnedInOutlinedIcon
-                            style={{ color: "#BDBFC4" }}
+                        <PersonPinCircleIcon
+                            style={{
+                                color: iconColorActive,
+                                fontSize: iconSize,
+                            }}
                         />
                     }
                 />
-                <ListMenu
+                {/* <ListMenu
                     title="Periode Pemilu"
                     href="/admin/periode-pemilu"
                     open={open}
                     linkActive={false}
-                    icon={<EventRoundedIcon style={{ color: "#BDBFC4" }} />}
+                    icon={<EventRoundedIcon     style={{ color: "#BDBFC4", fontSize: iconSize }} />}
+                /> */}
+                {/* LAPORAN */}
+                <ListItemToggleDropdown
+                    toggleState={toggleListReport}
+                    handleToggle={() => setToggleListReport(!toggleListReport)}
+                    linkActive={url.startsWith("/admin/laporan")}
+                    iconEl={
+                        <TaskIcon
+                            style={{
+                                color: iconColorActive,
+                                fontSize: iconSize,
+                            }}
+                        />
+                    }
+                    title={"Laporan"}
+                    open={open}
                 />
+
+                <Collapse
+                    in={toggleListReport}
+                    timeout="auto"
+                    unmountOnExit
+                    sx={{ backgroundColor: "#091627" }}
+                >
+                    <List component="div" disablePadding>
+                        <Link
+                            href="/admin/laporan/laporan-saksi"
+                            style={{
+                                textDecoration: "none",
+                                backgroundColor: "red",
+                            }}
+                        >
+                            <ListItemButton sx={{ pl: 4, color: "#BDBFC4" }}>
+                                <ListItemIcon>
+                                    <BadgeIcon
+                                        style={{
+                                            color: iconColorActive,
+                                        }}
+                                    />
+                                </ListItemIcon>
+                                <ListItemText primary="Saksi" />
+                            </ListItemButton>
+                        </Link>
+
+                        <Link
+                            href="/admin/laporan/laporan-suara"
+                            style={{
+                                textDecoration: "none",
+                                backgroundColor: "red",
+                            }}
+                        >
+                            <ListItemButton sx={{ pl: 4, color: "#BDBFC4" }}>
+                                <ListItemIcon>
+                                    <HomeIcon
+                                        style={{
+                                            color: iconColorActive,
+                                            fontSize: iconSize,
+                                        }}
+                                    />
+                                </ListItemIcon>
+                                <ListItemText primary="Suara" />
+                            </ListItemButton>
+                        </Link>
+                    </List>
+                </Collapse>
+                {/* END REPORT */}
             </List>
             <Divider />
         </Drawer>
+    );
+};
+
+const ListItemToggleDropdown = ({
+    handleToggle,
+    iconEl,
+    toggleState,
+    title,
+    open,
+    linkActive,
+}) => {
+    return (
+        <ListItem
+            disablePadding
+            sx={{
+                color: "#BDBFC4",
+                display: "block",
+                backgroundColor: linkActive && "#1a3251",
+            }}
+            onClick={handleToggle}
+        >
+            <ListItemButton
+                sx={{
+                    minHeight: 48,
+                    justifyContent: open ? "initial" : "center",
+                    px: 2.5,
+                }}
+            >
+                <ListItemIcon
+                    sx={{
+                        minWidth: 0,
+                        mr: open ? 3 : "auto",
+                        justifyContent: "center",
+                    }}
+                >
+                    {iconEl}
+                </ListItemIcon>
+                <ListItemText primary={title} sx={{ opacity: open ? 1 : 0 }} />
+
+                {open && (toggleState ? <ExpandLess /> : <ExpandMore />)}
+            </ListItemButton>
+        </ListItem>
     );
 };
 const ListMenu = ({ title, href, open, linkActive, icon }) => {
@@ -198,15 +311,13 @@ const ListMenu = ({ title, href, open, linkActive, icon }) => {
             style={{
                 color: "#BDBFC4",
                 textDecoration: "none",
-                backgroundColor: "red",
             }}
         >
             <ListItem
                 disablePadding
                 sx={{
                     display: "block",
-
-                    // backgroundColor: linkActive ? "red" : "white",
+                    backgroundColor: linkActive && "#1a3251",
                 }}
             >
                 <ListItemButton
@@ -223,9 +334,7 @@ const ListMenu = ({ title, href, open, linkActive, icon }) => {
                             justifyContent: "center",
                         }}
                     >
-                        {/* icon title*/}
                         {icon}
-                        {/* <InboxIcon style={{ color: "#BDBFC4" }} /> */}
                     </ListItemIcon>
                     <ListItemText
                         primary={title}

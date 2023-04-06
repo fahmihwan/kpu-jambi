@@ -20,4 +20,8 @@ class Sesi_tps_saksi extends Model
     {
         return $this->belongsTo(Tps::class);
     }
+    public function transaksis()
+    {
+        return $this->hasMany(Transaksi::class);
+    }
 }

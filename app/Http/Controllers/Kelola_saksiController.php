@@ -22,10 +22,9 @@ class Kelola_saksiController extends Controller
     }
     public function index()
     {
-        // return  ;
-        // dd($this->sesiId->getSesiId());
 
-        $datas = Sesi_tps_saksi::select(['sesi_tps_saksis.id', 'telp', 'saksis.nama as saksi', 'tps.nama as tps'])
+
+        $datas = Sesi_tps_saksi::select(['sesi_tps_saksis.id', 'telp', 'saksis.nama as saksi', 'username', 'password', 'tps.nama as tps'])
             ->join('saksis', 'sesi_tps_saksis.saksi_id', '=', 'saksis.id')
             ->join('tps', 'sesi_tps_saksis.tps_id', '=', 'tps.id')
             ->where('sesi_tps_saksis.sesi_pemilu_id', $this->sesiId->getSesiId())
@@ -78,6 +77,7 @@ class Kelola_saksiController extends Controller
 
         return redirect()->back();
     }
+
     public function destroy_sesi_tps_saksi($id)
     {
         Sesi_tps_saksi::destroy($id);

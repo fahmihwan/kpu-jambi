@@ -14,7 +14,7 @@ import {
 import { BreadcrumbsEl } from "../../../Components/NavCompt";
 import AuthenticatedLayout from "../../../Layouts/AuthenticatedLayout";
 
-const Edit = ({ api_kota, tps }) => {
+const Edit = ({ api_kota, tps, auth, sesi_share }) => {
     const [toggleSwitch, setToggleSwitch] = useState(false);
 
     const { data, setData, put, processing, errors, reset } = useForm({
@@ -64,14 +64,14 @@ const Edit = ({ api_kota, tps }) => {
     const label = { inputProps: { "aria-label": "Switch demo" } };
 
     return (
-        <AuthenticatedLayout>
+        <AuthenticatedLayout auth={auth} share={sesi_share}>
             <DivSpaceBetween>
                 <h2>TPS</h2>
                 <BreadcrumbsEl
                     list={[
                         { title: "Master", href: "#" },
-                        { title: "List Saksi", href: "#" },
-                        { title: "Create", href: "#" },
+                        { title: "List TPS", href: "#" },
+                        { title: "Edit", href: "#" },
                     ]}
                 />
             </DivSpaceBetween>
@@ -81,12 +81,11 @@ const Edit = ({ api_kota, tps }) => {
                     <Card style={{ overflow: "inherit" }}>
                         <DivSpaceBetween
                             style={{
-                                paddingLeft: "10px",
-                                paddingRight: "10px",
-                                backgroundColor: "gainsboro",
+                                padding: "10px",
+                                backgroundColor: "#e0e0e0",
                             }}
                         >
-                            <p>Create Saksi</p>
+                            <p>EDIT TPS</p>
                             <ButtonLinkEl
                                 title="kembali"
                                 href="/admin/master/tps"

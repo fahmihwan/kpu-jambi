@@ -19,9 +19,9 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { Inertia } from "@inertiajs/inertia";
 
-const Index = ({ datas }) => {
+const Index = ({ datas, auth, sesi_share }) => {
     return (
-        <AuthenticatedLayout>
+        <AuthenticatedLayout auth={auth} share={sesi_share}>
             <DivSpaceBetween>
                 <h2>Akun</h2>
                 <BreadcrumbsEl

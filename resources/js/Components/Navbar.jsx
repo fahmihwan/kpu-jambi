@@ -89,10 +89,18 @@ export const Navbar = ({ open, handleDrawerOpen, auth }) => {
                             >
                                 <Link
                                     style={{ textDecoration: "none" }}
+                                    href="/admin/periode-pemilu"
+                                >
+                                    <MenuItem onClick={handleClose}>
+                                        Tambah Periode Pemilu
+                                    </MenuItem>
+                                </Link>
+                                <Link
+                                    style={{ textDecoration: "none" }}
                                     href="/admin/setting"
                                 >
                                     <MenuItem onClick={handleClose}>
-                                        Periode Pemilu
+                                        Setting Periode Pemilu
                                     </MenuItem>
                                 </Link>
                                 <Link

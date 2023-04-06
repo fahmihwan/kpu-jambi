@@ -4,7 +4,9 @@ namespace App\Http\Middleware;
 
 use App\Models\Sesi_pemilu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Middleware;
+
 
 class HandleInertiaRequests extends Middleware
 {

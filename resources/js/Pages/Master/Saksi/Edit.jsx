@@ -1,5 +1,5 @@
 import { useForm } from "@inertiajs/inertia-react";
-import { Box, Card, Switch } from "@mui/material";
+import { Box, Card, Switch, Typography } from "@mui/material";
 
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { MuiTelInput } from "mui-tel-input";
@@ -14,27 +14,13 @@ import {
 import { BreadcrumbsEl } from "../../../Components/NavCompt";
 import AuthenticatedLayout from "../../../Layouts/AuthenticatedLayout";
 
-const Edit = ({ tps, saksi }) => {
-    const [toggleSwitch, setToggleSwitch] = useState(false);
-    const [phone, setPhone] = useState("+62");
-    const [listTps, setlistTps] = useState();
-    useEffect(() => {
-        let data = tps.map((d) => ({ value: d.id, label: d.nama }));
-        setlistTps(data);
-    }, []);
-
+const Edit = ({ saksi, auth, sesi_share }) => {
     const { data, setData, put, processing, errors, reset } = useForm({
         nama: saksi.nama,
         username: saksi.username,
         password: saksi.password,
         telp: saksi.telp,
-        tps_id: saksi.tps_id,
     });
-    useEffect(() => {
-        if (!toggleSwitch) {
-            setData("tps_id", saksi.tps_id);
-        }
-    }, [toggleSwitch]);
 
     const handleChange = (e) => {
         setData(e.target.name, e.target.value);
@@ -46,13 +32,14 @@ const Edit = ({ tps, saksi }) => {
     };
     const label = { inputProps: { "aria-label": "Switch demo" } };
     return (
-        <AuthenticatedLayout>
+        <AuthenticatedLayout auth={auth} share={sesi_share}>
             <DivSpaceBetween>
                 <h2>Saksi</h2>
                 <BreadcrumbsEl
                     list={[
                         { title: "Master", href: "#" },
                         { title: "List Saksi", href: "#" },
+                        { title: "Edit", href: "#" },
                     ]}
                 />
             </DivSpaceBetween>
@@ -62,9 +49,8 @@ const Edit = ({ tps, saksi }) => {
                     <Card style={{ overflow: "inherit" }}>
                         <DivSpaceBetween
                             style={{
-                                paddingLeft: "10px",
-                                paddingRight: "10px",
-                                backgroundColor: "gainsboro",
+                                padding: "10px",
+                                backgroundColor: "#e0e0e0",
                             }}
                         >
                             <p>Create Saksi</p>
@@ -79,7 +65,12 @@ const Edit = ({ tps, saksi }) => {
                         >
                             <Grid2 container spacing={3}>
                                 <Grid2 xs={6}>
-                                    <h4>Pengguna</h4>
+                                    <Typography
+                                        variant="h5"
+                                        sx={{ marginBottom: "10px" }}
+                                    >
+                                        Pengguna
+                                    </Typography>
                                     <DivFormControl>
                                         <InputEl
                                             title="nama"
@@ -99,27 +90,14 @@ const Edit = ({ tps, saksi }) => {
                                             }
                                         />
                                     </DivFormControl>
-                                    <label htmlFor="">Edit Lokas TPS</label>{" "}
-                                    <Switch
-                                        {...label}
-                                        onClick={() =>
-                                            setToggleSwitch(!toggleSwitch)
-                                        }
-                                    />
-                                    {toggleSwitch && (
-                                        <DivFormControl>
-                                            <SelectSearchEl
-                                                options={listTps}
-                                                nameData="kecamatan"
-                                                handleChange={(e) =>
-                                                    setData("tps_id", e.value)
-                                                }
-                                            />
-                                        </DivFormControl>
-                                    )}
                                 </Grid2>
                                 <Grid2 xs={6}>
-                                    <h4>Akun</h4>
+                                    <Typography
+                                        variant="h5"
+                                        sx={{ marginBottom: "10px" }}
+                                    >
+                                        Akun
+                                    </Typography>
                                     <DivFormControl>
                                         <InputEl
                                             title="username"

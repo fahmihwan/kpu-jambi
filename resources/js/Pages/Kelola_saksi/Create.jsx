@@ -63,8 +63,8 @@ const Create = ({ sesi_share, auth, saksi, tps, datas }) => {
                 <h2>Kelola Saksi</h2>
                 <BreadcrumbsEl
                     list={[
-                        { title: "Master", href: "#" },
-                        { title: "List Saksi", href: "#" },
+                        { title: "List Wakil", href: "#" },
+                        { title: "Create", href: "#" },
                     ]}
                 />
             </DivSpaceBetween>
@@ -74,12 +74,11 @@ const Create = ({ sesi_share, auth, saksi, tps, datas }) => {
                     <Card style={{ overflow: "inherit" }}>
                         <DivSpaceBetween
                             style={{
-                                paddingLeft: "10px",
-                                paddingRight: "10px",
-                                backgroundColor: "gainsboro",
+                                padding: "10px",
+                                backgroundColor: "#e0e0e0",
                             }}
                         >
-                            <p>Create Saksi</p>
+                            <p>Create Wakil</p>
                             <ButtonLinkEl
                                 title="kembali"
                                 href="/admin/kelola-saksi"
@@ -121,12 +120,11 @@ const Create = ({ sesi_share, auth, saksi, tps, datas }) => {
                     <Card style={{ overflow: "inherit" }}>
                         <DivSpaceBetween
                             style={{
-                                paddingLeft: "10px",
-                                paddingRight: "10px",
-                                backgroundColor: "gainsboro",
+                                padding: "10px",
+                                backgroundColor: "#e0e0e0",
                             }}
                         >
-                            <p>Create Saksi</p>
+                            <p>List Data</p>
                         </DivSpaceBetween>
                         <TableContainer component={Paper}>
                             <Table

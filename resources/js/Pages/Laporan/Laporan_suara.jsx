@@ -1,8 +1,5 @@
-import { Link } from "@inertiajs/inertia-react";
 import {
-    Button,
     Card,
-    Pagination,
     Paper,
     Table,
     TableBody,
@@ -13,17 +10,16 @@ import {
 } from "@mui/material";
 import React from "react";
 import styled from "styled-components";
-import { ButtonLinkEl } from "../../Components/InputCompt";
 import { BreadcrumbsEl } from "../../Components/NavCompt";
 import AuthenticatedLayout from "../../Layouts/AuthenticatedLayout";
 
-const Index = ({ datas, auth, sesi_share }) => {
+const Laporan_suara = ({ datas, auth, sesi_share }) => {
     console.log(datas);
     return (
         <AuthenticatedLayout auth={auth} share={sesi_share}>
             <DivSpaceBetween>
-                <h2>List Wakil</h2>
-                <BreadcrumbsEl list={[{ title: "List Wakil", href: "#" }]} />
+                <h2>Laporan Suara</h2>
+                <BreadcrumbsEl list={[{ title: "List Suara", href: "#" }]} />
             </DivSpaceBetween>
             <Card>
                 <DivSpaceBetween
@@ -32,11 +28,7 @@ const Index = ({ datas, auth, sesi_share }) => {
                         backgroundColor: "#e0e0e0",
                     }}
                 >
-                    <p>List Periode</p>
-                    <ButtonLinkEl
-                        title="Tambah Data"
-                        href="/admin/kelola-saksi/create"
-                    />
+                    <p>List Suara</p>
                 </DivSpaceBetween>
 
                 <TableContainer component={Paper}>
@@ -44,16 +36,15 @@ const Index = ({ datas, auth, sesi_share }) => {
                         <TableHead>
                             <TableRow>
                                 <TableCell>#</TableCell>
-                                <TableCell>tps</TableCell>
-                                <TableCell>saksi</TableCell>
-                                <TableCell>username</TableCell>
-                                <TableCell>password</TableCell>
-                                <TableCell>telp</TableCell>
+                                <TableCell>TPS</TableCell>
+                                <TableCell>Alamat</TableCell>
+                                <TableCell>Suara</TableCell>
+                                <TableCell>Wakil</TableCell>
                                 <TableCell></TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {datas?.data?.map((d, i) => (
+                            {datas.data?.map((d, i) => (
                                 <TableRow
                                     key={i}
                                     sx={{
@@ -64,18 +55,12 @@ const Index = ({ datas, auth, sesi_share }) => {
                                 >
                                     <TableCell>{datas.from + i}</TableCell>
                                     <TableCell>{d.tps}</TableCell>
-                                    <TableCell>{d.saksi}</TableCell>
-                                    <TableCell>{d.username}</TableCell>
-                                    <TableCell>{d.password}</TableCell>
-                                    <TableCell>{d.telp}</TableCell>
                                     <TableCell>
-                                        {/* <a
-                                            target={"_blank"}
-                                            href="https://api.whatsapp.com/send/?phone=628112952883&text=&type=phone_number&app_absent=0"
-                                        >
-                                            +6282281376072
-                                        </a> */}
+                                        {d.kota} - {d.kecamatan} - {d.kelurahan}
                                     </TableCell>
+                                    <TableCell>{d.qty}</TableCell>
+                                    <TableCell>{d.saksi}</TableCell>
+                                    <TableCell></TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
@@ -86,7 +71,7 @@ const Index = ({ datas, auth, sesi_share }) => {
     );
 };
 
-export default Index;
+export default Laporan_suara;
 
 const DivSpaceBetween = styled.div`
     display: flex;

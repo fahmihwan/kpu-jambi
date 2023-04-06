@@ -12,7 +12,7 @@ import {
 import { BreadcrumbsEl } from "../../Components/NavCompt";
 import AuthenticatedLayout from "../../Layouts/AuthenticatedLayout";
 
-const Edit = ({ item, auth }) => {
+const Edit = ({ item, auth, sesi_share }) => {
     const { data, setData, put, processing, errors, reset } = useForm({
         kode: item.kode,
         tanggal: item.tanggal,
@@ -28,7 +28,7 @@ const Edit = ({ item, auth }) => {
         put(`/admin/periode-pemilu/${item.id}`);
     };
     return (
-        <AuthenticatedLayout auth={auth}>
+        <AuthenticatedLayout auth={auth} share={sesi_share}>
             <DivSpaceBetween>
                 <h2>Edit Periode Pemilu</h2>
                 <BreadcrumbsEl

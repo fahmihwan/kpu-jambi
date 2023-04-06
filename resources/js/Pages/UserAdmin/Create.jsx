@@ -12,7 +12,7 @@ import {
 import { BreadcrumbsEl } from "../../Components/NavCompt";
 import AuthenticatedLayout from "../../Layouts/AuthenticatedLayout";
 
-const Create = () => {
+const Create = ({ auth, sesi_share }) => {
     const { data, setData, post, processing, errors, reset } = useForm({
         nama: "",
         username: "",
@@ -28,7 +28,7 @@ const Create = () => {
         post("/admin/akun");
     };
     return (
-        <AuthenticatedLayout>
+        <AuthenticatedLayout auth={auth} share={sesi_share}>
             <DivSpaceBetween>
                 <h2>Akun</h2>
                 <BreadcrumbsEl

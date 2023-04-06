@@ -1,26 +1,30 @@
-import {
-    Box,
-    Button,
-    Card,
-    Container,
-    Hidden,
-    Stack,
-    Typography,
-} from "@mui/material";
+import { Box, Button, Card, Hidden, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import React from "react";
 import styled from "styled-components";
-import { ButtonSubmitEl, InputEl } from "../../Components/InputCompt";
+import { InputEl } from "../../Components/InputCompt";
 
 import LogoKpu from "../../../../public/img/logo-kpu.jpeg";
+import { useForm } from "@inertiajs/inertia-react";
 const Login = () => {
+    const { data, setData, post, processing, errors, reset } = useForm({
+        username: "",
+        password: "",
+    });
+
+    const handleChange = (e) => {
+        setData(e.target.name, e.target.value);
+    };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        post("/");
+    };
     return (
         <Box
             sx={{
-                position: "fixed",
-                backgroundColor: "#1C2536",
-                width: "100%",
+                backgroundColor: "#091627",
                 height: "100vh",
+                padding: "0px",
                 margin: "0px",
                 display: "flex",
                 justifyContent: "center",
@@ -30,18 +34,15 @@ const Login = () => {
             <Card
                 sx={{
                     margin: "30px",
-                    width: "900px",
+                    width: "800px",
                     height: "70vh",
-                    sm: {
-                        height: "0vh",
-                    },
                 }}
             >
-                <Grid2 container spacing={3} sx={{ height: "100%" }}>
+                <Grid2 container spacing={0} sx={{ height: "100%" }}>
                     <Grid2
-                        // sm={{ display: "none" }}
                         md={6}
                         sx={{
+                            backgroundColor: "red",
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
@@ -51,7 +52,7 @@ const Login = () => {
                             <img
                                 src={LogoKpu}
                                 alt=""
-                                style={{ width: "300px" }}
+                                style={{ width: "350px" }}
                             />
                         </Hidden>
                     </Grid2>
@@ -64,10 +65,13 @@ const Login = () => {
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
+                            // border: "1px solid black",
                             height: "100%",
                         }}
                     >
-                        <form action="" style={{ width: "80%" }}>
+                        <form onSubmit={handleSubmit} style={{ width: "80%" }}>
+                            {/* <h4>Login</h4> */}
+
                             <Typography
                                 sx={{
                                     textAlign: "center",
@@ -76,21 +80,48 @@ const Login = () => {
                                 variant="h4"
                                 component="h1"
                             >
-                                Login
+                                Login User
                             </Typography>
                             <DivFormControl>
-                                <InputEl title="username" name="username" />
+                                <InputEl
+                                    title="username"
+                                    handleChange={handleChange}
+                                    value={data.username}
+                                    name="username"
+                                />
                             </DivFormControl>
                             <DivFormControl>
-                                <InputEl title="password" name="password" />
+                                <InputEl
+                                    title="password"
+                                    type="password"
+                                    handleChange={handleChange}
+                                    value={data.password}
+                                    name="password"
+                                />
                             </DivFormControl>
                             <Button
                                 type="submit"
                                 variant="contained"
-                                sx={{ width: "100%", height: "40px" }}
+                                // color="black"
+                                sx={{
+                                    width: "100%",
+                                    height: "40px",
+                                    // backgroundColor: "#091627",
+                                    color: "white",
+                                }}
                             >
                                 Login
                             </Button>
+                            <Typography
+                                sx={{
+                                    textAlign: "center",
+                                    marginTop: "40px",
+                                    color: "grey",
+                                }}
+                            >
+                                Sistem Informasi <br />
+                                Penghitungan Suara DPRD JAMBI
+                            </Typography>
                         </form>
                     </Grid2>
                 </Grid2>

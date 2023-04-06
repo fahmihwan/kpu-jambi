@@ -25,7 +25,7 @@ import AuthenticatedLayout from "../../../Layouts/AuthenticatedLayout";
 import Select from "react-select";
 import AsyncSelect from "react-select/async";
 
-const Create = ({ api_kota }) => {
+const Create = ({ api_kota, auth, sesi_share }) => {
     const { data, setData, post, processing, errors, reset } = useForm({
         nama: "",
         kota: "",
@@ -46,7 +46,6 @@ const Create = ({ api_kota }) => {
     }, []);
 
     const handleCity = async (e) => {
-        console.log(e);
         setData("kota", e.label);
         let res = await axios.get(`/admin/${e.value}/get-district`);
         let cek = await res.data?.map((d) => ({ value: d.id, label: d.name }));
@@ -71,13 +70,13 @@ const Create = ({ api_kota }) => {
     };
 
     return (
-        <AuthenticatedLayout>
+        <AuthenticatedLayout auth={auth} share={sesi_share}>
             <DivSpaceBetween>
                 <h2>TPS</h2>
                 <BreadcrumbsEl
                     list={[
                         { title: "Master", href: "#" },
-                        { title: "List Saksi", href: "#" },
+                        { title: "List TPS", href: "#" },
                         { title: "Create", href: "#" },
                     ]}
                 />
@@ -88,12 +87,11 @@ const Create = ({ api_kota }) => {
                     <Card style={{ overflow: "inherit" }}>
                         <DivSpaceBetween
                             style={{
-                                paddingLeft: "10px",
-                                paddingRight: "10px",
-                                backgroundColor: "gainsboro",
+                                padding: "10px",
+                                backgroundColor: "#e0e0e0",
                             }}
                         >
-                            <p>Create Saksi</p>
+                            <p>Create TPS</p>
                             <ButtonLinkEl
                                 title="kembali"
                                 href="/admin/master/tps"

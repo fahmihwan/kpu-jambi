@@ -19,16 +19,19 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { Inertia } from "@inertiajs/inertia";
 
-const Index = ({ datas }) => {
-    const handleDelete = (id) => {};
+const Index = ({ datas, auth, sesi_share }) => {
+    const handleDelete = (id) => {
+        confirm("apakah anda yakin ingin menghapus ? ") &&
+            Inertia.delete(`/admin/master/tps/${id}`);
+    };
     return (
-        <AuthenticatedLayout>
+        <AuthenticatedLayout auth={auth} share={sesi_share}>
             <DivSpaceBetween>
                 <h2>TPS</h2>
                 <BreadcrumbsEl
                     list={[
                         { title: "Master", href: "#" },
-                        { title: "List Saksi", href: "#" },
+                        { title: "List TPS", href: "#" },
                     ]}
                 />
             </DivSpaceBetween>
@@ -36,7 +39,7 @@ const Index = ({ datas }) => {
                 <DivSpaceBetween
                     style={{
                         padding: "10px",
-                        backgroundColor: "#F8F9FA",
+                        backgroundColor: "#e0e0e0",
                     }}
                 >
                     <p>List TPS</p>
@@ -87,11 +90,7 @@ const Index = ({ datas }) => {
                                         </Link>
 
                                         <Button
-                                            onClick={() =>
-                                                Inertia.delete(
-                                                    `/admin/master/tps/${d.id}`
-                                                )
-                                            }
+                                            onClick={() => handleDelete(d.id)}
                                             color="error"
                                             variant="outlined"
                                         >

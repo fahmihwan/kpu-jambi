@@ -1,26 +1,18 @@
 import { useForm } from "@inertiajs/inertia-react";
-import { Card, FormControl, TextField } from "@mui/material";
+import { Card } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { MuiTelInput } from "mui-tel-input";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import {
     ButtonLinkEl,
     ButtonSubmitEl,
     InputEl,
-    SelectSearchEl,
 } from "../../../Components/InputCompt";
 import { BreadcrumbsEl } from "../../../Components/NavCompt";
 import AuthenticatedLayout from "../../../Layouts/AuthenticatedLayout";
 
-const Create = ({ tps }) => {
-    const [phone, setPhone] = useState("+62");
-    // const [listTps, setlistTps] = useState();
-    // useEffect(() => {
-    //     let data = tps.map((d) => ({ value: d.id, label: d.nama }));
-    //     setlistTps(data);
-    // }, []);
-
+const Create = ({ auth, sesi_share }) => {
     const { data, setData, post, processing, errors, reset } = useForm({
         nama: "",
         username: "",
@@ -37,13 +29,14 @@ const Create = ({ tps }) => {
         post("/admin/master/saksi");
     };
     return (
-        <AuthenticatedLayout>
+        <AuthenticatedLayout auth={auth} share={sesi_share}>
             <DivSpaceBetween>
                 <h2>Saksi</h2>
                 <BreadcrumbsEl
                     list={[
                         { title: "Master", href: "#" },
                         { title: "List Saksi", href: "#" },
+                        { title: "Create", href: "#" },
                     ]}
                 />
             </DivSpaceBetween>
@@ -53,9 +46,8 @@ const Create = ({ tps }) => {
                     <Card style={{ overflow: "inherit" }}>
                         <DivSpaceBetween
                             style={{
-                                paddingLeft: "10px",
-                                paddingRight: "10px",
-                                backgroundColor: "gainsboro",
+                                padding: "10px",
+                                backgroundColor: "#e0e0e0",
                             }}
                         >
                             <p>Create Saksi</p>

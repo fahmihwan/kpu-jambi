@@ -1,8 +1,8 @@
 <?php
 
-use App\Models\Saksi;
 use App\Models\Sesi_pemilu;
-use App\Models\Tps;
+use App\Models\Sesi_tps_saksi;
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,8 +17,7 @@ return new class extends Migration
         Schema::create('transaksis', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Sesi_pemilu::class);
-            $table->foreignIdFor(Saksi::class);
-            $table->foreignIdFor(Tps::class);
+            $table->foreignIdFor(Sesi_tps_saksi::class);
             $table->integer('qty');
             $table->timestamps();
         });
