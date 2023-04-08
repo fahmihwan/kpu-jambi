@@ -26,7 +26,7 @@ import TaskIcon from "@mui/icons-material/Task";
 import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
 import HomeIcon from "@mui/icons-material/Home";
 import BadgeIcon from "@mui/icons-material/Badge";
-
+import WorkHistoryIcon from "@mui/icons-material/WorkHistory";
 export const Sidebar = ({ theme, handleDrawerClose, open, share }) => {
     const [toggleList, setToggleList] = useState(false);
     const [toggleListReport, setToggleListReport] = useState(false);
@@ -185,15 +185,24 @@ export const Sidebar = ({ theme, handleDrawerClose, open, share }) => {
                         />
                     }
                 />
-                {/* <ListMenu
-                    title="Periode Pemilu"
-                    href="/admin/periode-pemilu"
+                <ListMenu
+                    onClick={() => setToggleList(!toggleList)}
+                    title="Suara"
+                    linkActive={url.startsWith("/admin/laporan")}
+                    href="/admin/laporan/laporan-suara"
                     open={open}
-                    linkActive={false}
-                    icon={<EventRoundedIcon     style={{ color: "#BDBFC4", fontSize: iconSize }} />}
-                /> */}
+                    icon={
+                        <WorkHistoryIcon
+                            style={{
+                                color: iconColorActive,
+                                fontSize: iconSize,
+                            }}
+                        />
+                    }
+                />
+
                 {/* LAPORAN */}
-                <ListItemToggleDropdown
+                {/* <ListItemToggleDropdown
                     toggleState={toggleListReport}
                     handleToggle={() => setToggleListReport(!toggleListReport)}
                     linkActive={url.startsWith("/admin/laporan")}
@@ -207,9 +216,9 @@ export const Sidebar = ({ theme, handleDrawerClose, open, share }) => {
                     }
                     title={"Laporan"}
                     open={open}
-                />
+                /> */}
 
-                <Collapse
+                {/* <Collapse
                     in={toggleListReport}
                     timeout="auto"
                     unmountOnExit
@@ -255,7 +264,7 @@ export const Sidebar = ({ theme, handleDrawerClose, open, share }) => {
                             </ListItemButton>
                         </Link>
                     </List>
-                </Collapse>
+                </Collapse> */}
                 {/* END REPORT */}
             </List>
             <Divider />

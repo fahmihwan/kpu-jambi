@@ -21,12 +21,17 @@ class TpsController extends Controller
      */
     public function index()
     {
+
         $sesiId = $this->sesiId->getSesiId();
         if (!$sesiId) {
             return 'harap pilih periode';
         }
+        // return Tps::where('sesi_pemilu_id', $sesiId)->latest()->get();
+
+
         return Inertia::render('Master/Tps/Index', [
-            'datas' => Tps::where('sesi_pemilu_id', $sesiId)->latest()->paginate(10)
+            // 'datas' => Tps::where('sesi_pemilu_id', $sesiId)->latest()->paginate(10)
+            'datas' => Tps::where('sesi_pemilu_id', $sesiId)->latest()->get()
         ]);
     }
 
@@ -117,6 +122,7 @@ class TpsController extends Controller
     public function destroy($id)
     {
         Tps::destroy($id);
-        return redirect('/admin/master/tps');
+        return redirect()->back();
+        // return redirect('/admin/master/tps');
     }
 }

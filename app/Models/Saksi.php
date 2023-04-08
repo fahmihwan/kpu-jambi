@@ -17,8 +17,5 @@ class Saksi extends Authenticatable
     //     'password',
     // ];
 
-    public function tps()
-    {
-        return $this->belongsTo(Tps::class)->withTrashed();
-    }
+
 }

@@ -1,17 +1,5 @@
 import { Link } from "@inertiajs/inertia-react";
-import {
-    Button,
-    Card,
-    Container,
-    Pagination,
-    Paper,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow,
-} from "@mui/material";
+import { Box, Button, Card, Container } from "@mui/material";
 import React from "react";
 import styled from "styled-components";
 import { ButtonLinkEl } from "../../../Components/InputCompt";
@@ -21,12 +9,87 @@ import AuthenticatedLayout from "../../../Layouts/AuthenticatedLayout";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { Inertia } from "@inertiajs/inertia";
+import MUIDataTable from "mui-datatables";
+import { Typography } from "@mui/material";
 
 const Index = ({ datas, auth, sesi_share }) => {
     const handleDelete = (id) => {
         confirm("apakah anda yakin ingin menghapus ? ") &&
             Inertia.delete(`/admin/master/saksi/${id}`);
     };
+
+    const columns = [
+        {
+            name: "#",
+            options: {
+                filter: false,
+                customBodyRender: (value, tableMeta, updateValue) => (
+                    <Typography>{tableMeta.rowIndex + 1}</Typography>
+                ),
+            },
+        },
+        {
+            name: "nama",
+            options: {
+                filter: true,
+            },
+        },
+        {
+            name: "username",
+            options: {
+                filter: true,
+            },
+        },
+        {
+            name: "password",
+            options: {
+                filter: true,
+            },
+        },
+        {
+            name: "telp",
+            options: {
+                filter: true,
+            },
+        },
+        {
+            name: "id",
+            label: "Action",
+            options: {
+                filter: false,
+                customBodyRender: (value, tableMeta, updateValue) => (
+                    <Box sx={{ display: "flex" }}>
+                        <Link
+                            href={`/admin/master/saksi/${tableMeta.rowData[5]}/edit`} //id
+                            style={{
+                                marginRight: "5px",
+                            }}
+                        >
+                            <Button variant="outlined" color="warning">
+                                <EditIcon />
+                            </Button>
+                        </Link>
+                        <Button
+                            onClick={() => handleDelete(tableMeta.rowData[5])}
+                            color="error"
+                            variant="outlined"
+                        >
+                            <DeleteIcon />
+                        </Button>
+                    </Box>
+                ),
+            },
+        },
+    ];
+
+    const options = {
+        selectableRows: false,
+        responsive: "standard",
+        fixedHeader: true,
+        fixedSelectColumn: true,
+        tableBodyHeight: "400px",
+    };
+
     return (
         <AuthenticatedLayout auth={auth} share={sesi_share}>
             <Container sx={{ height: "100%" }}>
@@ -53,7 +116,13 @@ const Index = ({ datas, auth, sesi_share }) => {
                         />
                     </DivSpaceBetween>
 
-                    <TableContainer component={Paper}>
+                    <MUIDataTable
+                        data={datas}
+                        columns={columns}
+                        options={options}
+                    />
+
+                    {/* <TableContainer component={Paper}>
                         <Table sx={{ minWidth: 650 }} aria-label="simple table">
                             <TableHead>
                                 <TableRow>
@@ -111,6 +180,7 @@ const Index = ({ datas, auth, sesi_share }) => {
                             </TableBody>
                         </Table>
                     </TableContainer>
+                    <Pagination totals={datas.total} links={datas.links} /> */}
                     {/* <Pagination count={1} variant="outlined" shape="rounded" /> */}
                 </Card>
             </Container>

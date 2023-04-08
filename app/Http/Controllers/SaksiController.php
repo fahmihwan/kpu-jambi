@@ -15,8 +15,9 @@ class SaksiController extends Controller
      */
     public function index()
     {
-        $datas = Saksi::with('tps:id,nama')->latest()->paginate(10);
-        // return $datas;
+        $datas = Saksi::latest()->get();
+
+
         return Inertia::render('Master/Saksi/Index', [
             'datas' => $datas
         ]);

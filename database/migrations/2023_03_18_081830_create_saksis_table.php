@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('saksis', function (Blueprint $table) {
             $table->id();
             $table->string('nama', 50);
-            $table->string('username', 15);
+            $table->string('username', 15)->unique();
             $table->string('password');
             $table->string('telp', 20);
             // $table->foreignIdFor(Tps::class);

@@ -12,7 +12,8 @@ import {
 import { BreadcrumbsEl } from "../../../Components/NavCompt";
 import AuthenticatedLayout from "../../../Layouts/AuthenticatedLayout";
 
-const Create = ({ auth, sesi_share }) => {
+const Create = ({ auth, sesi_share, csrf }) => {
+    console.log(csrf);
     const { data, setData, post, processing, errors, reset } = useForm({
         nama: "",
         username: "",

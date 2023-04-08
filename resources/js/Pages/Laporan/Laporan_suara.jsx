@@ -7,14 +7,60 @@ import {
     TableContainer,
     TableHead,
     TableRow,
+    Typography,
 } from "@mui/material";
+import MUIDataTable from "mui-datatables";
 import React from "react";
 import styled from "styled-components";
 import { BreadcrumbsEl } from "../../Components/NavCompt";
 import AuthenticatedLayout from "../../Layouts/AuthenticatedLayout";
 
 const Laporan_suara = ({ datas, auth, sesi_share }) => {
-    console.log(datas);
+    const options = {
+        selectableRows: false,
+        responsive: "standard",
+        fixedHeader: true,
+        fixedSelectColumn: true,
+        tableBodyHeight: "400px",
+    };
+    const columns = [
+        {
+            name: "#",
+            options: {
+                filter: false,
+                customBodyRender: (value, tableMeta, updateValue) => (
+                    <Typography>{tableMeta.rowIndex + 1}</Typography>
+                ),
+            },
+        },
+        {
+            name: "tps",
+            options: {
+                filter: true,
+            },
+        },
+        {
+            name: "qty",
+            label: "suara",
+            options: {
+                filter: true,
+            },
+        },
+        {
+            name: "alamat",
+            label: "alamat",
+            options: {
+                filter: true,
+            },
+        },
+        {
+            name: "saksi",
+            options: {
+                filter: true,
+            },
+        },
+    ];
+
     return (
         <AuthenticatedLayout auth={auth} share={sesi_share}>
             <DivSpaceBetween>
@@ -31,7 +77,12 @@ const Laporan_suara = ({ datas, auth, sesi_share }) => {
                     <p>List Suara</p>
                 </DivSpaceBetween>
 
-                <TableContainer component={Paper}>
+                <MUIDataTable
+                    data={datas}
+                    columns={columns}
+                    options={options}
+                />
+                {/* <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 650 }} aria-label="simple table">
                         <TableHead>
                             <TableRow>
@@ -65,7 +116,7 @@ const Laporan_suara = ({ datas, auth, sesi_share }) => {
                             ))}
                         </TableBody>
                     </Table>
-                </TableContainer>
+                </TableContainer> */}
             </Card>
         </AuthenticatedLayout>
     );
