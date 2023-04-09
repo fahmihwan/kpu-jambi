@@ -42,6 +42,8 @@ class LaporanController extends Controller
             ->orderBy('transaksis.id', 'desc')->get();
 
 
+
+
         return Inertia::render('Laporan/Laporan_suara', [
             'datas' => $datas
         ]);
