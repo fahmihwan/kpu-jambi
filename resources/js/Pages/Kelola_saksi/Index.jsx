@@ -44,13 +44,7 @@ const Index = ({ datas, auth, sesi_share }) => {
             },
         },
         {
-            name: "username",
-            options: {
-                filter: true,
-            },
-        },
-        {
-            name: "password",
+            name: "token",
             options: {
                 filter: true,
             },

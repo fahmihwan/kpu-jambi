@@ -17,8 +17,7 @@ import AuthenticatedLayout from "../../../Layouts/AuthenticatedLayout";
 const Edit = ({ saksi, auth, sesi_share }) => {
     const { data, setData, put, processing, errors, reset } = useForm({
         nama: saksi.nama,
-        username: saksi.username,
-        password: saksi.password,
+        token: saksi.token,
         telp: saksi.telp,
     });
 
@@ -100,24 +99,16 @@ const Edit = ({ saksi, auth, sesi_share }) => {
                                     </Typography>
                                     <DivFormControl>
                                         <InputEl
-                                            title="username"
-                                            name="username"
-                                            handleChange={handleChange}
-                                            value={data.username}
-                                        />
-                                    </DivFormControl>
-                                    <DivFormControl>
-                                        <InputEl
-                                            title="password"
-                                            name="password"
-                                            handleChange={handleChange}
-                                            value={data.password}
+                                            title="token"
+                                            name="token"
+                                            disabled={true}
+                                            value={data.token}
                                         />
                                     </DivFormControl>
                                 </Grid2>
                             </Grid2>
 
-                            <ButtonSubmitEl />
+                            <ButtonSubmitEl disabled={processing} />
                         </form>
                     </Card>
                 </Grid2>

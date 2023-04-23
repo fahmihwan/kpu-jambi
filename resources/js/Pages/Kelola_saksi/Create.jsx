@@ -10,6 +10,7 @@ import {
     TableRow,
     Button,
     Box,
+    TextField,
 } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 
@@ -18,6 +19,7 @@ import styled from "styled-components";
 import {
     ButtonLinkEl,
     ButtonSubmitEl,
+    InputEl,
     SelectSearchClearSubmitEl,
 } from "../../Components/InputCompt";
 import { BreadcrumbsEl } from "../../Components/NavCompt";
@@ -29,11 +31,20 @@ const Create = ({ sesi_share, auth, saksi, tps, datas }) => {
     const [listTps, setlistTps] = useState();
     const [listSaksi, setlistSaksi] = useState();
 
+    const [listDatas, setlistDatas] = useState();
+
+    const [inputSearch, setInputSearch] = useState("");
+
     useEffect(() => {
         setlistTps(tps.map((d) => ({ value: d.id, label: d.nama })));
         setlistSaksi(
             saksi.map((d) => ({ value: d.id, label: `${d.nama} (${d.telp})` }))
         );
+        setlistDatas(datas);
+        // let cek = listDatas?.filter((d) =>
+        //     d.saksi.toLowerCase().includes("darman")
+        // );
+        // console.log(cek);
     }, []);
 
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -57,6 +68,7 @@ const Create = ({ sesi_share, auth, saksi, tps, datas }) => {
         });
     };
 
+    // let listDatasFilter = listDatas;
     return (
         <AuthenticatedLayout auth={auth} share={sesi_share}>
             <DivSpaceBetween>
@@ -125,6 +137,18 @@ const Create = ({ sesi_share, auth, saksi, tps, datas }) => {
                             }}
                         >
                             <p>List Data</p>
+                            <TextField
+                                id={"serach"}
+                                label={"cari berdasarkan tps / nama"}
+                                type={"text"}
+                                // backgroundColor="white"
+                                sx={{ width: "50%", backgroundColor: "white" }}
+                                autoComplete={"off"}
+                                variant="outlined"
+                                onChange={(e) => setInputSearch(e.target.value)}
+
+                                // value={value}
+                            />
                         </DivSpaceBetween>
                         <TableContainer component={Paper}>
                             <Table
@@ -140,33 +164,43 @@ const Create = ({ sesi_share, auth, saksi, tps, datas }) => {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {datas?.map((d, i) => (
-                                        <TableRow
-                                            key={i}
-                                            sx={{
-                                                "&:last-child td, &:last-child th":
-                                                    {
-                                                        border: 0,
-                                                    },
-                                            }}
-                                        >
-                                            <TableCell>{i + 1}</TableCell>
-                                            <TableCell>{d.saksi}</TableCell>
-                                            <TableCell>{d.tps}</TableCell>
+                                    {listDatas
+                                        ?.filter(
+                                            (d) =>
+                                                d.saksi
+                                                    .toLowerCase()
+                                                    .includes(inputSearch) ||
+                                                d.tps
+                                                    .toLowerCase()
+                                                    .includes(inputSearch)
+                                        )
+                                        .map((d, i) => (
+                                            <TableRow
+                                                key={i}
+                                                sx={{
+                                                    "&:last-child td, &:last-child th":
+                                                        {
+                                                            border: 0,
+                                                        },
+                                                }}
+                                            >
+                                                <TableCell>{i + 1}</TableCell>
+                                                <TableCell>{d.saksi}</TableCell>
+                                                <TableCell>{d.tps}</TableCell>
 
-                                            <TableCell>
-                                                <Button
-                                                    onClick={() =>
-                                                        handleDelete(d.id)
-                                                    }
-                                                    color="error"
-                                                    variant="outlined"
-                                                >
-                                                    <DeleteIcon />
-                                                </Button>
-                                            </TableCell>
-                                        </TableRow>
-                                    ))}
+                                                <TableCell>
+                                                    <Button
+                                                        onClick={() =>
+                                                            handleDelete(d.id)
+                                                        }
+                                                        color="error"
+                                                        variant="outlined"
+                                                    >
+                                                        <DeleteIcon />
+                                                    </Button>
+                                                </TableCell>
+                                            </TableRow>
+                                        ))}
                                 </TableBody>
                             </Table>
                         </TableContainer>

@@ -8,8 +8,7 @@ import LogoKpu from "../../../../public/img/logo-kpu.jpeg";
 import { useForm } from "@inertiajs/inertia-react";
 const Login = () => {
     const { data, setData, post, processing, errors, reset } = useForm({
-        username: "",
-        password: "",
+        token: "",
     });
 
     const handleChange = (e) => {
@@ -80,29 +79,21 @@ const Login = () => {
                                 variant="h4"
                                 component="h1"
                             >
-                                Login User
+                                Login Saksi
                             </Typography>
                             <DivFormControl>
                                 <InputEl
-                                    title="username"
+                                    title="token"
                                     handleChange={handleChange}
-                                    value={data.username}
-                                    name="username"
-                                />
-                            </DivFormControl>
-                            <DivFormControl>
-                                <InputEl
-                                    title="password"
-                                    type="password"
-                                    handleChange={handleChange}
-                                    value={data.password}
-                                    name="password"
+                                    value={data.token}
+                                    name="token"
                                 />
                             </DivFormControl>
                             <Button
                                 type="submit"
                                 variant="contained"
                                 // color="black"
+                                disabled={processing}
                                 sx={{
                                     width: "100%",
                                     height: "40px",

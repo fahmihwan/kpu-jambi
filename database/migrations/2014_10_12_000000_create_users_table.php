@@ -14,8 +14,8 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->string('username');
+            $table->string('nama', 60);
+            $table->string('username', 60);
             $table->string('password');
             $table->foreignIdFor(Sesi_pemilu::class)->nullable();
             $table->timestamps();

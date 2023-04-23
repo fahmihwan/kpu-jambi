@@ -46,9 +46,11 @@ class DatabaseSeeder extends Seeder
         for ($i = 0; $i < 90; $i++) {
             Saksi::create([
                 'nama' => fake()->name(),
-                'username' => fake()->password(10, 14),
-                'password' => fake()->uuid(),
-                'telp' =>  fake()->phoneNumber(),
+                // 'username' => fake()->password(10, 14),
+                // 'password' => fake()->uuid(),
+                // 'token' => fake()->name() + fake()->e164MobilePhoneNumber(),
+                'token' => fake()->name() . fake()->e164PhoneNumber('+62'),
+                'telp' =>  fake()->phoneNumber('+62'),
             ]);
         }
         for ($i = 1; $i <= 90; $i++) {

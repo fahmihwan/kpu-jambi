@@ -11,13 +11,12 @@ import {
 } from "../../../Components/InputCompt";
 import { BreadcrumbsEl } from "../../../Components/NavCompt";
 import AuthenticatedLayout from "../../../Layouts/AuthenticatedLayout";
+import axios from "axios";
 
 const Create = ({ auth, sesi_share, csrf }) => {
-    console.log(csrf);
     const { data, setData, post, processing, errors, reset } = useForm({
         nama: "",
-        username: "",
-        password: "",
+        token: "",
         telp: "+62",
     });
 
@@ -25,9 +24,9 @@ const Create = ({ auth, sesi_share, csrf }) => {
         setData(e.target.name, e.target.value);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        post("/admin/master/saksi");
+        await post("/admin/master/saksi");
     };
     return (
         <AuthenticatedLayout auth={auth} share={sesi_share}>
@@ -62,18 +61,23 @@ const Create = ({ auth, sesi_share, csrf }) => {
                             style={{ padding: "20px" }}
                         >
                             <Grid2 container spacing={3}>
-                                <Grid2 xs={6}>
-                                    <h4>Pengguna</h4>
+                                <Grid2 xs={8}>
+                                    <h4 style={{ marginBottom: "10px" }}>
+                                        Pengguna
+                                    </h4>
                                     <DivFormControl>
                                         <InputEl
                                             title="nama"
                                             name="nama"
+                                            autoComplete={"off"}
                                             handleChange={handleChange}
                                             value={data.nama}
                                         />
                                     </DivFormControl>
                                     <DivFormControl>
                                         <MuiTelInput
+                                            autoComplete={"off"}
+                                            placeholder="telp"
                                             forceCallingCode
                                             defaultCountry={"ID"}
                                             style={{ width: "100%" }}
@@ -93,7 +97,7 @@ const Create = ({ auth, sesi_share, csrf }) => {
                                         />
                                     </DivFormControl> */}
                                 </Grid2>
-                                <Grid2 xs={6}>
+                                {/* <Grid2 xs={6}>
                                     <h4>Akun</h4>
                                     <DivFormControl>
                                         <InputEl
@@ -111,7 +115,7 @@ const Create = ({ auth, sesi_share, csrf }) => {
                                             value={data.password}
                                         />
                                     </DivFormControl>
-                                </Grid2>
+                                </Grid2> */}
                             </Grid2>
 
                             <ButtonSubmitEl />

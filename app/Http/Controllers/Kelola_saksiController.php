@@ -23,11 +23,12 @@ class Kelola_saksiController extends Controller
     public function index()
     {
 
-        $datas = Sesi_tps_saksi::select(['sesi_tps_saksis.id', 'telp', 'saksis.nama as saksi', 'username', 'password', 'tps.nama as tps'])
+        $datas = Sesi_tps_saksi::select(['sesi_tps_saksis.id', 'telp', 'saksis.nama as saksi', 'token', 'tps.nama as tps'])
             ->join('saksis', 'sesi_tps_saksis.saksi_id', '=', 'saksis.id')
             ->join('tps', 'sesi_tps_saksis.tps_id', '=', 'tps.id')
             ->where('sesi_tps_saksis.sesi_pemilu_id', $this->sesiId->getSesiId())
             ->orderBy('id', 'desc')->get();
+
 
 
 
@@ -41,9 +42,10 @@ class Kelola_saksiController extends Controller
         if (!$sesiId) {
             return 'harap pilih periode';
         }
-        $datas = Sesi_tps_saksi::select(['sesi_tps_saksis.id', 'saksis.nama as saksi', 'tps.nama as tps'])
+        $datas = Sesi_tps_saksi::select(['sesi_tps_saksis.id', 'saksis.nama as saksi', 'tps.nama as tps', 'sesi_tps_saksis.created_at'])
             ->join('saksis', 'sesi_tps_saksis.saksi_id', '=', 'saksis.id')
             ->join('tps', 'sesi_tps_saksis.tps_id', '=', 'tps.id')
+            ->latest()
             ->get();
 
         return Inertia::render('Kelola_saksi/Create', [

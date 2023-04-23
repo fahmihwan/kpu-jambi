@@ -10,9 +10,9 @@ export const ButtonLinkEl = ({ title, href }) => {
     );
 };
 
-export const ButtonSubmitEl = () => {
+export const ButtonSubmitEl = ({ disabled }) => {
     return (
-        <Button type="submit" variant="contained">
+        <Button disabled={disabled} type="submit" variant="contained">
             Submit
         </Button>
     );
@@ -72,6 +72,8 @@ export const InputEl = ({
     name,
     handleChange,
     value,
+    autoComplete,
+    disabled,
 }) => {
     return (
         <TextField
@@ -79,7 +81,9 @@ export const InputEl = ({
             label={title}
             type={type}
             sx={{ width: "100%" }}
+            autoComplete={autoComplete}
             variant="outlined"
+            disabled={disabled}
             name={name}
             onChange={handleChange}
             value={value}

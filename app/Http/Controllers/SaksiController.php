@@ -37,14 +37,12 @@ class SaksiController extends Controller
     public function store(Request $request)
     {
 
+
         $validated = $request->validate([
             'nama' => 'required|max:50',
-            'username' => 'required|max:15',
             'telp' => 'required|max:20',
-            'password' => 'required',
         ]);
-
-        // $validated['password'] = Hash::make($request->password);
+        $validated['token'] = preg_replace('/\s+/', '', $request->nama) . preg_replace('/\s+/', '', $validated['telp']);
         Saksi::create($validated);
 
         return redirect('/admin/master/saksi');
@@ -75,11 +73,9 @@ class SaksiController extends Controller
     {
         $validated = $request->validate([
             'nama' => 'required|max:50',
-            'username' => 'required|max:15',
             'telp' => 'required|max:20',
-            'tps_id' => 'required',
-            'password' => 'required',
         ]);
+        $validated['token'] = preg_replace('/\s+/', '', $request->nama) . preg_replace('/\s+/', '', $validated['telp']);
 
         Saksi::where('id', $saksi->id)->update($validated);
         return redirect('/admin/master/saksi');

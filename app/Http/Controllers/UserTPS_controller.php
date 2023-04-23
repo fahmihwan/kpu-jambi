@@ -25,16 +25,13 @@ class UserTPS_controller extends Controller
     public function authenticated(Request $request)
     {
         $validated = $request->validate([
-            'username' => 'required',
-            'password' => 'required',
+            'token' => 'required',
         ]);
 
-        $get_id =  Saksi::where(['username' => $validated['username'], 'password' => $validated['password']])->first()->id;
-
+        $get_id =  Saksi::where(['token' => $validated['token']])->first()->id;
         if (Auth::guard('websaksi')->loginUsingId($get_id)) {
             $request->session()->regenerate();
             return redirect()->intended('/user-tps');
-            // return 'ok';
         }
     }
     public function dashboard()

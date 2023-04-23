@@ -35,17 +35,12 @@ const Index = ({ datas, auth, sesi_share }) => {
             },
         },
         {
-            name: "username",
+            name: "token",
             options: {
                 filter: true,
             },
         },
-        {
-            name: "password",
-            options: {
-                filter: true,
-            },
-        },
+
         {
             name: "telp",
             options: {
@@ -60,7 +55,7 @@ const Index = ({ datas, auth, sesi_share }) => {
                 customBodyRender: (value, tableMeta, updateValue) => (
                     <Box sx={{ display: "flex" }}>
                         <Link
-                            href={`/admin/master/saksi/${tableMeta.rowData[5]}/edit`} //id
+                            href={`/admin/master/saksi/${tableMeta.rowData[4]}/edit`} //id
                             style={{
                                 marginRight: "5px",
                             }}
@@ -70,7 +65,7 @@ const Index = ({ datas, auth, sesi_share }) => {
                             </Button>
                         </Link>
                         <Button
-                            onClick={() => handleDelete(tableMeta.rowData[5])}
+                            onClick={() => handleDelete(tableMeta.rowData[4])}
                             color="error"
                             variant="outlined"
                         >
