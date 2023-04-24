@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Sesi_pemilu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -10,7 +11,10 @@ class AuthController extends Controller
 {
     public function login()
     {
-        return Inertia::render('Auth/Login');
+
+        return Inertia::render('Auth/Login', [
+            'custome_description' => Sesi_pemilu::select('custome_login_description')->where('isActive', true)->first()
+        ]);
     }
     public function authenticated(Request $request)
     {

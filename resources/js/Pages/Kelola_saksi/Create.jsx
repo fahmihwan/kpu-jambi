@@ -41,10 +41,6 @@ const Create = ({ sesi_share, auth, saksi, tps, datas }) => {
             saksi.map((d) => ({ value: d.id, label: `${d.nama} (${d.telp})` }))
         );
         setlistDatas(datas);
-        // let cek = listDatas?.filter((d) =>
-        //     d.saksi.toLowerCase().includes("darman")
-        // );
-        // console.log(cek);
     }, []);
 
     const { data, setData, post, processing, errors, reset } = useForm({

@@ -4,9 +4,9 @@ import React from "react";
 import styled from "styled-components";
 import { InputEl } from "../../Components/InputCompt";
 
-import LogoKpu from "../../../../public/img/logo-kpu.jpeg";
+import LogoKpu from "../../../../public/img/boss-2.jpeg";
 import { useForm } from "@inertiajs/inertia-react";
-const Login = () => {
+const Login = ({ custome_description }) => {
     const { data, setData, post, processing, errors, reset } = useForm({
         token: "",
     });
@@ -41,7 +41,7 @@ const Login = () => {
                     <Grid2
                         md={6}
                         sx={{
-                            backgroundColor: "red",
+                            backgroundColor: "#2a3c53",
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
@@ -110,8 +110,7 @@ const Login = () => {
                                     color: "grey",
                                 }}
                             >
-                                Sistem Informasi <br />
-                                Penghitungan Suara DPRD JAMBI
+                                {custome_description?.custome_login_description}
                             </Typography>
                         </form>
                     </Grid2>

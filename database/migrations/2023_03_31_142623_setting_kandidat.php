@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('setting_kandidats', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
+            $table->string('nama', 50);
             $table->string('img');
             $table->timestamps();
         });

@@ -22,12 +22,10 @@ import AddHomeIcon from "@mui/icons-material/AddHome";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import { Typography } from "@mui/material";
-import TaskIcon from "@mui/icons-material/Task";
 import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
-import HomeIcon from "@mui/icons-material/Home";
-import BadgeIcon from "@mui/icons-material/Badge";
+
 import WorkHistoryIcon from "@mui/icons-material/WorkHistory";
-export const Sidebar = ({ theme, handleDrawerClose, open, share }) => {
+export const Sidebar = ({ theme, handleDrawerClose, open, setOpen, share }) => {
     const [toggleList, setToggleList] = useState(false);
     const [toggleListReport, setToggleListReport] = useState(false);
     // console.log(open);
@@ -106,7 +104,10 @@ export const Sidebar = ({ theme, handleDrawerClose, open, share }) => {
                 {/* MASTER DATA */}
                 <ListItemToggleDropdown
                     toggleState={toggleList}
-                    handleToggle={() => setToggleList(!toggleList)}
+                    handleToggle={() => {
+                        setToggleList(!toggleList);
+                        setOpen(true);
+                    }}
                     linkActive={url.startsWith("/admin/master")}
                     iconEl={
                         <BusinessCenterIcon

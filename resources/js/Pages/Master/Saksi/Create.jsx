@@ -1,5 +1,5 @@
 import { useForm } from "@inertiajs/inertia-react";
-import { Card } from "@mui/material";
+import { Card, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { MuiTelInput } from "mui-tel-input";
 import React from "react";
@@ -12,13 +12,15 @@ import {
 import { BreadcrumbsEl } from "../../../Components/NavCompt";
 import AuthenticatedLayout from "../../../Layouts/AuthenticatedLayout";
 import axios from "axios";
+import { AlertFail } from "../../../Components/AlertCompt";
 
-const Create = ({ auth, sesi_share, csrf }) => {
+const Create = ({ auth, sesi_share, flash }) => {
     const { data, setData, post, processing, errors, reset } = useForm({
         nama: "",
         token: "",
         telp: "+62",
     });
+    console.log(flash);
 
     const handleChange = (e) => {
         setData(e.target.name, e.target.value);
@@ -42,7 +44,11 @@ const Create = ({ auth, sesi_share, csrf }) => {
             </DivSpaceBetween>
 
             <Grid2 container spacing={2}>
-                <Grid2 item xs={8}>
+                <Grid2 item xs={12} md={8}>
+                    {/* {errors?.telp !== false ? (
+                        <AlertFail message={"dsds"} />
+                    ) : null} */}
+
                     <Card style={{ overflow: "inherit" }}>
                         <DivSpaceBetween
                             style={{
@@ -72,10 +78,16 @@ const Create = ({ auth, sesi_share, csrf }) => {
                                             autoComplete={"off"}
                                             handleChange={handleChange}
                                             value={data.nama}
-                                        />
+                                        />{" "}
+                                        {errors?.nama && (
+                                            <Typography sx={{ color: "red" }}>
+                                                {errors?.nama}
+                                            </Typography>
+                                        )}
                                     </DivFormControl>
                                     <DivFormControl>
                                         <MuiTelInput
+                                            required
                                             autoComplete={"off"}
                                             placeholder="telp"
                                             forceCallingCode
@@ -86,16 +98,12 @@ const Create = ({ auth, sesi_share, csrf }) => {
                                                 setData("telp", newPhone)
                                             }
                                         />
+                                        {errors?.telp && (
+                                            <Typography sx={{ color: "red" }}>
+                                                {errors?.telp}
+                                            </Typography>
+                                        )}
                                     </DivFormControl>
-                                    {/* <DivFormControl>
-                                        <SelectSearchEl
-                                            options={listTps}
-                                            nameData="kecamatan"
-                                            handleChange={(e) =>
-                                                setData("tps_id", e.value)
-                                            }
-                                        />
-                                    </DivFormControl> */}
                                 </Grid2>
                                 {/* <Grid2 xs={6}>
                                     <h4>Akun</h4>
@@ -118,7 +126,7 @@ const Create = ({ auth, sesi_share, csrf }) => {
                                 </Grid2> */}
                             </Grid2>
 
-                            <ButtonSubmitEl />
+                            <ButtonSubmitEl disabled={processing} />
                         </form>
                     </Card>
                 </Grid2>

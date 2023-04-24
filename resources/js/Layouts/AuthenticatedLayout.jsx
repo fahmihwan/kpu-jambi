@@ -34,6 +34,7 @@ export default function AuthenticatedLayout({ children, auth, share }) {
                 handleDrawerClose={handleDrawerClose}
                 drawerWidth={drawerWidth}
                 open={open}
+                setOpen={setOpen}
             />
             <Box
                 component="main"

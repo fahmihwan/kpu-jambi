@@ -19,7 +19,9 @@ class UserTPS_controller extends Controller
     }
     public function login()
     {
-        return Inertia::render('UserTPS/Login');
+        return Inertia::render('UserTPS/Login', [
+            'custome_description' => Sesi_pemilu::select('custome_login_description')->where('isActive', true)->first()
+        ]);
     }
 
     public function authenticated(Request $request)

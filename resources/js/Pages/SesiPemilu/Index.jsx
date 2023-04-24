@@ -53,6 +53,7 @@ const Index = ({ datas, auth, sesi_share }) => {
                                 <TableCell>kode</TableCell>
                                 <TableCell>Tanggal Pelaksanaan</TableCell>
                                 <TableCell>keterangan</TableCell>
+                                <TableCell>custome login description</TableCell>
                                 <TableCell></TableCell>
                             </TableRow>
                         </TableHead>
@@ -70,6 +71,9 @@ const Index = ({ datas, auth, sesi_share }) => {
                                     <TableCell>{d.kode}</TableCell>
                                     <TableCell>{d.tanggal}</TableCell>
                                     <TableCell>{d.keterangan}</TableCell>
+                                    <TableCell>
+                                        {d.custome_login_description}
+                                    </TableCell>
                                     <TableCell>
                                         <Link
                                             href={`/admin/periode-pemilu/${d.id}/edit`}

@@ -37,11 +37,11 @@ class SaksiController extends Controller
     public function store(Request $request)
     {
 
-
         $validated = $request->validate([
             'nama' => 'required|max:50',
-            'telp' => 'required|max:20',
+            'telp' => 'required|max:20|unique:saksis,telp',
         ]);
+
         $validated['token'] = preg_replace('/\s+/', '', $request->nama) . preg_replace('/\s+/', '', $validated['telp']);
         Saksi::create($validated);
 
@@ -73,7 +73,7 @@ class SaksiController extends Controller
     {
         $validated = $request->validate([
             'nama' => 'required|max:50',
-            'telp' => 'required|max:20',
+            'telp' => 'required|max:20|unique:saksis,telp,' . $saksi->id,
         ]);
         $validated['token'] = preg_replace('/\s+/', '', $request->nama) . preg_replace('/\s+/', '', $validated['telp']);
 

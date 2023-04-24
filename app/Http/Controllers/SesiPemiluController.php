@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SesiRequest;
 use App\Models\Sesi_pemilu;
+
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+
 
 class SesiPemiluController extends Controller
 {
@@ -29,15 +32,10 @@ class SesiPemiluController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(SesiRequest $request)
     {
-        $validated = $request->validate([
-            'kode' => 'required',
-            'tanggal' => 'required',
-            'keterangan' => 'required'
-        ]);
+        $validated = $request->validated();
         $validated['isActive'] = false;
-        // return $validated;
         Sesi_pemilu::create($validated);
 
         return redirect('/admin/periode-pemilu');
@@ -66,14 +64,10 @@ class SesiPemiluController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(SesiRequest $request, $id)
     {
-        $validated = $request->validate([
-            'kode' => 'required',
-            'tanggal' => 'required',
-            'keterangan' => 'required'
-        ]);
-        // $validated['isActive'] = false;
+
+        $validated = $request->validated();
 
         Sesi_pemilu::where('id', $id)->update($validated);
         return redirect('/admin/periode-pemilu');

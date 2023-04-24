@@ -1,13 +1,9 @@
 import React, { useEffect } from "react";
-import Button from "@mui/material/Button";
 import AuthenticatedLayout from "../Layouts/AuthenticatedLayout";
 
 import { Card } from "@mui/material";
 import { BreadcrumbsEl } from "../Components/NavCompt";
 import styled from "styled-components";
-
-import { Box } from "@mui/material";
-import { CardContent } from "@mui/material";
 import { Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 
@@ -22,13 +18,9 @@ import { PolarArea } from "react-chartjs-2";
 
 ChartJS.register(RadialLinearScale, ArcElement, Tooltip, Legend);
 
-// 'stat_tps' => $stat_saksi,
-//             'stat_tps' => $stat_tps,
-//             'stat_suara' => $stat_suara,
 const Dashboard = ({
     auth,
     sesi_share,
-    // polar_area_charts,
     stat_suara,
     stat_tps,
     stat_saksi,
@@ -49,22 +41,56 @@ const Dashboard = ({
             {/* <Card> */}
 
             <Grid2 container spacing={2}>
-                <Grid2 item xs={6} md={2}>
-                    <Card sx={{ padding: "20px", backgroundColor: "#84ffff" }}>
-                        <Typography variant="h5">Total Suara </Typography>
-                        <Typography> {stat_suara}</Typography>
+                <Grid2 item xs={12} md={2}>
+                    <Card
+                        sx={{
+                            padding: "20px",
+                            backgroundColor: "#84ffff",
+                            borderBottom: "5px solid #6d9e62",
+                            marginBottom: "10px",
+                        }}
+                    >
+                        <Typography
+                            variant="h5"
+                            sx={{ fontWeight: "bold", marginBottom: "10px" }}
+                        >
+                            {stat_suara}
+                        </Typography>
+                        <Typography> Total Suara</Typography>
                     </Card>
                 </Grid2>
-                <Grid2 item xs={6} md={2}>
-                    <Card sx={{ padding: "20px", backgroundColor: "#e3f2fd" }}>
-                        <Typography variant="h5">Total Saksi</Typography>
-                        <Typography> {stat_saksi}</Typography>
+                <Grid2 item xs={12} md={2}>
+                    <Card
+                        sx={{
+                            padding: "20px",
+                            backgroundColor: "#e3f2fd",
+                            borderBottom: "5px solid #6d9e62",
+                        }}
+                    >
+                        <Typography
+                            variant="h5"
+                            sx={{ fontWeight: "bold", marginBottom: "10px" }}
+                        >
+                            {stat_saksi}
+                        </Typography>
+                        <Typography>Total Saksi </Typography>
                     </Card>
                 </Grid2>
-                <Grid2 item xs={6} md={2}>
-                    <Card sx={{ padding: "20px", backgroundColor: "#e0f7fa" }}>
-                        <Typography variant="h5">Total TPS</Typography>
-                        <Typography> {stat_tps}</Typography>
+                <Grid2 item xs={12} md={2}>
+                    <Card
+                        sx={{
+                            padding: "20px",
+                            backgroundColor: "#e0f7fa",
+                            borderBottom: "5px solid #6d9e62",
+                        }}
+                    >
+                        <Typography
+                            variant="h5"
+                            sx={{ fontWeight: "bold", marginBottom: "10px" }}
+                        >
+                            {stat_tps}
+                        </Typography>
+                        <Typography>Total TPS </Typography>
                     </Card>
                 </Grid2>
             </Grid2>

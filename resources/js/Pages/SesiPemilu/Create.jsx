@@ -18,6 +18,8 @@ const Create = ({ auth, sesi_share }) => {
         kode: "",
         tanggal: "",
         keterangan: "",
+        custome_login_description:
+            "Sistem Informasi Penghitungan Suara DPRD JAMBI (SUTEJO)",
     });
 
     const handleChange = (e) => {
@@ -45,15 +47,14 @@ const Create = ({ auth, sesi_share }) => {
                     <Card style={{ overflow: "inherit" }}>
                         <DivSpaceBetween
                             style={{
-                                paddingLeft: "10px",
-                                paddingRight: "10px",
+                                padding: "10px",
                                 backgroundColor: "gainsboro",
                             }}
                         >
                             <p>Create Akun</p>
                             <ButtonLinkEl
                                 title="kembali"
-                                href="/admin/master/saksi"
+                                href="/admin/periode-pemilu"
                             />
                         </DivSpaceBetween>
                         <form
@@ -83,6 +84,14 @@ const Create = ({ auth, sesi_share }) => {
                                     name="keterangan"
                                     handleChange={handleChange}
                                     value={data.keterangan}
+                                />
+                            </DivFormControl>
+                            <DivFormControl>
+                                <InputEl
+                                    title="custome login description"
+                                    name="custome_login_description"
+                                    handleChange={handleChange}
+                                    value={data.custome_login_description}
                                 />
                             </DivFormControl>
 

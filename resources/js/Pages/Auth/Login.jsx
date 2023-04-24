@@ -3,10 +3,9 @@ import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import React from "react";
 import styled from "styled-components";
 import { InputEl } from "../../Components/InputCompt";
-// import UserLogo from "../../../public/dist/img/user2-160x160.jpg";
-import LogoKpu from "../../../../public/img/logo-kpu.jpeg";
+import LogoKpu from "../../../../public/img/boss-2.jpeg";
 import { useForm } from "@inertiajs/inertia-react";
-const Login = () => {
+const Login = ({ custome_description }) => {
     const { data, setData, post, processing, errors, reset } = useForm({
         username: "",
         password: "",
@@ -42,7 +41,7 @@ const Login = () => {
                     <Grid2
                         md={6}
                         sx={{
-                            backgroundColor: "red",
+                            backgroundColor: "#2a3c53",
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
@@ -65,13 +64,11 @@ const Login = () => {
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
-                            // border: "1px solid black",
                             height: "100%",
                         }}
                     >
                         <form onSubmit={handleSubmit} style={{ width: "80%" }}>
                             {/* <h4>Login</h4> */}
-
                             <Typography
                                 sx={{
                                     textAlign: "center",
@@ -102,11 +99,10 @@ const Login = () => {
                             <Button
                                 type="submit"
                                 variant="contained"
-                                // color="black"
+                                disabled={processing}
                                 sx={{
                                     width: "100%",
                                     height: "40px",
-                                    // backgroundColor: "#091627",
                                     color: "white",
                                 }}
                             >
@@ -119,8 +115,7 @@ const Login = () => {
                                     color: "grey",
                                 }}
                             >
-                                Sistem Informasi <br />
-                                Penghitungan Suara DPRD JAMBI
+                                {custome_description?.custome_login_description}
                             </Typography>
                         </form>
                     </Grid2>

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->date('tanggal');
             $table->string('keterangan');
             $table->boolean('isActive');
+            $table->string('custome_login_description');
             $table->softDeletes();
             $table->timestamps();
         });

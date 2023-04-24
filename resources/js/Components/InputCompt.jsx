@@ -85,6 +85,7 @@ export const InputEl = ({
             variant="outlined"
             disabled={disabled}
             name={name}
+            required
             onChange={handleChange}
             value={value}
         />

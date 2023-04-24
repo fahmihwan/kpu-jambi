@@ -1,5 +1,5 @@
 import { useForm } from "@inertiajs/inertia-react";
-import { Card } from "@mui/material";
+import { Button, Card } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 
 import React from "react";
@@ -17,6 +17,7 @@ const Edit = ({ item, auth, sesi_share }) => {
         kode: item.kode,
         tanggal: item.tanggal,
         keterangan: item.keterangan,
+        custome_login_description: item.custome_login_description,
     });
 
     const handleChange = (e) => {
@@ -40,19 +41,18 @@ const Edit = ({ item, auth, sesi_share }) => {
             </DivSpaceBetween>
 
             <Grid2 container spacing={2}>
-                <Grid2 item xs={8}>
+                <Grid2 item xs={12} md={8}>
                     <Card style={{ overflow: "inherit" }}>
                         <DivSpaceBetween
                             style={{
-                                paddingLeft: "10px",
-                                paddingRight: "10px",
+                                padding: "10px",
                                 backgroundColor: "gainsboro",
                             }}
                         >
                             <p>Edit Akun</p>
                             <ButtonLinkEl
                                 title="kembali"
-                                href="/admin/master/saksi"
+                                href="/admin/periode-pemilu"
                             />
                         </DivSpaceBetween>
                         <form
@@ -84,8 +84,22 @@ const Edit = ({ item, auth, sesi_share }) => {
                                     value={data.keterangan}
                                 />
                             </DivFormControl>
+                            <DivFormControl>
+                                <InputEl
+                                    title="custome login description"
+                                    name="custome_login_description"
+                                    handleChange={handleChange}
+                                    value={data.custome_login_description}
+                                />
+                            </DivFormControl>
 
-                            <ButtonSubmitEl />
+                            <Button
+                                disabled={processing}
+                                type="submit"
+                                variant="contained"
+                            >
+                                Update
+                            </Button>
                         </form>
                     </Card>
                 </Grid2>

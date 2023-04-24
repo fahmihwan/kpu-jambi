@@ -1,16 +1,11 @@
 import { useForm } from "@inertiajs/inertia-react";
-import { Box, Card, Switch, Typography } from "@mui/material";
+import { Button, Card } from "@mui/material";
 
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { MuiTelInput } from "mui-tel-input";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
-import {
-    ButtonLinkEl,
-    ButtonSubmitEl,
-    InputEl,
-    SelectSearchEl,
-} from "../../../Components/InputCompt";
+import { ButtonLinkEl, InputEl } from "../../../Components/InputCompt";
 import { BreadcrumbsEl } from "../../../Components/NavCompt";
 import AuthenticatedLayout from "../../../Layouts/AuthenticatedLayout";
 
@@ -20,6 +15,7 @@ const Edit = ({ saksi, auth, sesi_share }) => {
         token: saksi.token,
         telp: saksi.telp,
     });
+    console.log(errors);
 
     const handleChange = (e) => {
         setData(e.target.name, e.target.value);
@@ -44,7 +40,7 @@ const Edit = ({ saksi, auth, sesi_share }) => {
             </DivSpaceBetween>
 
             <Grid2 container spacing={2}>
-                <Grid2 item xs={8}>
+                <Grid2 item xs={12} md={8}>
                     <Card style={{ overflow: "inherit" }}>
                         <DivSpaceBetween
                             style={{
@@ -64,12 +60,9 @@ const Edit = ({ saksi, auth, sesi_share }) => {
                         >
                             <Grid2 container spacing={3}>
                                 <Grid2 xs={6}>
-                                    <Typography
-                                        variant="h5"
-                                        sx={{ marginBottom: "10px" }}
-                                    >
+                                    <h4 style={{ marginBottom: "10px" }}>
                                         Pengguna
-                                    </Typography>
+                                    </h4>
                                     <DivFormControl>
                                         <InputEl
                                             title="nama"
@@ -88,15 +81,17 @@ const Edit = ({ saksi, auth, sesi_share }) => {
                                                 setData("telp", newPhone)
                                             }
                                         />
+                                        {errors?.telp && (
+                                            <p style={{ color: "red" }}>
+                                                {errors?.telp}
+                                            </p>
+                                        )}
                                     </DivFormControl>
                                 </Grid2>
                                 <Grid2 xs={6}>
-                                    <Typography
-                                        variant="h5"
-                                        sx={{ marginBottom: "10px" }}
-                                    >
+                                    <h4 style={{ marginBottom: "10px" }}>
                                         Akun
-                                    </Typography>
+                                    </h4>
                                     <DivFormControl>
                                         <InputEl
                                             title="token"
@@ -108,7 +103,14 @@ const Edit = ({ saksi, auth, sesi_share }) => {
                                 </Grid2>
                             </Grid2>
 
-                            <ButtonSubmitEl disabled={processing} />
+                            {/* <ButtonSubmitEl disabled={processing} /> */}
+                            <Button
+                                disabled={processing}
+                                type="submit"
+                                variant="contained"
+                            >
+                                update
+                            </Button>
                         </form>
                     </Card>
                 </Grid2>
