@@ -18,20 +18,41 @@ class TransaksiControler extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'qty' => 'required'
+            'qty' => 'required|numeric'
         ]);
 
-        $item = Sesi_tps_saksi::select(['id'])
-            ->where([
-                ['sesi_pemilu_id', '=', $this->sesiId->getSesiId()],
-                ['saksi_id', '=', Auth::guard('websaksi')->user()->id]
-            ],)
-            ->first()->id;
+        try {
+            $item = Sesi_tps_saksi::select(['id'])
+                ->where([
+                    ['sesi_pemilu_id', '=', $this->sesiId->getSesiId()],
+                    ['saksi_id', '=', Auth::guard('websaksi')->user()->id]
+                ],)
+                ->first()->id;
 
-        $validated['sesi_pemilu_id'] = $this->sesiId->getSesiId();
-        $validated['sesi_tps_saksi_id'] = $item;
+            $validated['sesi_pemilu_id'] = $this->sesiId->getSesiId();
+            $validated['sesi_tps_saksi_id'] = $item;
 
-        Transaksi::create($validated);
+            Transaksi::create($validated);
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error_message', $th->getMessage());
+        }
+
+        return redirect()->back();
+    }
+    public function update_suara(Request $request, $id_transaksi)
+    {
+
+        $validated = $request->validate([
+            'qty' => 'required|numeric'
+        ]);
+
+        try {
+            Transaksi::where('id', $id_transaksi)->update($validated);
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error_message', $th->getMessage());
+        }
+
+
         return redirect()->back();
     }
 }

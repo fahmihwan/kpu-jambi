@@ -6,6 +6,8 @@ use App\Helpers\SesiHelper;
 use App\Models\Saksi;
 use App\Models\Sesi_pemilu;
 use App\Models\Sesi_tps_saksi;
+use App\Models\Transaksi;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -19,6 +21,7 @@ class UserTPS_controller extends Controller
     }
     public function login()
     {
+
         return Inertia::render('UserTPS/Login', [
             'custome_description' => Sesi_pemilu::select('custome_login_description')->where('isActive', true)->first()
         ]);
@@ -31,6 +34,7 @@ class UserTPS_controller extends Controller
         ]);
 
         $get_id =  Saksi::where(['token' => $validated['token']])->first()->id;
+
         if (Auth::guard('websaksi')->loginUsingId($get_id)) {
             $request->session()->regenerate();
             return redirect()->intended('/user-tps');
@@ -39,18 +43,10 @@ class UserTPS_controller extends Controller
     public function dashboard()
     {
 
-        // $item = Sesi_tps_saksi::select(['id'])
-        //     ->where([
-        //         ['sesi_pemilu_id', '=', $this->sesiId->getSesiId()],
-        //         ['saksi_id', '=', Auth::guard('websaksi')->user()->id]
-        //     ],)
-        //     ->first()->id;
-
         $periode_id = $this->sesiId->getSesiId();
 
-
         $item = Sesi_tps_saksi::with([
-            'saksi:id,nama,username',
+            'saksi:id,nama',
             'tps'
         ])->select(['id', 'saksi_id', 'tps_id'])
             ->where([
@@ -59,21 +55,25 @@ class UserTPS_controller extends Controller
             ])
             ->first();
 
+
         $isSubmit = Sesi_tps_saksi::with([
-            'transaksis',
+            'transaksi',
         ])->where([
             ['sesi_pemilu_id', '=', $periode_id],
             ['saksi_id', '=', Auth::guard('websaksi')->user()->id]
         ])->whereHas('transaksis', function ($q) use ($periode_id) {
             $q->where('sesi_pemilu_id', $periode_id);
-        })->exists();
-
+        });
 
         return Inertia::render('UserTPS/Dashboard', [
             'item' => $item,
-            'isSubmit' => $isSubmit
+            'kode_periode' => Sesi_pemilu::where('id', $periode_id)->where('isActive', 1)->first()->kode,
+            'isSubmit' => $isSubmit->exists(),
+            'qty' => isset($isSubmit->first()->transaksi->qty) ? $isSubmit->first()->transaksi->qty : 0,
+            'id_transaksi' => isset($isSubmit->first()->transaksi->id) ? $isSubmit->first()->transaksi->id : false
         ]);
     }
+
 
 
     public function logout(Request $request)

@@ -6,9 +6,10 @@ import styled from "styled-components";
 import AuthenticatedLayout from "../../Layouts/AuthenticatedLayout";
 import { Inertia } from "@inertiajs/inertia";
 
-const ListSesi = ({ auth, datas, share, sesi_share }) => {
+const ListSesi = ({ auth, datas, sesi_share }) => {
     const handleChange = (e) => {
-        Inertia.put(`/admin/setting/${e.target.value}/update`);
+        confirm("apakah anda yakin ingin mengubah sesi pemilu?") &&
+            Inertia.put(`/admin/setting/${e.target.value}/update`);
     };
 
     return (
@@ -24,7 +25,11 @@ const ListSesi = ({ auth, datas, share, sesi_share }) => {
             </DivSpaceBetween>
             <Card>
                 <Box sx={{ padding: "20px" }}>
-                    <Typography>Fahimi Ichwanurrohm</Typography>
+                    <Typography>Sesi pemilhan suara</Typography>
+                    <Typography sx={{ color: "red" }}>
+                        * Jangan mengubah sesi pada saat pemilihan suara
+                        berlangsung
+                    </Typography>
                 </Box>
                 <Box sx={{ display: "flex" }}>
                     {datas?.map((d, i) => (

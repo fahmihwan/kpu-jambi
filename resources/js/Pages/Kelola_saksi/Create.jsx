@@ -11,6 +11,7 @@ import {
     Button,
     Box,
     TextField,
+    Alert,
 } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 
@@ -27,7 +28,13 @@ import AuthenticatedLayout from "../../Layouts/AuthenticatedLayout";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Inertia } from "@inertiajs/inertia";
 
-const Create = ({ sesi_share, auth, saksi, tps, datas }) => {
+const Create = ({ sesi_share, auth, saksi, tps, datas, flash }) => {
+    const { data, setData, post, processing, errors, reset } = useForm({
+        saksi_id: "",
+        tps_id: "",
+    });
+    console.log(flash);
+
     const [listTps, setlistTps] = useState();
     const [listSaksi, setlistSaksi] = useState();
 
@@ -41,24 +48,19 @@ const Create = ({ sesi_share, auth, saksi, tps, datas }) => {
             saksi.map((d) => ({ value: d.id, label: `${d.nama} (${d.telp})` }))
         );
         setlistDatas(datas);
-    }, []);
-
-    const { data, setData, post, processing, errors, reset } = useForm({
-        saksi_id: "",
-        tps_id: "",
-    });
+    }, [datas]);
 
     const handleChangeSelect = (value, actionMeta) => {
         setData(actionMeta.name, value);
     };
-    const handleDelete = (id) => {
-        Inertia.delete(`/admin/kelola-saksi/create/${id}`);
+    const handleDelete = async (id) => {
+        await Inertia.delete(`/admin/kelola-saksi/create/${id}`);
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         await post("/admin/kelola-saksi");
-        setData({
+        await setData({
             saksi_id: "",
             tps_id: "",
         });
@@ -96,6 +98,15 @@ const Create = ({ sesi_share, auth, saksi, tps, datas }) => {
                             onSubmit={handleSubmit}
                             style={{ padding: "20px" }}
                         >
+                            {flash?.error_message && (
+                                <Alert
+                                    severity="error"
+                                    sx={{ marginBottom: "10px" }}
+                                >
+                                    {flash?.error_message}
+                                </Alert>
+                            )}
+
                             <DivFormControl>
                                 <label htmlFor="">Saksi</label>
                                 <SelectSearchClearSubmitEl
@@ -119,7 +130,7 @@ const Create = ({ sesi_share, auth, saksi, tps, datas }) => {
                                 />
                             </DivFormControl>
 
-                            <ButtonSubmitEl />
+                            <ButtonSubmitEl disabled={processing} />
                         </form>
                     </Card>
                 </Grid2>
@@ -146,7 +157,10 @@ const Create = ({ sesi_share, auth, saksi, tps, datas }) => {
                                 // value={value}
                             />
                         </DivSpaceBetween>
-                        <TableContainer component={Paper}>
+                        <TableContainer
+                            sx={{ height: "500px" }}
+                            component={Paper}
+                        >
                             <Table
                                 sx={{ minWidth: 650 }}
                                 aria-label="simple table"

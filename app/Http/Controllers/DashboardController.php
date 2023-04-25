@@ -22,12 +22,6 @@ class DashboardController extends Controller
     {
 
         $sesiId = $this->sesiId->getSesiId();
-        // $datas = Transaksi::selectRaw("transaksis.id, tps.nama as tps, qty")
-        //     ->join('sesi_tps_saksis', 'transaksis.sesi_tps_saksi_id', '=', 'sesi_tps_saksis.id')
-        //     ->join('saksis', 'sesi_tps_saksis.saksi_id', '=', 'saksis.id')
-        //     ->join('tps', 'sesi_tps_saksis.tps_id', '=', 'tps.id')
-        //     ->where('transaksis.sesi_pemilu_id', $sesiId)
-        //     ->orderBy('transaksis.id', 'desc')->get();
 
         // saksi aktif
 

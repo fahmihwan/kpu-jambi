@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('sesi_pemilus', function (Blueprint $table) {
             $table->id();
-            $table->string('kode');
+            $table->string('kode', 10);;
             $table->date('tanggal');
-            $table->string('keterangan');
+            $table->string('keterangan', 100);
             $table->boolean('isActive');
-            $table->string('custome_login_description');
+            $table->string('custome_login_description', 100);
             $table->softDeletes();
             $table->timestamps();
         });

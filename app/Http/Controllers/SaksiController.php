@@ -42,7 +42,9 @@ class SaksiController extends Controller
             'telp' => 'required|max:20|unique:saksis,telp',
         ]);
 
-        $validated['token'] = preg_replace('/\s+/', '', $request->nama) . preg_replace('/\s+/', '', $validated['telp']);
+        $validated['token'] = preg_replace('/\s+/', '', $request->nama) . $validated['telp'];
+
+
         Saksi::create($validated);
 
         return redirect('/admin/master/saksi');
@@ -75,7 +77,10 @@ class SaksiController extends Controller
             'nama' => 'required|max:50',
             'telp' => 'required|max:20|unique:saksis,telp,' . $saksi->id,
         ]);
-        $validated['token'] = preg_replace('/\s+/', '', $request->nama) . preg_replace('/\s+/', '', $validated['telp']);
+
+        $validated['telp'] = preg_replace('/\s+/', '', $validated['telp']);
+        $validated['token'] = preg_replace('/\s+/', '', $request->nama) . $validated['telp'];
+
 
         Saksi::where('id', $saksi->id)->update($validated);
         return redirect('/admin/master/saksi');

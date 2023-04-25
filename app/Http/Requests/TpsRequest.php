@@ -3,11 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class SesiRequest extends FormRequest
+class TpsRequest extends FormRequest
 {
-
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -23,12 +21,11 @@ class SesiRequest extends FormRequest
      */
     public function rules(): array
     {
-
         return [
-            'kode' => 'required|unique:sesi_pemilus,kode,NULL,id,deleted_at,NULL',
-            'tanggal' => 'required',
-            'keterangan' => 'required',
-            'custome_login_description' => 'required'
+            'nama' => 'required',
+            'kota' => 'required',
+            'kecamatan' => 'required',
+            'kelurahan' => 'required'
         ];
     }
 }

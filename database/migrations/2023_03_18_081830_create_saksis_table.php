@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama', 50);
             $table->string('token');
-            $table->string('telp', 20);
+            $table->string('telp', 20)->unique();
             $table->timestamps();
             $table->softDeletes();
         });

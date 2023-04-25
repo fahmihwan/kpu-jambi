@@ -74,7 +74,7 @@ const Index = ({ datas, auth, sesi_share }) => {
                                     <TableCell>
                                         {d.custome_login_description}
                                     </TableCell>
-                                    <TableCell>
+                                    <TableCell sx={{ display: "flex" }}>
                                         <Link
                                             href={`/admin/periode-pemilu/${d.id}/edit`}
                                             style={{ marginRight: "5px" }}
@@ -88,11 +88,14 @@ const Index = ({ datas, auth, sesi_share }) => {
                                         </Link>
 
                                         <Button
-                                            onClick={() =>
-                                                Inertia.delete(
-                                                    `/admin/periode-pemilu/${d.id}`
-                                                )
-                                            }
+                                            onClick={() => {
+                                                confirm(
+                                                    "Apakah anda yakin ingin menghapus?"
+                                                ) &&
+                                                    Inertia.delete(
+                                                        `/admin/periode-pemilu/${d.id}`
+                                                    );
+                                            }}
                                             color="error"
                                             variant="outlined"
                                         >

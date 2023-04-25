@@ -3,26 +3,30 @@ import { Button, Card } from "@mui/material";
 
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { MuiTelInput } from "mui-tel-input";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { ButtonLinkEl, InputEl } from "../../../Components/InputCompt";
 import { BreadcrumbsEl } from "../../../Components/NavCompt";
 import AuthenticatedLayout from "../../../Layouts/AuthenticatedLayout";
 
 const Edit = ({ saksi, auth, sesi_share }) => {
+    const [telp, setTelp] = useState(saksi.telp);
     const { data, setData, put, processing, errors, reset } = useForm({
         nama: saksi.nama,
         token: saksi.token,
-        telp: saksi.telp,
+        telp: "",
     });
-    console.log(errors);
+    useEffect(() => {
+        setData("telp", telp.split(" ").join(""));
+    }, [telp]);
 
     const handleChange = (e) => {
         setData(e.target.name, e.target.value);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        setData("telp", data.telp.split(" ").join(""));
         put(`/admin/master/saksi/${saksi.id}`);
     };
     const label = { inputProps: { "aria-label": "Switch demo" } };
@@ -76,9 +80,13 @@ const Edit = ({ saksi, auth, sesi_share }) => {
                                             forceCallingCode
                                             defaultCountry={"ID"}
                                             style={{ width: "100%" }}
-                                            value={data.telp}
+                                            // value={data.telp}
+                                            // onChange={(newPhone) =>
+                                            //     setData("telp", newPhone)
+                                            // }
+                                            value={telp}
                                             onChange={(newPhone) =>
-                                                setData("telp", newPhone)
+                                                setTelp(newPhone)
                                             }
                                         />
                                         {errors?.telp && (

@@ -64,10 +64,14 @@ class SesiPemiluController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(SesiRequest $request, $id)
+    public function update(Request $request, $id)
     {
-
-        $validated = $request->validated();
+        $validated = $request->validate([
+            'kode' => 'required|unique:sesi_pemilus,kode,' . $id . ',id,deleted_at,NULL',
+            'tanggal' => 'required',
+            'keterangan' => 'required',
+            'custome_login_description' => 'required'
+        ]);
 
         Sesi_pemilu::where('id', $id)->update($validated);
         return redirect('/admin/periode-pemilu');

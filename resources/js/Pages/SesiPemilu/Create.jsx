@@ -1,5 +1,5 @@
 import { useForm } from "@inertiajs/inertia-react";
-import { Card, TextField } from "@mui/material";
+import { Card, TextField, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { MuiTelInput } from "mui-tel-input";
 
@@ -13,7 +13,7 @@ import {
 import { BreadcrumbsEl } from "../../Components/NavCompt";
 import AuthenticatedLayout from "../../Layouts/AuthenticatedLayout";
 
-const Create = ({ auth, sesi_share }) => {
+const Create = ({ auth, sesi_share, flash }) => {
     const { data, setData, post, processing, errors, reset } = useForm({
         kode: "",
         tanggal: "",
@@ -33,7 +33,7 @@ const Create = ({ auth, sesi_share }) => {
     return (
         <AuthenticatedLayout auth={auth} share={sesi_share}>
             <DivSpaceBetween>
-                <h2>Create Periode Pemilu</h2>
+                <h2>Tambah Periode Pemilu</h2>
                 <BreadcrumbsEl
                     list={[
                         { title: "Master", href: "#" },
@@ -43,7 +43,7 @@ const Create = ({ auth, sesi_share }) => {
             </DivSpaceBetween>
 
             <Grid2 container spacing={2}>
-                <Grid2 item xs={8}>
+                <Grid2 item xs={12} md={8}>
                     <Card style={{ overflow: "inherit" }}>
                         <DivSpaceBetween
                             style={{
@@ -66,8 +66,13 @@ const Create = ({ auth, sesi_share }) => {
                                     title="kode"
                                     name="kode"
                                     handleChange={handleChange}
-                                    value={data.kode}
+                                    value={data?.kode}
                                 />
+                                {errors?.kode && (
+                                    <Typography sx={{ color: "red" }}>
+                                        {errors?.kode}
+                                    </Typography>
+                                )}
                             </DivFormControl>
                             <DivFormControl>
                                 <InputEl
@@ -75,7 +80,7 @@ const Create = ({ auth, sesi_share }) => {
                                     type="date"
                                     name="tanggal"
                                     handleChange={handleChange}
-                                    value={data.tanggal}
+                                    value={data?.tanggal}
                                 />
                             </DivFormControl>
                             <DivFormControl>
@@ -83,7 +88,7 @@ const Create = ({ auth, sesi_share }) => {
                                     title="keterangan"
                                     name="keterangan"
                                     handleChange={handleChange}
-                                    value={data.keterangan}
+                                    value={data?.keterangan}
                                 />
                             </DivFormControl>
                             <DivFormControl>
@@ -91,11 +96,11 @@ const Create = ({ auth, sesi_share }) => {
                                     title="custome login description"
                                     name="custome_login_description"
                                     handleChange={handleChange}
-                                    value={data.custome_login_description}
+                                    value={data?.custome_login_description}
                                 />
                             </DivFormControl>
 
-                            <ButtonSubmitEl />
+                            <ButtonSubmitEl disabled={processing} />
                         </form>
                     </Card>
                 </Grid2>

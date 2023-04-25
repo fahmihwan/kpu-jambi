@@ -1,8 +1,8 @@
 import { useForm } from "@inertiajs/inertia-react";
-import { Card, Typography } from "@mui/material";
+import { Alert, Card, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { MuiTelInput } from "mui-tel-input";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import {
     ButtonLinkEl,
@@ -15,12 +15,15 @@ import axios from "axios";
 import { AlertFail } from "../../../Components/AlertCompt";
 
 const Create = ({ auth, sesi_share, flash }) => {
+    const [telp, setTelp] = useState("+62");
     const { data, setData, post, processing, errors, reset } = useForm({
         nama: "",
         token: "",
         telp: "+62",
     });
-    console.log(flash);
+    useEffect(() => {
+        setData("telp", telp.split(" ").join(""));
+    }, [telp]);
 
     const handleChange = (e) => {
         setData(e.target.name, e.target.value);
@@ -28,7 +31,8 @@ const Create = ({ auth, sesi_share, flash }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await post("/admin/master/saksi");
+        setData("telp", data.telp.split(" ").join(""));
+        post("/admin/master/saksi");
     };
     return (
         <AuthenticatedLayout auth={auth} share={sesi_share}>
@@ -67,10 +71,20 @@ const Create = ({ auth, sesi_share, flash }) => {
                             style={{ padding: "20px" }}
                         >
                             <Grid2 container spacing={3}>
-                                <Grid2 xs={8}>
+                                <Grid2 xs={12} md={8}>
+                                    {flash?.error_message && (
+                                        <Alert
+                                            severity="error"
+                                            sx={{ marginBottom: "10px" }}
+                                        >
+                                            {flash?.error_message}
+                                        </Alert>
+                                    )}
+
                                     <h4 style={{ marginBottom: "10px" }}>
                                         Pengguna
                                     </h4>
+
                                     <DivFormControl>
                                         <InputEl
                                             title="nama"
@@ -93,9 +107,9 @@ const Create = ({ auth, sesi_share, flash }) => {
                                             forceCallingCode
                                             defaultCountry={"ID"}
                                             style={{ width: "100%" }}
-                                            value={data.telp}
+                                            value={telp}
                                             onChange={(newPhone) =>
-                                                setData("telp", newPhone)
+                                                setTelp(newPhone)
                                             }
                                         />
                                         {errors?.telp && (

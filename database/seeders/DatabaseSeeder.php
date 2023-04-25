@@ -31,8 +31,10 @@ class DatabaseSeeder extends Seeder
             'kode' => 'PM001',
             'tanggal' => date('Y-m-d'),
             'keterangan' => 'pemilu seluruh kota',
-            'isActive' => 1
+            'isActive' => 1,
+            'custome_login_description' => 'Sistem Informasi Penghitungan Suara DPRD TANJAB BARAT(SUTEJO)'
         ]);
+
 
         for ($i = 0; $i < 90; $i++) {
             Tps::create([
@@ -46,13 +48,28 @@ class DatabaseSeeder extends Seeder
         for ($i = 0; $i < 90; $i++) {
             Saksi::create([
                 'nama' => fake()->name(),
-                // 'username' => fake()->password(10, 14),
-                // 'password' => fake()->uuid(),
-                // 'token' => fake()->name() + fake()->e164MobilePhoneNumber(),
                 'token' => fake()->name() . fake()->e164PhoneNumber('+62'),
                 'telp' =>  fake()->phoneNumber('+62'),
             ]);
         }
+
+        // Saksi::create([
+        //     'nama' => 'fahmi',
+        //     'token' => 'fahmi' . '+6282334337393',
+        //     'telp' =>  '+6282334337393',
+        // ]);
+        // Saksi::create([
+        //     'nama' => 'darunik',
+        //     'token' => 'darunik' . '+6285233505012',
+        //     'telp' =>  '+6285233505012',
+        // ]);
+
+        Sesi_tps_saksi::create([
+            'user_id' => 1,
+            'saksi_id' => $i,
+            'sesi_pemilu_id' => 1,
+            'tps_id' => $i,
+        ]);
         for ($i = 1; $i <= 90; $i++) {
             Sesi_tps_saksi::create([
                 'user_id' => 1,

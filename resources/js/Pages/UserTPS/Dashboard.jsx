@@ -1,16 +1,24 @@
 import { Box, Button, Card, Stack, TextField, Typography } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import PersonIcon from "@mui/icons-material/Person";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Inertia } from "@inertiajs/inertia";
 import { useForm } from "@inertiajs/inertia-react";
+import { Alert } from "@mui/material";
 
-const Dashboard = ({ item, isSubmit }) => {
-    console.log(isSubmit);
+const Dashboard = ({
+    item,
+    isSubmit,
+    kode_periode,
+    qty,
+    id_transaksi,
+    flash,
+}) => {
     const { data, setData, post, processing, errors, reset } = useForm({
-        qty: "",
+        qty: qty,
     });
 
+    const [isEdit, setIsEdit] = useState(false);
     const handleLogout = () => {
         return Inertia.post("/user-tps/logout");
     };
@@ -19,20 +27,22 @@ const Dashboard = ({ item, isSubmit }) => {
         e.preventDefault();
         post("/user-tps/transaksi");
     };
+    const handleEdit = async (e) => {
+        e.preventDefault();
+        await Inertia.put(`/user-tps/transaksi/${id_transaksi}`, data);
+        setIsEdit(false);
+    };
     return (
         <Stack
             sx={{
                 position: "fixed",
                 width: "100%",
-                backgroundColor: "#6219B8",
+                backgroundColor: "#091627",
                 height: "100vh",
             }}
         >
-            <TopBarEl
-                nama={item?.saksi?.nama}
-                username={item?.saksi?.username}
-                handleLogout={handleLogout}
-            />
+            <TopBarEl nama={item?.saksi?.nama} handleLogout={handleLogout} />
+
             <Box
                 sx={{
                     backgroundColor: "#e8eaf6",
@@ -40,8 +50,15 @@ const Dashboard = ({ item, isSubmit }) => {
                     padding: "20px",
                 }}
             >
+                {flash?.error_message !== null && (
+                    <Alert severity="error" sx={{ margin: "5px" }}>
+                        {flash?.error_message}
+                    </Alert>
+                )}
+
                 {/* <InfoEl /> */}
                 <StatEl
+                    kode_periode={kode_periode}
                     nama={item?.tps?.nama}
                     kota={item?.tps?.kota}
                     kecamatan={item?.tps?.kecamatan}
@@ -49,29 +66,70 @@ const Dashboard = ({ item, isSubmit }) => {
                 />
 
                 <Box sx={{ marginTop: "20px" }}>
-                    <form action="" onSubmit={handleSubmit}>
-                        <InfoEl />
-                        <TextField
-                            label={"total suara"}
-                            type={"number"}
-                            sx={{
-                                width: "100%",
-                                marginTop: "5px",
-                                backgroundColor: "white",
-                                marginBottom: "10px",
-                            }}
-                            onChange={(e) => setData("qty", e.target.value)}
-                            value={data.qty}
-                            variant="outlined"
-                        />
-                        {isSubmit ? (
-                            <Button type="submit">Edit</Button>
-                        ) : (
-                            <Button type="submit" variant="outlined">
+                    {isSubmit ? (
+                        <>
+                            <form onSubmit={handleEdit}>
+                                <InfoEl />
+                                <TextField
+                                    label={"total suara"}
+                                    type={"number"}
+                                    disabled={!isEdit}
+                                    sx={{
+                                        width: "100%",
+                                        marginTop: "5px",
+                                        backgroundColor: "white",
+                                        marginBottom: "10px",
+                                    }}
+                                    onChange={(e) =>
+                                        setData("qty", e.target.value)
+                                    }
+                                    value={data.qty}
+                                    variant="outlined"
+                                />
+                                <Button
+                                    sx={{ marginRight: "5px" }}
+                                    onClick={() => setIsEdit(!isEdit)}
+                                    variant="outlined"
+                                    color={isEdit ? "error" : "warning"}
+                                >
+                                    {isEdit ? "batal" : "edit"}
+                                </Button>
+                                {isEdit && (
+                                    <Button
+                                        type="submit"
+                                        disabled={processing}
+                                        variant="outlined"
+                                    >
+                                        Perbarui
+                                    </Button>
+                                )}
+                            </form>
+                        </>
+                    ) : (
+                        <form onSubmit={handleSubmit}>
+                            <InfoEl />
+                            <TextField
+                                label={"total suara"}
+                                type={"number"}
+                                sx={{
+                                    width: "100%",
+                                    marginTop: "5px",
+                                    backgroundColor: "white",
+                                    marginBottom: "10px",
+                                }}
+                                onChange={(e) => setData("qty", e.target.value)}
+                                value={data.qty}
+                                variant="outlined"
+                            />
+                            <Button
+                                disabled={processing}
+                                type="submit"
+                                variant="outlined"
+                            >
                                 Submit
                             </Button>
-                        )}
-                    </form>
+                        </form>
+                    )}
                 </Box>
                 <Typography
                     style={{
@@ -100,7 +158,6 @@ const InfoEl = () => {
     return (
         <>
             <section style={{ marginBottom: "10px", textAlign: "right" }}>
-                {/* <Typography variant="h5">Info: </Typography> */}
                 <Typography style={{ fontSize: "12px", color: "grey" }}>
                     22 dari 100 orang telah mengisi
                 </Typography>
@@ -112,7 +169,7 @@ const InfoEl = () => {
     );
 };
 
-const TopBarEl = ({ nama, username, handleLogout }) => {
+const TopBarEl = ({ nama, handleLogout }) => {
     return (
         <Box
             sx={{
@@ -124,11 +181,11 @@ const TopBarEl = ({ nama, username, handleLogout }) => {
                 justifyContent: "space-between",
             }}
         >
-            <Box sx={{ display: "flex" }}>
+            <Box sx={{ display: "flex", alignItems: "center" }}>
                 <PersonIcon
                     sx={{
                         backgroundColor: "white",
-                        // color: "#6219B8",
+
                         color: "#091627",
                         width: "30px",
                         height: "30px",
@@ -139,9 +196,6 @@ const TopBarEl = ({ nama, username, handleLogout }) => {
                 ></PersonIcon>
                 <Box>
                     <Typography>{nama}</Typography>
-                    <Typography>
-                        id: <span>{username}</span>
-                    </Typography>
                 </Box>
             </Box>
             <Button
@@ -159,20 +213,39 @@ const TopBarEl = ({ nama, username, handleLogout }) => {
         </Box>
     );
 };
-const StatEl = ({ nama, kota, kecamatan, kelurahan }) => {
+const StatEl = ({ nama, kota, kecamatan, kelurahan, kode_periode }) => {
     return (
         <Card
             sx={{
-                borderRadius: "20px",
+                borderRadius: "10px",
                 padding: "20px",
             }}
             variant="outlined"
         >
-            <Typography variant="h4">{nama}</Typography>
+            <Box
+                sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                }}
+            >
+                <Typography variant="h4">{nama}</Typography>
+                <Typography
+                    sx={{
+                        background: "#091627",
+                        color: "white",
+                        borderRadius: "60px",
+                        padding: "5px",
+                        fontSize: "12px",
+                    }}
+                >
+                    {kode_periode}
+                </Typography>
+            </Box>
             <hr />
 
             <Box sx={{ marginTop: "20px" }}>
-                <Typography variant="h5" color={"gray"}>
+                <Typography sx={{ fontSize: "12px" }} color={"gray"}>
                     detail :
                 </Typography>
                 <table style={{ width: "100%" }}>

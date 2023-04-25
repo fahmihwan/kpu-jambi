@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\SesiHelper;
+use App\Http\Requests\TpsRequest;
 use App\Models\Sesi_pemilu;
 use App\Models\Tps;
 use Illuminate\Http\Request;
@@ -26,11 +27,8 @@ class TpsController extends Controller
         if (!$sesiId) {
             return 'harap pilih periode';
         }
-        // return Tps::where('sesi_pemilu_id', $sesiId)->latest()->get();
-
 
         return Inertia::render('Master/Tps/Index', [
-            // 'datas' => Tps::where('sesi_pemilu_id', $sesiId)->latest()->paginate(10)
             'datas' => Tps::where('sesi_pemilu_id', $sesiId)->latest()->get()
         ]);
     }
@@ -51,17 +49,10 @@ class TpsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(TpsRequest $request)
     {
 
-        // dd($this->sesiId->getSesiId());
-
-        $validated =  $request->validate([
-            'nama' => 'required',
-            'kota' => 'required',
-            'kecamatan' => 'required',
-            'kelurahan' => 'required'
-        ]);
+        $validated = $request->validated();
 
         $sesiId = $this->sesiId->getSesiId();
         if (!$sesiId) {
@@ -102,14 +93,10 @@ class TpsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(TpsRequest $request, $id)
     {
-        $validated =  $request->validate([
-            'nama' => 'required',
-            'kota' => 'required',
-            'kecamatan' => 'required',
-            'kelurahan' => 'required'
-        ]);
+
+        $validated = $request->validated();
 
         Tps::where('id', $id)->update($validated);
 

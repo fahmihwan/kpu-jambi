@@ -1,5 +1,5 @@
 import { useForm } from "@inertiajs/inertia-react";
-import { Button, Card } from "@mui/material";
+import { Button, Card, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 
 import React from "react";
@@ -66,6 +66,11 @@ const Edit = ({ item, auth, sesi_share }) => {
                                     handleChange={handleChange}
                                     value={data.kode}
                                 />
+                                {errors?.kode && (
+                                    <Typography sx={{ color: "red" }}>
+                                        {errors?.kode}
+                                    </Typography>
+                                )}
                             </DivFormControl>
                             <DivFormControl>
                                 <InputEl

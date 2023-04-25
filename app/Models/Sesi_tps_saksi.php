@@ -24,4 +24,8 @@ class Sesi_tps_saksi extends Model
     {
         return $this->hasMany(Transaksi::class);
     }
+    public function transaksi()
+    {
+        return $this->hasOne(Transaksi::class);
+    }
 }

@@ -33,6 +33,7 @@ Route::post("/", [UserTPS_controller::class, 'authenticated']);
 Route::get("/user-tps", [UserTPS_controller::class, 'dashboard']);
 Route::post("/user-tps/logout", [UserTPS_controller::class, 'logout']);
 Route::post('/user-tps/transaksi', [TransaksiControler::class, 'store']);
+Route::put('/user-tps/transaksi/{id_transaksi}', [TransaksiControler::class, 'update_suara']);
 
 
 
