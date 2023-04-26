@@ -23,7 +23,6 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-
         if (Auth::attempt($validated)) {
             $request->session()->regenerate();
             return redirect()->intended('/admin/dashboard');

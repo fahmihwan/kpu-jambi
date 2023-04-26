@@ -10,6 +10,7 @@ use App\Models\Transaksi;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 
 class UserTPS_controller extends Controller
@@ -34,8 +35,8 @@ class UserTPS_controller extends Controller
         ]);
 
         try {
-
             $get_id =  Saksi::where(['token' => $validated['token']])->first()->id;
+            // $get_id =  Saksi::where(['token' => $validated['token']])->first()->id;
         } catch (\Throwable $th) {
             return redirect()->back()->with('error_message', 'token tidak tersedia');
         }

@@ -98,7 +98,7 @@ const Laporan_suara = ({ datas, auth, sesi_share, belum_mengisi }) => {
                 <DivSpaceBetween
                     style={{
                         padding: "10px",
-                        backgroundColor: "#e0e0e0",
+                        backgroundColor: "#F8F9FA",
                     }}
                 >
                     <p>List sudah mengisi</p>
@@ -114,7 +114,7 @@ const Laporan_suara = ({ datas, auth, sesi_share, belum_mengisi }) => {
                 <DivSpaceBetween
                     style={{
                         padding: "10px",
-                        backgroundColor: "#e0e0e0",
+                        backgroundColor: "#F8F9FA",
                     }}
                 >
                     <p>List belum mengisi</p>

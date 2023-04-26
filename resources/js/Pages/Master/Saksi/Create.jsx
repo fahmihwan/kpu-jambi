@@ -57,7 +57,7 @@ const Create = ({ auth, sesi_share, flash }) => {
                         <DivSpaceBetween
                             style={{
                                 padding: "10px",
-                                backgroundColor: "#e0e0e0",
+                                backgroundColor: "#F8F9FA",
                             }}
                         >
                             <p>Create Saksi</p>

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Export_csv_controller;
 use App\Http\Controllers\GetApiController;
 
 use App\Http\Controllers\Kelola_saksiController;
@@ -74,4 +75,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/laporan/laporan-suara', [LaporanController::class, 'laporan_suara']);
 
     Route::get('/admin/laporan/proses-transaksi', [ProsesTransaksiController::class, 'index']);
+
+    Route::get('/admin/export_transaksi', [Export_csv_controller::class, 'export_transaksi']);
 });

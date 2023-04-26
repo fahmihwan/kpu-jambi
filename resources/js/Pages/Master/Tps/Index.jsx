@@ -104,7 +104,7 @@ const Index = ({ datas, auth, sesi_share }) => {
                 <DivSpaceBetween
                     style={{
                         padding: "10px",
-                        backgroundColor: "#e0e0e0",
+                        backgroundColor: "#F8F9FA",
                     }}
                 >
                     <p>List TPS</p>

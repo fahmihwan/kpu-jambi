@@ -46,7 +46,7 @@ const Edit = ({ item, auth, sesi_share }) => {
                         <DivSpaceBetween
                             style={{
                                 padding: "10px",
-                                backgroundColor: "gainsboro",
+                                backgroundColor: "#F8F9FA",
                             }}
                         >
                             <p>Edit Akun</p>

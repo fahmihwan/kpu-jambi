@@ -39,10 +39,13 @@ class SaksiController extends Controller
 
         $validated = $request->validate([
             'nama' => 'required|max:50',
-            'telp' => 'required|max:20|unique:saksis,telp',
+            // 'telp' => 'required|max:20|unique:saksis,telp,deleted_at,NULL',
+            'telp' => 'required|max:20',
         ]);
 
         $validated['token'] = preg_replace('/\s+/', '', $request->nama) . $validated['telp'];
+        // $validated['token'] = Hash::make(preg_replace('/\s+/', '', $request->nama) . $validated['telp']);
+
 
 
         Saksi::create($validated);
@@ -79,7 +82,7 @@ class SaksiController extends Controller
         ]);
 
         $validated['telp'] = preg_replace('/\s+/', '', $validated['telp']);
-        $validated['token'] = preg_replace('/\s+/', '', $request->nama) . $validated['telp'];
+        $validated['token'] = Hash::make(preg_replace('/\s+/', '', $request->nama) . $validated['telp']);
 
 
         Saksi::where('id', $saksi->id)->update($validated);

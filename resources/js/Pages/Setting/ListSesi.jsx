@@ -14,7 +14,12 @@ const ListSesi = ({ auth, datas, sesi_share }) => {
 
     return (
         <AuthenticatedLayout auth={auth} share={sesi_share}>
-            <DivSpaceBetween>
+            <DivSpaceBetween
+                style={{
+                    padding: "10px",
+                    backgroundColor: "#F8F9FA",
+                }}
+            >
                 <h2>Setting Periode</h2>
                 <BreadcrumbsEl
                     list={[

@@ -85,10 +85,10 @@ const Create = ({ sesi_share, auth, saksi, tps, datas, flash }) => {
                         <DivSpaceBetween
                             style={{
                                 padding: "10px",
-                                backgroundColor: "#e0e0e0",
+                                backgroundColor: "#F8F9FA",
                             }}
                         >
-                            <p>Create Wakil</p>
+                            <p>Tambah wakil</p>
                             <ButtonLinkEl
                                 title="kembali"
                                 href="/admin/kelola-saksi"
@@ -140,10 +140,10 @@ const Create = ({ sesi_share, auth, saksi, tps, datas, flash }) => {
                         <DivSpaceBetween
                             style={{
                                 padding: "10px",
-                                backgroundColor: "#e0e0e0",
+                                backgroundColor: "#F8F9FA",
                             }}
                         >
-                            <p>List Data</p>
+                            <p>List data</p>
                             <TextField
                                 id={"serach"}
                                 label={"cari berdasarkan tps / nama"}
