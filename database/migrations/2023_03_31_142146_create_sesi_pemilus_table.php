@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('keterangan', 100);
             $table->boolean('isActive');
             $table->string('custome_login_description', 100);
-            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -28,6 +28,7 @@ class AuthController extends Controller
             $request->session()->regenerate();
             return redirect()->intended('/admin/dashboard');
         }
+        return redirect()->back()->with('error_message', 'username atau password salah');
     }
     public function logout(Request $request)
     {

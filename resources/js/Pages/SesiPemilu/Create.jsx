@@ -13,7 +13,7 @@ import {
 import { BreadcrumbsEl } from "../../Components/NavCompt";
 import AuthenticatedLayout from "../../Layouts/AuthenticatedLayout";
 
-const Create = ({ auth, sesi_share, flash }) => {
+const Create = ({ auth, sesi_share }) => {
     const { data, setData, post, processing, errors, reset } = useForm({
         kode: "",
         tanggal: "",

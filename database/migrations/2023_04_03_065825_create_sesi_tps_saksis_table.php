@@ -19,9 +19,13 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(Saksi::class);
+
             $table->foreignIdFor(Sesi_pemilu::class);
+            // $table->foreign('sesi_pemilu_id')->references('id')->on('sesi_pemilus')->onDelete('restrict');
+
+
             $table->foreignIdFor(Tps::class);
-            $table->softDeletes();
+
             $table->timestamps();
         });
     }

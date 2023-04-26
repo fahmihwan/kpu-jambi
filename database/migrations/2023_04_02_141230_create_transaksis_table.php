@@ -16,7 +16,8 @@ return new class extends Migration
     {
         Schema::create('transaksis', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Sesi_pemilu::class);
+            // $table->foreignIdFor(Sesi_pemilu::class);
+            $table->foreignId('sesi_pemilu_id')->constrained()->onDelete('restrict');
             $table->foreignIdFor(Sesi_tps_saksi::class);
             $table->integer('qty');
             $table->timestamps();

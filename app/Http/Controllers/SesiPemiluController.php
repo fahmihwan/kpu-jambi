@@ -67,7 +67,7 @@ class SesiPemiluController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'kode' => 'required|unique:sesi_pemilus,kode,' . $id . ',id,deleted_at,NULL',
+            'kode' => 'required|unique:sesi_pemilus,kode,' . $id . ',id',
             'tanggal' => 'required',
             'keterangan' => 'required',
             'custome_login_description' => 'required'
@@ -82,7 +82,13 @@ class SesiPemiluController extends Controller
      */
     public function destroy($id)
     {
-        Sesi_pemilu::destroy($id);
+        try {
+
+            Sesi_pemilu::destroy($id);
+        } catch (\Throwable $th) {
+            //throw $th;
+            return redirect()->back()->with('error_message', 'sesi tidak dapat dihapus karena menampung seluruh suara pemilu');
+        }
         return redirect()->back();
     }
 }

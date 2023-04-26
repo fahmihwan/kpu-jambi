@@ -8,9 +8,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Sesi_pemilu extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
     protected $guarded = ['id'];
-    // protected $casts = ['created_at' => 'datetime:l, d-m-Y'];
-
-
 }

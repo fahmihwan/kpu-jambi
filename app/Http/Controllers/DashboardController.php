@@ -23,8 +23,6 @@ class DashboardController extends Controller
 
         $sesiId = $this->sesiId->getSesiId();
 
-        // saksi aktif
-
 
         $stat_suara = Transaksi::where('sesi_pemilu_id', $sesiId)->sum('qty');
         $stat_saksi = Sesi_tps_saksi::where('sesi_pemilu_id', $sesiId)->count();
@@ -45,12 +43,8 @@ class DashboardController extends Controller
             ->groupBy('kota')
             ->get();
 
-        // return $sum_suara_perkecamatan;
-
 
         return Inertia::render('Dashboard', [
-            // 'polar_area_charts' => $datas,
-
             'stat_suara' => $stat_suara,
             'stat_tps' => $stat_tps,
             'stat_saksi' => $stat_saksi,

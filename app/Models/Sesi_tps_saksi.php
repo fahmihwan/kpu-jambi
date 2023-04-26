@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Sesi_tps_saksi extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
     protected $guarded = ['id'];
 
     public function saksi()

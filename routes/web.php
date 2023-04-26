@@ -7,6 +7,7 @@ use App\Http\Controllers\GetApiController;
 
 use App\Http\Controllers\Kelola_saksiController;
 use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\ProsesTransaksiController;
 use App\Http\Controllers\SaksiController;
 use App\Http\Controllers\SesiPemiluController;
 use App\Http\Controllers\Setting_primary_dataController;
@@ -69,6 +70,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/{id}/get-district', [GetApiController::class, 'get_district']);
     Route::get('/admin/{id}/get-village', [GetApiController::class, 'get_village']);
 
-    Route::get('/admin/laporan/laporan-saksi', [LaporanController::class, 'laporan_saksi']);
+    // Route::get('/admin/laporan/laporan-saksi', [LaporanController::class, 'laporan_saksi']);
     Route::get('/admin/laporan/laporan-suara', [LaporanController::class, 'laporan_suara']);
+
+    Route::get('/admin/laporan/proses-transaksi', [ProsesTransaksiController::class, 'index']);
 });

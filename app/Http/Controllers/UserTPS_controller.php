@@ -33,7 +33,12 @@ class UserTPS_controller extends Controller
             'token' => 'required',
         ]);
 
-        $get_id =  Saksi::where(['token' => $validated['token']])->first()->id;
+        try {
+
+            $get_id =  Saksi::where(['token' => $validated['token']])->first()->id;
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error_message', 'token tidak tersedia');
+        }
 
         if (Auth::guard('websaksi')->loginUsingId($get_id)) {
             $request->session()->regenerate();

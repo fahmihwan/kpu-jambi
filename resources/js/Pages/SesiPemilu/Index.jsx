@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "@inertiajs/inertia-react";
 import {
+    Alert,
     Button,
     Card,
     Paper,
@@ -19,7 +20,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { Inertia } from "@inertiajs/inertia";
 
-const Index = ({ datas, auth, sesi_share }) => {
+const Index = ({ datas, auth, sesi_share, flash }) => {
+    console.log(flash);
     return (
         <AuthenticatedLayout auth={auth} share={sesi_share}>
             <DivSpaceBetween>
@@ -31,6 +33,12 @@ const Index = ({ datas, auth, sesi_share }) => {
                     ]}
                 />
             </DivSpaceBetween>
+            {flash?.error_message && (
+                <Alert severity="error" sx={{ marginBottom: "10px" }}>
+                    {flash?.error_message}
+                </Alert>
+            )}
+
             <Card>
                 <DivSpaceBetween
                     style={{

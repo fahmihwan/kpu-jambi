@@ -1,15 +1,16 @@
-import { Box, Button, Card, Hidden, Typography } from "@mui/material";
+import { Alert, Box, Button, Card, Hidden, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import React from "react";
 import styled from "styled-components";
 import { InputEl } from "../../Components/InputCompt";
 import LogoKpu from "../../../../public/img/boss-2.jpeg";
 import { useForm } from "@inertiajs/inertia-react";
-const Login = ({ custome_description }) => {
+const Login = ({ custome_description, flash }) => {
     const { data, setData, post, processing, errors, reset } = useForm({
         username: "",
         password: "",
     });
+    console.log(flash);
 
     const handleChange = (e) => {
         setData(e.target.name, e.target.value);
@@ -69,6 +70,14 @@ const Login = ({ custome_description }) => {
                     >
                         <form onSubmit={handleSubmit} style={{ width: "80%" }}>
                             {/* <h4>Login</h4> */}
+                            {flash?.error_message && (
+                                <Alert
+                                    severity="error"
+                                    sx={{ marginBottom: "10px" }}
+                                >
+                                    {flash?.error_message}
+                                </Alert>
+                            )}
                             <Typography
                                 sx={{
                                     textAlign: "center",

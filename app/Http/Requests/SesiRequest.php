@@ -25,7 +25,7 @@ class SesiRequest extends FormRequest
     {
 
         return [
-            'kode' => 'required|unique:sesi_pemilus,kode,NULL,id,deleted_at,NULL',
+            'kode' => 'required|unique:sesi_pemilus,kode,id',
             'tanggal' => 'required',
             'keterangan' => 'required',
             'custome_login_description' => 'required'
