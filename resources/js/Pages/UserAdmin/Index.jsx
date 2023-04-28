@@ -27,7 +27,7 @@ const Index = ({ datas, auth, sesi_share }) => {
                 <BreadcrumbsEl
                     list={[
                         { title: "Master", href: "#" },
-                        { title: "List Saksi", href: "#" },
+                        { title: "Akun", href: "#" },
                     ]}
                 />
             </DivSpaceBetween>
@@ -38,7 +38,7 @@ const Index = ({ datas, auth, sesi_share }) => {
                         backgroundColor: "#F8F9FA",
                     }}
                 >
-                    <p>List TPS</p>
+                    <p>List akun</p>
                     <ButtonLinkEl
                         title="Tambah Data"
                         href="/admin/akun/create"

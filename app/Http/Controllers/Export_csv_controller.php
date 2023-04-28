@@ -10,6 +10,6 @@ class Export_csv_controller extends Controller
 {
     public function export_transaksi()
     {
-        return Excel::download(new TransaksiExport, 'users.xlsx');
+        return Excel::download(new TransaksiExport, 'laporan_suara.xlsx');
     }
 }

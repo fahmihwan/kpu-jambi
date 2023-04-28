@@ -1,13 +1,15 @@
-import { Card, Typography } from "@mui/material";
+import { Button, Card, Typography } from "@mui/material";
 import MUIDataTable from "mui-datatables";
 import React from "react";
 import styled from "styled-components";
 import { BreadcrumbsEl } from "../../Components/NavCompt";
 import AuthenticatedLayout from "../../Layouts/AuthenticatedLayout";
+import { Inertia } from "@inertiajs/inertia";
+import { Link } from "@inertiajs/inertia-react";
 
 const Laporan_suara = ({ datas, auth, sesi_share, belum_mengisi }) => {
     const options = {
-        selectableRows: false,
+        selectableRows: "none",
         responsive: "standard",
         fixedHeader: true,
         fixedSelectColumn: true,
@@ -102,6 +104,9 @@ const Laporan_suara = ({ datas, auth, sesi_share, belum_mengisi }) => {
                     }}
                 >
                     <p>List sudah mengisi</p>
+                    <a href="/admin/export_transaksi">
+                        <Button variant="outlined">Download File</Button>
+                    </a>
                 </DivSpaceBetween>
 
                 <MUIDataTable

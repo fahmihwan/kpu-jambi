@@ -77,7 +77,7 @@ const Create = ({ api_kota, auth, sesi_share }) => {
                     list={[
                         { title: "Master", href: "#" },
                         { title: "List TPS", href: "#" },
-                        { title: "Create", href: "#" },
+                        { title: "Tambah", href: "#" },
                     ]}
                 />
             </DivSpaceBetween>
@@ -91,7 +91,7 @@ const Create = ({ api_kota, auth, sesi_share }) => {
                                 backgroundColor: "#F8F9FA",
                             }}
                         >
-                            <p>Create TPS</p>
+                            <p>Tamabh TPS</p>
                             <ButtonLinkEl
                                 title="kembali"
                                 href="/admin/master/tps"

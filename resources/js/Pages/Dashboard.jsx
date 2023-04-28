@@ -31,12 +31,7 @@ const Dashboard = ({
         <AuthenticatedLayout auth={auth} share={sesi_share}>
             <DivSpaceBetween>
                 <h2>Dashboard</h2>
-                <BreadcrumbsEl
-                    list={[
-                        { title: "Master", href: "#" },
-                        { title: "List Saksi", href: "#" },
-                    ]}
-                />
+                <BreadcrumbsEl list={[{ title: "Dashboard", href: "#" }]} />
             </DivSpaceBetween>
             {/* <Card> */}
 

@@ -74,7 +74,7 @@ const Create = ({ sesi_share, auth, saksi, tps, datas, flash }) => {
                 <BreadcrumbsEl
                     list={[
                         { title: "List Wakil", href: "#" },
-                        { title: "Create", href: "#" },
+                        { title: "Tambah", href: "#" },
                     ]}
                 />
             </DivSpaceBetween>

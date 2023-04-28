@@ -32,11 +32,12 @@ const Edit = ({ item, auth, sesi_share }) => {
     return (
         <AuthenticatedLayout auth={auth} share={sesi_share}>
             <DivSpaceBetween>
-                <h2>Akun</h2>
+                <h2>Edit akun</h2>
                 <BreadcrumbsEl
                     list={[
                         { title: "Master", href: "#" },
-                        { title: "List Saksi", href: "#" },
+                        { title: "Akun", href: "#" },
+                        { title: "Edit", href: "#" },
                     ]}
                 />
             </DivSpaceBetween>
@@ -46,8 +47,7 @@ const Edit = ({ item, auth, sesi_share }) => {
                     <Card style={{ overflow: "inherit" }}>
                         <DivSpaceBetween
                             style={{
-                                paddingLeft: "10px",
-                                paddingRight: "10px",
+                                padding: "10px",
                                 backgroundColor: "gainsboro",
                             }}
                         >

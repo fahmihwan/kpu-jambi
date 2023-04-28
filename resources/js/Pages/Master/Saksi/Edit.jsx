@@ -52,7 +52,7 @@ const Edit = ({ saksi, auth, sesi_share }) => {
                                 backgroundColor: "#F8F9FA",
                             }}
                         >
-                            <p>Create Saksi</p>
+                            <p>Edit Saksi</p>
                             <ButtonLinkEl
                                 title="kembali"
                                 href="/admin/master/saksi"

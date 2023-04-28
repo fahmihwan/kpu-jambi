@@ -35,7 +35,8 @@ const Edit = ({ item, auth, sesi_share }) => {
                 <BreadcrumbsEl
                     list={[
                         { title: "Master", href: "#" },
-                        { title: "List Saksi", href: "#" },
+                        { title: "Periode pemilu", href: "#" },
+                        { title: "Edit", href: "#" },
                     ]}
                 />
             </DivSpaceBetween>

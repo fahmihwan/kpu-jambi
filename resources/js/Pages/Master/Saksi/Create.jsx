@@ -41,8 +41,8 @@ const Create = ({ auth, sesi_share, flash }) => {
                 <BreadcrumbsEl
                     list={[
                         { title: "Master", href: "#" },
-                        { title: "List Saksi", href: "#" },
-                        { title: "Create", href: "#" },
+                        { title: "List saksi", href: "#" },
+                        { title: "Tambah ", href: "#" },
                     ]}
                 />
             </DivSpaceBetween>
@@ -60,7 +60,7 @@ const Create = ({ auth, sesi_share, flash }) => {
                                 backgroundColor: "#F8F9FA",
                             }}
                         >
-                            <p>Create Saksi</p>
+                            <p>Tambah saksi</p>
                             <ButtonLinkEl
                                 title="kembali"
                                 href="/admin/master/saksi"

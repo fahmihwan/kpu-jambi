@@ -1,18 +1,5 @@
 import { Link } from "@inertiajs/inertia-react";
-import {
-    Box,
-    Button,
-    Card,
-    Pagination,
-    Paper,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow,
-    Typography,
-} from "@mui/material";
+import { Card, Typography } from "@mui/material";
 import MUIDataTable from "mui-datatables";
 import React from "react";
 import styled from "styled-components";
@@ -58,7 +45,7 @@ const Index = ({ datas, auth, sesi_share }) => {
     ];
 
     const options = {
-        selectableRows: false,
+        selectableRows: "none",
         responsive: "standard",
         fixedHeader: true,
         fixedSelectColumn: true,
@@ -68,7 +55,7 @@ const Index = ({ datas, auth, sesi_share }) => {
     return (
         <AuthenticatedLayout auth={auth} share={sesi_share}>
             <DivSpaceBetween>
-                <h2>List Wakil</h2>
+                <h2>List wakil</h2>
                 <BreadcrumbsEl list={[{ title: "List Wakil", href: "#" }]} />
             </DivSpaceBetween>
             <Card>
@@ -78,7 +65,7 @@ const Index = ({ datas, auth, sesi_share }) => {
                         backgroundColor: "#F8F9FA",
                     }}
                 >
-                    <p>List Wakil</p>
+                    <p>List wakil</p>
                     <ButtonLinkEl
                         title="Tambah Data"
                         href="/admin/kelola-saksi/create"

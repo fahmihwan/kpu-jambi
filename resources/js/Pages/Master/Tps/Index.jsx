@@ -82,7 +82,7 @@ const Index = ({ datas, auth, sesi_share }) => {
     ];
 
     const options = {
-        selectableRows: false,
+        selectableRows: "none",
         responsive: "standard",
         fixedHeader: true,
         fixedSelectColumn: true,

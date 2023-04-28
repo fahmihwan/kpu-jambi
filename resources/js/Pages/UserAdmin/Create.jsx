@@ -34,7 +34,8 @@ const Create = ({ auth, sesi_share }) => {
                 <BreadcrumbsEl
                     list={[
                         { title: "Master", href: "#" },
-                        { title: "List Saksi", href: "#" },
+                        { title: "Akun", href: "#" },
+                        { title: "Tambah", href: "#" },
                     ]}
                 />
             </DivSpaceBetween>
@@ -44,12 +45,11 @@ const Create = ({ auth, sesi_share }) => {
                     <Card style={{ overflow: "inherit" }}>
                         <DivSpaceBetween
                             style={{
-                                paddingLeft: "10px",
-                                paddingRight: "10px",
+                                padding: "10px",
                                 backgroundColor: "gainsboro",
                             }}
                         >
-                            <p>Create Akun</p>
+                            <p>Tambah akun</p>
                             <ButtonLinkEl
                                 title="kembali"
                                 href="/admin/master/saksi"

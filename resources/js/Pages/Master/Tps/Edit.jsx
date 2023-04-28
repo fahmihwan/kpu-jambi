@@ -85,7 +85,7 @@ const Edit = ({ api_kota, tps, auth, sesi_share }) => {
                                 backgroundColor: "#F8F9FA",
                             }}
                         >
-                            <p>EDIT TPS</p>
+                            <p>Edit TPS</p>
                             <ButtonLinkEl
                                 title="kembali"
                                 href="/admin/master/tps"

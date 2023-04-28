@@ -37,7 +37,8 @@ const Create = ({ auth, sesi_share }) => {
                 <BreadcrumbsEl
                     list={[
                         { title: "Master", href: "#" },
-                        { title: "List Saksi", href: "#" },
+                        { title: "Periode pemilu", href: "#" },
+                        { title: "Tambah", href: "#" },
                     ]}
                 />
             </DivSpaceBetween>
