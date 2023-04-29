@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import AuthenticatedLayout from "../Layouts/AuthenticatedLayout";
 
-import { Card } from "@mui/material";
+import { Box, Card } from "@mui/material";
 import { BreadcrumbsEl } from "../Components/NavCompt";
 import styled from "styled-components";
 import { Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
-
+import HomeIcon from "@mui/icons-material/Home";
 import {
     Chart as ChartJS,
     RadialLinearScale,
@@ -15,7 +15,9 @@ import {
     Legend,
 } from "chart.js";
 import { PolarArea } from "react-chartjs-2";
-
+import BadgeIcon from "@mui/icons-material/Badge";
+import InventoryIcon from "@mui/icons-material/Inventory";
+import BeenhereIcon from "@mui/icons-material/Beenhere";
 ChartJS.register(RadialLinearScale, ArcElement, Tooltip, Legend);
 
 const Dashboard = ({
@@ -36,56 +38,160 @@ const Dashboard = ({
             {/* <Card> */}
 
             <Grid2 container spacing={2}>
-                <Grid2 item xs={12} md={2}>
+                <Grid2 item xs={12} md={3}>
                     <Card
                         sx={{
                             padding: "20px",
-                            backgroundColor: "#84ffff",
-                            borderBottom: "5px solid #6d9e62",
+                            // backgroundColor: "#84ffff",
+                            borderBottom: "5px solid #9898e3",
+                            display: "flex",
                             marginBottom: "10px",
                         }}
                     >
-                        <Typography
-                            variant="h5"
-                            sx={{ fontWeight: "bold", marginBottom: "10px" }}
+                        <Box
+                            sx={{
+                                width: "50%",
+                                justifyContent: "center",
+                            }}
                         >
-                            {stat_suara}
-                        </Typography>
-                        <Typography> Total Suara</Typography>
+                            <Typography
+                                variant="h5"
+                                sx={{
+                                    fontWeight: "bold",
+                                    marginBottom: "10px",
+                                }}
+                            >
+                                {stat_suara}
+                            </Typography>
+                            <Typography> Total Suara</Typography>
+                        </Box>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                width: "50%",
+                                justifyContent: "center",
+                            }}
+                        >
+                            <HomeIcon
+                                sx={{ fontSize: "60px", color: "#a7a7a7" }}
+                            />
+                        </Box>
                     </Card>
                 </Grid2>
-                <Grid2 item xs={12} md={2}>
+                <Grid2 item xs={12} md={3}>
                     <Card
                         sx={{
                             padding: "20px",
-                            backgroundColor: "#e3f2fd",
-                            borderBottom: "5px solid #6d9e62",
+                            display: "flex",
+                            // backgroundColor: "#e3f2fd",
+                            borderBottom: "5px solid #9898e3",
                         }}
                     >
-                        <Typography
-                            variant="h5"
-                            sx={{ fontWeight: "bold", marginBottom: "10px" }}
+                        <Box
+                            sx={{
+                                width: "50%",
+                                justifyContent: "center",
+                            }}
                         >
-                            {stat_saksi}
-                        </Typography>
-                        <Typography>Total Saksi </Typography>
+                            <Typography
+                                variant="h5"
+                                sx={{
+                                    fontWeight: "bold",
+                                    marginBottom: "10px",
+                                }}
+                            >
+                                {stat_saksi}
+                            </Typography>
+                            <Typography>Total Saksi </Typography>
+                        </Box>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                width: "50%",
+                                justifyContent: "center",
+                            }}
+                        >
+                            <BadgeIcon
+                                sx={{ fontSize: "60px", color: "#a7a7a7" }}
+                            />
+                        </Box>
                     </Card>
                 </Grid2>
-                <Grid2 item xs={12} md={2}>
+                <Grid2 item xs={12} md={3}>
                     <Card
                         sx={{
                             padding: "20px",
-                            backgroundColor: "#e0f7fa",
-                            borderBottom: "5px solid #6d9e62",
+                            display: "flex",
+                            borderBottom: "5px solid #9898e3",
                         }}
                     >
-                        <Typography
-                            variant="h5"
-                            sx={{ fontWeight: "bold", marginBottom: "10px" }}
+                        <Box
+                            sx={{
+                                width: "50%",
+                                justifyContent: "center",
+                            }}
                         >
-                            {stat_tps}
-                        </Typography>
-                        <Typography>Total TPS </Typography>
+                            <Typography
+                                variant="h5"
+                                sx={{
+                                    fontWeight: "bold",
+                                    marginBottom: "10px",
+                                }}
+                            >
+                                {stat_tps}
+                            </Typography>
+                            <Typography>Total TPS </Typography>
+                        </Box>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                width: "50%",
+                                justifyContent: "center",
+                            }}
+                        >
+                            <InventoryIcon
+                                sx={{ fontSize: "60px", color: "#a7a7a7" }}
+                            />
+                        </Box>
+                    </Card>
+                </Grid2>
+                <Grid2 item xs={12} md={3}>
+                    <Card
+                        sx={{
+                            padding: "20px",
+                            display: "flex",
+                            borderBottom: "5px solid #9898e3",
+                        }}
+                    >
+                        <Box
+                            sx={{
+                                width: "50%",
+                                justifyContent: "center",
+                            }}
+                        >
+                            <Typography
+                                variant="h5"
+                                sx={{
+                                    fontWeight: "bold",
+                                    marginBottom: "10px",
+                                }}
+                            >
+                                {/* {stat_tps} */}
+                                55/90
+                            </Typography>
+                            <Typography>Sudah mengisi</Typography>
+                        </Box>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                width: "50%",
+                                justifyContent: "center",
+                            }}
+                        >
+                            <BeenhereIcon
+                                sx={{ fontSize: "60px", color: "#a7a7a7" }}
+                            />
+                        </Box>
                     </Card>
                 </Grid2>
             </Grid2>
@@ -96,13 +202,12 @@ const Dashboard = ({
                         <DivSpaceBetween
                             style={{
                                 padding: "10px",
-                                backgroundColor: "#F8F9FA",
+                                // backgroundColor: "#F8F9FA",
+                                borderBottom: "1px solid #dcdcdc",
                             }}
                         >
                             <p>Perolehan suara lingkup Kecamatan</p>
                         </DivSpaceBetween>
-                        {/* <Typography variant="h5">Total Suara </Typography>
-                        <Typography> 10000</Typography> */}
                         <ChartSuara datas={sum_suara_perkecamatan} />
                     </Card>
                 </Grid2>

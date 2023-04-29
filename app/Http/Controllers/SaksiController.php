@@ -6,6 +6,7 @@ use App\Models\Saksi;
 use App\Models\Tps;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 
 class SaksiController extends Controller
@@ -39,12 +40,10 @@ class SaksiController extends Controller
 
         $validated = $request->validate([
             'nama' => 'required|max:50',
-            // 'telp' => 'required|max:20|unique:saksis,telp,deleted_at,NULL',
-            'telp' => 'required|max:20',
+            'telp' => ['required', 'max:20', Rule::unique('saksis')->whereNull('deleted_at')],
         ]);
 
         $validated['token'] = preg_replace('/\s+/', '', $request->nama) . $validated['telp'];
-        // $validated['token'] = Hash::make(preg_replace('/\s+/', '', $request->nama) . $validated['telp']);
 
 
 
@@ -78,11 +77,11 @@ class SaksiController extends Controller
     {
         $validated = $request->validate([
             'nama' => 'required|max:50',
-            'telp' => 'required|max:20|unique:saksis,telp,' . $saksi->id,
+            'telp' => ['required', 'max:20', Rule::unique('saksis')->ignore($saksi->id)->whereNull('deleted_at')],
         ]);
 
-        $validated['telp'] = preg_replace('/\s+/', '', $validated['telp']);
-        $validated['token'] = Hash::make(preg_replace('/\s+/', '', $request->nama) . $validated['telp']);
+
+        $validated['token'] = preg_replace('/\s+/', '', $request->nama) . $validated['telp'];
 
 
         Saksi::where('id', $saksi->id)->update($validated);

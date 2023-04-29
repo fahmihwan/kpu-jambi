@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\SesiHelper;
-use App\Http\Requests\TpsRequest;
-use App\Models\Sesi_pemilu;
 use App\Models\Tps;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 
 class TpsController extends Controller
@@ -49,10 +48,15 @@ class TpsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(TpsRequest $request)
+    public function store(Request $request)
     {
 
-        $validated = $request->validated();
+        $validated = $request->validate([
+            'nama' => ['required', Rule::unique('tps')->whereNull('deleted_at')],
+            'kota' => 'required',
+            'kecamatan' => 'required',
+            'kelurahan' => 'required'
+        ]);
 
         $sesiId = $this->sesiId->getSesiId();
         if (!$sesiId) {
@@ -93,10 +97,15 @@ class TpsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(TpsRequest $request, $id)
+    public function update(Request $request, $id)
     {
 
-        $validated = $request->validated();
+        $validated = $request->validate([
+            'nama' => ['required', Rule::unique('tps')->ignore($id)->whereNull('deleted_at')],
+            'kota' => 'required',
+            'kecamatan' => 'required',
+            'kelurahan' => 'required'
+        ]);
 
         Tps::where('id', $id)->update($validated);
 

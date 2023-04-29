@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('tps', function (Blueprint $table) {
             $table->id();
-            $table->string('nama', 30)->unique();
+            $table->string('nama', 30);
             // $table->string('provinsi', 50);
             $table->string('kota', 50);
             $table->string('kecamatan', 50);

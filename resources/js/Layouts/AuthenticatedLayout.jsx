@@ -19,7 +19,13 @@ export default function AuthenticatedLayout({ children, auth, share }) {
     };
 
     return (
-        <Box sx={{ display: "flex" }}>
+        <Box
+            sx={{
+                display: "flex",
+                backgroundColor: "#f0f0f0",
+                // backgroundColor: "#ffffff",
+            }}
+        >
             <CssBaseline />
 
             <Navbar
@@ -41,7 +47,6 @@ export default function AuthenticatedLayout({ children, auth, share }) {
                 sx={{
                     flexGrow: 1,
                     p: 3,
-                    //  backgroundColor: "#F9FAFB"
                 }}
             >
                 <DrawerHeader />

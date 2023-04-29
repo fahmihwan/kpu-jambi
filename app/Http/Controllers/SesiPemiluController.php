@@ -6,6 +6,7 @@ use App\Http\Requests\SesiRequest;
 use App\Models\Sesi_pemilu;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 
 
@@ -67,7 +68,7 @@ class SesiPemiluController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'kode' => 'required|unique:sesi_pemilus,kode,' . $id . ',id',
+            'kode' =>  ['required'],
             'tanggal' => 'required',
             'keterangan' => 'required',
             'custome_login_description' => 'required'
