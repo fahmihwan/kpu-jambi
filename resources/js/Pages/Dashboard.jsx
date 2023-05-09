@@ -216,7 +216,7 @@ const Dashboard = ({
                         <DivSpaceBetween
                             style={{
                                 padding: "10px",
-                                backgroundColor: "#F8F9FA",
+                                borderBottom: "1px solid #dcdcdc",
                             }}
                         >
                             <p>Perolehan suara lingkup Kota</p>

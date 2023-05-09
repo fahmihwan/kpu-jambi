@@ -72,10 +72,6 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Saksi::class,
         ]
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
     ],
 
     /*

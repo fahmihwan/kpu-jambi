@@ -23,6 +23,7 @@ export default function AuthenticatedLayout({ children, auth, share }) {
             sx={{
                 display: "flex",
                 backgroundColor: "#f0f0f0",
+                height: "100vh",
                 // backgroundColor: "#ffffff",
             }}
         >

@@ -40,8 +40,9 @@ class DatabaseSeeder extends Seeder
             Tps::create([
                 'nama' => 'TPS0' . $i,
                 'sesi_pemilu_id' => 1,
-                'kota' => 'KOTA JAMBI',
-                'kecamatan' =>  fake()->randomElement(['SUNGAI BAHAR', 'MESTONG', 'BAHAR UTARA', 'TAMAN RAJO']),
+                // 'kota' => 'KOTA JAMBI',
+                'kota' => fake()->randomElement(['SUNGAI PENUH', 'KERINCI', 'MERANGIN', 'MUARO JAMBI', 'BATANG BAHAR']),
+                'kecamatan' =>  fake()->randomElement(['SUNGAI BAHAR', 'MESTONG', 'BAHAR UTARA', 'TAMAN RAJO', 'PASAR JAMBI']),
                 'kelurahan' => fake()->randomElement(['MARGA', 'BUKIT MAS', 'SUKA MAKMUR', 'BERKAH']),
             ]);
         }
@@ -66,12 +67,12 @@ class DatabaseSeeder extends Seeder
         }
 
 
-        Sesi_tps_saksi::create([
-            'user_id' => 1,
-            'saksi_id' => $i,
-            'sesi_pemilu_id' => 1,
-            'tps_id' => $i,
-        ]);
+        // Sesi_tps_saksi::create([
+        //     'user_id' => 1,
+        //     'saksi_id' => $i,
+        //     'sesi_pemilu_id' => 1,
+        //     'tps_id' => $i,
+        // ]);
         for ($i = 1; $i <= 90; $i++) {
             Sesi_tps_saksi::create([
                 'user_id' => 1,

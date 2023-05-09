@@ -32,10 +32,7 @@ use Inertia\Inertia;
 
 Route::get("/", [UserTPS_controller::class, 'login']);
 Route::post("/", [UserTPS_controller::class, 'authenticated']);
-Route::get("/user-tps", [UserTPS_controller::class, 'dashboard']);
-Route::post("/user-tps/logout", [UserTPS_controller::class, 'logout']);
-Route::post('/user-tps/transaksi', [TransaksiControler::class, 'store']);
-Route::put('/user-tps/transaksi/{id_transaksi}', [TransaksiControler::class, 'update_suara']);
+
 
 
 
@@ -77,4 +74,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/laporan/proses-transaksi', [ProsesTransaksiController::class, 'index']);
 
     Route::get('/admin/export_transaksi', [Export_csv_controller::class, 'export_transaksi']);
+});
+
+Route::middleware(['saksi'])->group(function () {
+    Route::get("/user-tps", [UserTPS_controller::class, 'dashboard']);
+    Route::post("/user-tps/logout", [UserTPS_controller::class, 'logout']);
+    Route::post('/user-tps/transaksi', [TransaksiControler::class, 'store']);
+    Route::put('/user-tps/transaksi/{id_transaksi}', [TransaksiControler::class, 'update_suara']);
 });
