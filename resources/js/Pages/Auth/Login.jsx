@@ -17,7 +17,7 @@ const Login = ({ custome_description, flash }) => {
     };
     const handleSubmit = (e) => {
         e.preventDefault();
-        post("/admin/auth/");
+        post("/admin/auth");
     };
     return (
         <Box

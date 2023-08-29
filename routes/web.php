@@ -34,17 +34,9 @@ Route::get("/", [UserTPS_controller::class, 'login']);
 Route::post("/", [UserTPS_controller::class, 'authenticated']);
 
 
-
-
-// ====================================================================================================
-Route::get('/admin/setting', [Setting_primary_dataController::class, 'index']);
-Route::put('/admin/setting/{id}/update', [Setting_primary_dataController::class, 'update_active']);
-
-
 Route::get('/admin', [AuthController::class, 'login']);
 Route::post('/admin/auth/', [AuthController::class, 'authenticated']);
-Route::post('/admin/auth/logout', [AuthController::class, 'logout']);
-Route::resource('/admin/akun', AdminController::class);
+
 
 
 
@@ -74,6 +66,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/laporan/proses-transaksi', [ProsesTransaksiController::class, 'index']);
 
     Route::get('/admin/export_transaksi', [Export_csv_controller::class, 'export_transaksi']);
+
+
+
+
+    // ====================================================================================================
+    Route::get('/admin/setting', [Setting_primary_dataController::class, 'index']);
+    Route::put('/admin/setting/{id}/update', [Setting_primary_dataController::class, 'update_active']);
+
+    Route::post('/admin/auth/logout', [AuthController::class, 'logout']);
+    Route::resource('/admin/akun', AdminController::class);
 });
 
 Route::middleware(['saksi'])->group(function () {

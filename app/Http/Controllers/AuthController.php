@@ -11,7 +11,6 @@ class AuthController extends Controller
 {
     public function login()
     {
-
         return Inertia::render('Auth/Login', [
             'custome_description' => Sesi_pemilu::select('custome_login_description')->where('isActive', true)->first()
         ]);
