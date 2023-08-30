@@ -23,71 +23,71 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         User::create([
-            'nama' => 'fahmi',
-            'username' => 'fahmihwan',
+            'nama' => 'alif',
+            'username' => 'alif',
             'password' => Hash::make('qweqwe123')
         ]);
-        Sesi_pemilu::create([
-            'kode' => 'PM001',
-            'tanggal' => date('Y-m-d'),
-            'keterangan' => 'pemilu seluruh kota',
-            'isActive' => 1,
-            'custome_login_description' => 'Sistem Informasi Penghitungan Suara DPRD TANJAB BARAT(SUTEJO)'
-        ]);
+        // Sesi_pemilu::create([
+        //     'kode' => 'PM001',
+        //     'tanggal' => date('Y-m-d'),
+        //     'keterangan' => 'pemilu seluruh kota',
+        //     'isActive' => 1,
+        //     'custome_login_description' => 'Sistem Informasi Penghitungan Suara DPRD TANJAB BARAT(SUTEJO)'
+        // ]);
 
 
-        for ($i = 0; $i < 90; $i++) {
-            Tps::create([
-                'nama' => 'TPS0' . $i,
-                'sesi_pemilu_id' => 1,
-                // 'kota' => 'KOTA JAMBI',
-                'kota' => fake()->randomElement(['SUNGAI PENUH', 'KERINCI', 'MERANGIN', 'MUARO JAMBI', 'BATANG BAHAR']),
-                'kecamatan' =>  fake()->randomElement(['SUNGAI BAHAR', 'MESTONG', 'BAHAR UTARA', 'TAMAN RAJO', 'PASAR JAMBI']),
-                'kelurahan' => fake()->randomElement(['MARGA', 'BUKIT MAS', 'SUKA MAKMUR', 'BERKAH']),
-            ]);
-        }
+        // for ($i = 0; $i < 90; $i++) {
+        //     Tps::create([
+        //         'nama' => 'TPS0' . $i,
+        //         'sesi_pemilu_id' => 1,
+        //         // 'kota' => 'KOTA JAMBI',
+        //         'kota' => fake()->randomElement(['SUNGAI PENUH', 'KERINCI', 'MERANGIN', 'MUARO JAMBI', 'BATANG BAHAR']),
+        //         'kecamatan' =>  fake()->randomElement(['SUNGAI BAHAR', 'MESTONG', 'BAHAR UTARA', 'TAMAN RAJO', 'PASAR JAMBI']),
+        //         'kelurahan' => fake()->randomElement(['MARGA', 'BUKIT MAS', 'SUKA MAKMUR', 'BERKAH']),
+        //     ]);
+        // }
 
-        Saksi::create([
-            'nama' => 'fahmi',
-            'token' => 'fahmi' . '+6282334337393',
-            'telp' =>  '+6282334337393',
-        ]);
-        Saksi::create([
-            'nama' => 'darunik',
-            'token' => 'darunik' . '+6285233505012',
-            'telp' =>  '+6285233505012',
-        ]);
+        // Saksi::create([
+        //     'nama' => 'fahmi',
+        //     'token' => 'fahmi' . '+6282334337393',
+        //     'telp' =>  '+6282334337393',
+        // ]);
+        // Saksi::create([
+        //     'nama' => 'darunik',
+        //     'token' => 'darunik' . '+6285233505012',
+        //     'telp' =>  '+6285233505012',
+        // ]);
 
-        for ($i = 0; $i < 90; $i++) {
-            Saksi::create([
-                'nama' => fake()->name(),
-                'token' => fake()->name() . fake()->e164PhoneNumber('+62'),
-                'telp' =>  fake()->phoneNumber('+62'),
-            ]);
-        }
+        // for ($i = 0; $i < 90; $i++) {
+        //     Saksi::create([
+        //         'nama' => fake()->name(),
+        //         'token' => fake()->name() . fake()->e164PhoneNumber('+62'),
+        //         'telp' =>  fake()->phoneNumber('+62'),
+        //     ]);
+        // }
 
 
-        Sesi_tps_saksi::create([
-            'user_id' => 1,
-            'saksi_id' => $i,
-            'sesi_pemilu_id' => 1,
-            'tps_id' => $i,
-        ]);
-        for ($i = 1; $i <= 90; $i++) {
-            Sesi_tps_saksi::create([
-                'user_id' => 1,
-                'saksi_id' => $i,
-                'sesi_pemilu_id' => 1,
-                'tps_id' => $i,
-            ]);
-        }
+        // Sesi_tps_saksi::create([
+        //     'user_id' => 1,
+        //     'saksi_id' => $i,
+        //     'sesi_pemilu_id' => 1,
+        //     'tps_id' => $i,
+        // ]);
+        // for ($i = 1; $i <= 90; $i++) {
+        //     Sesi_tps_saksi::create([
+        //         'user_id' => 1,
+        //         'saksi_id' => $i,
+        //         'sesi_pemilu_id' => 1,
+        //         'tps_id' => $i,
+        //     ]);
+        // }
 
-        for ($i = 1; $i <= 90; $i++) {
-            Transaksi::create([
-                'sesi_pemilu_id' => 1,
-                'sesi_tps_saksi_id' => $i,
-                'qty' => fake()->numberBetween(100, 2000),
-            ]);
-        }
+        // for ($i = 1; $i <= 90; $i++) {
+        //     Transaksi::create([
+        //         'sesi_pemilu_id' => 1,
+        //         'sesi_tps_saksi_id' => $i,
+        //         'qty' => fake()->numberBetween(100, 2000),
+        //     ]);
+        // }
     }
 }

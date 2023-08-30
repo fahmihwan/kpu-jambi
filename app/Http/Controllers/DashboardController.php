@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\SesiHelper;
+use App\Models\Saksi;
+use App\Models\Sesi_pemilu;
 use App\Models\Sesi_tps_saksi;
 use App\Models\Tps;
 use App\Models\Transaksi;
@@ -20,9 +22,7 @@ class DashboardController extends Controller
 
     public function index()
     {
-
         $sesiId = $this->sesiId->getSesiId();
-
 
         $stat_suara = Transaksi::where('sesi_pemilu_id', $sesiId)->sum('qty');
         $stat_saksi = Sesi_tps_saksi::where('sesi_pemilu_id', $sesiId)->count();
@@ -43,13 +43,14 @@ class DashboardController extends Controller
             ->groupBy('kota')
             ->get();
 
-
         return Inertia::render('Dashboard', [
             'stat_suara' => $stat_suara,
             'stat_tps' => $stat_tps,
             'stat_saksi' => $stat_saksi,
             'sum_suara_perkecamatan' => $sum_suara_perkecamatan,
             'sum_suara_perkota' => $sum_suara_perkota,
+            'sudah_mengisi' => Transaksi::where('sesi_pemilu_id', $sesiId)->count() . "/" . Sesi_tps_saksi::where('sesi_pemilu_id', $sesiId)->count()
+
 
         ]);
     }

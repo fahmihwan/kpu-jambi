@@ -57,7 +57,7 @@ const ListSesi = ({ auth, datas, sesi_share }) => {
                     {datas?.map((d, i) => (
                         <CardEl
                             handleChange={handleChange}
-                            checked={d.isActive}
+                            isChecked={d.isActive}
                             value={d.id}
                             key={i}
                             kode={d.kode}
@@ -76,7 +76,7 @@ export default ListSesi;
 
 const CardEl = ({
     handleChange,
-    checked,
+    isChecked,
     value,
     kode,
     tanggal,
@@ -104,10 +104,10 @@ const CardEl = ({
                 </Typography>
 
                 <Radio
-                    checked={checked ? true : false}
+                    checked={isChecked == 1}
                     onChange={handleChange}
                     value={value}
-                    name="isActive"
+                    name="is-active"
                 />
             </Box>
 

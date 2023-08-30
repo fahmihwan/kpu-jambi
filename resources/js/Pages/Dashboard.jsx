@@ -28,6 +28,7 @@ const Dashboard = ({
     stat_saksi,
     sum_suara_perkecamatan,
     sum_suara_perkota,
+    sudah_mengisi,
 }) => {
     return (
         <AuthenticatedLayout auth={auth} share={sesi_share}>
@@ -177,7 +178,7 @@ const Dashboard = ({
                                 }}
                             >
                                 {/* {stat_tps} */}
-                                55/90
+                                {sudah_mengisi}
                             </Typography>
                             <Typography>Sudah mengisi</Typography>
                         </Box>
