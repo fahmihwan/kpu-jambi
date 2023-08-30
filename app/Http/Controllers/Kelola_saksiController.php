@@ -63,6 +63,7 @@ class Kelola_saksiController extends Controller
             'saksi_id' => 'required',
             'tps_id' => 'required'
         ]);
+
         // react-select lib
         $validated['saksi_id'] = $validated['saksi_id']['value'];
         $validated['tps_id'] = $validated['tps_id']['value'];
@@ -74,9 +75,10 @@ class Kelola_saksiController extends Controller
         $validated['user_id'] = auth()->user()->id;
         $validated['sesi_pemilu_id'] = $sesiId;
 
+
         $isWakilAlreadyExists = Sesi_tps_saksi::where('saksi_id', '=', $validated['saksi_id'])
-            ->orWhere('tps_id', '=', $validated['tps_id'])
-            ->having('sesi_pemilu_id', '=', $validated['sesi_pemilu_id'])
+            ->where('tps_id', '=', $validated['tps_id'])
+            ->where('sesi_pemilu_id', '=', $validated['sesi_pemilu_id'])
             ->exists();
 
         if ($isWakilAlreadyExists) {

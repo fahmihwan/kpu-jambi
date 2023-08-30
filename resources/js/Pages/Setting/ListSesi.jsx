@@ -1,10 +1,18 @@
 import React from "react";
 
-import { Card, CardContent, Typography, Box, Radio } from "@mui/material";
+import {
+    Card,
+    CardContent,
+    Typography,
+    Box,
+    Radio,
+    Button,
+} from "@mui/material";
 import { BreadcrumbsEl } from "../../Components/NavCompt";
 import styled from "styled-components";
 import AuthenticatedLayout from "../../Layouts/AuthenticatedLayout";
 import { Inertia } from "@inertiajs/inertia";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const ListSesi = ({ auth, datas, sesi_share }) => {
     const handleChange = (e) => {
@@ -12,6 +20,15 @@ const ListSesi = ({ auth, datas, sesi_share }) => {
             Inertia.put(`/admin/setting/${e.target.value}/update`);
     };
 
+    const handleDelete = (id) => {
+        const validate = "SAYA INGIN MENGHAPUSNYA";
+        const promptCek = prompt(`masukan teks ini (${validate})`);
+        if (promptCek == validate) {
+            Inertia.delete(`/admin/setting/${id}/delete`);
+        } else {
+            alert("gagal menghapus!. pastikan teks sudah sesuai");
+        }
+    };
     return (
         <AuthenticatedLayout auth={auth} share={sesi_share}>
             <DivSpaceBetween
@@ -46,6 +63,7 @@ const ListSesi = ({ auth, datas, sesi_share }) => {
                             kode={d.kode}
                             tanggal={d.tanggal}
                             keterangan={d.keterangan}
+                            handleDelete={() => handleDelete(d?.id)}
                         />
                     ))}
                 </Box>
@@ -63,6 +81,7 @@ const CardEl = ({
     kode,
     tanggal,
     keterangan,
+    handleDelete,
 }) => {
     return (
         <CardContent
@@ -95,6 +114,15 @@ const CardEl = ({
             <Typography component="div">{tanggal}</Typography>
 
             <Typography variant="body2">{keterangan}</Typography>
+            <Button
+                onClick={handleDelete}
+                style={{ marginTop: "20px", width: "100%" }}
+                color="error"
+                variant="outlined"
+            >
+                <DeleteIcon />
+                Hapus Sesi
+            </Button>
         </CardContent>
     );
 };

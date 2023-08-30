@@ -20,7 +20,8 @@ return new class extends Migration
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(Saksi::class);
 
-            $table->foreignIdFor(Sesi_pemilu::class);
+            // $table->foreignId('sesi_pemilu_id')->constrained()->onUpdate('CASCADE')->onDelete('CASCADE');
+            $table->foreignIdFor(Sesi_pemilu::class)->constrained()->onUpdate('CASCADE')->onDelete('CASCADE');
             // $table->foreign('sesi_pemilu_id')->references('id')->on('sesi_pemilus')->onDelete('restrict');
 
 

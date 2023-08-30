@@ -73,6 +73,7 @@ Route::middleware(['auth'])->group(function () {
     // ====================================================================================================
     Route::get('/admin/setting', [Setting_primary_dataController::class, 'index']);
     Route::put('/admin/setting/{id}/update', [Setting_primary_dataController::class, 'update_active']);
+    Route::delete('/admin/setting/{id}/delete', [Setting_primary_dataController::class, 'delete_sesi']);
 
     Route::post('/admin/auth/logout', [AuthController::class, 'logout']);
     Route::resource('/admin/akun', AdminController::class);

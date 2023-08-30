@@ -35,4 +35,11 @@ class Setting_primary_dataController extends Controller
             'isActive' => 1
         ]);
     }
+
+    public function delete_sesi($id)
+    {
+        // Sesi_pemilu::where('id', $id)->delete();
+        Sesi_pemilu::destroy($id);
+        return redirect()->back();
+    }
 }

@@ -19,6 +19,8 @@ return new class extends Migration
             $table->boolean('isActive');
             $table->string('custome_login_description', 100);
             $table->timestamps();
+            // $table->onDelete('CASCADE');
+            // $table->onUpdate('CASCADE');
         });
     }
 

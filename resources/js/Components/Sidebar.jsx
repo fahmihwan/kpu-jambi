@@ -64,7 +64,7 @@ export const Sidebar = ({ theme, handleDrawerClose, open, setOpen, share }) => {
                         fontSize: "20px",
                     }}
                 >
-                    {share?.kode}
+                    {share?.kode ?? "Sesi not found!"}
                 </Typography>
                 <IconButton
                     style={{ color: iconColorActive, fontSize: iconSize }}
